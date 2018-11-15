@@ -13,7 +13,7 @@ Hello! This is the codebase of the official website of On The Loose, the Claremo
 └── package.json      # Dependencies and scripts
 ```
 
-We use Parcel as a bundler because it requires no configuration, and Typescript to keep our code typed and maintainable.
+We use Parcel as a bundler because it requires no configuration, and TypeScript to keep our code typed and maintainable.
 
 # Development
 
@@ -28,4 +28,6 @@ Now you're ready to start developing with the following two scripts:
 
 Make sure to run these on two separate terminal windows or tabs.
 
-And you're ready to go!
+And you're ready to go! Point your browser to http://localhost:3000 to see the website.
+
+We recommend that you use [VSCode](https://code.visualstudio.com/) as an editor because of its top notch autocomplete and linting for TypeScript. Additionally, the use of [prettier](https://prettier.io/) to automatically format the code is also highly encouraged to keep the code nice and clean.
