@@ -15,7 +15,6 @@ const Logo = styled.img`
 `
 
 const Header = styled.div`
-  font-size: 'Replica Pro';
   align-items: center;
   padding: 3rem 4rem;
   display: flex;
@@ -27,18 +26,13 @@ const Header = styled.div`
 
 const StyledMenu = styled(Menu)`
   margin-left: auto;
-  /* line-height: 2.5rem; */
   margin-right: auto;
 `
 
 const StyledItem = styled(Menu.Item)`
   margin-left: auto;
-  /* height: 2.5rem; */
-  /* margin: 0 0.5rem; */
   padding: 0 3rem;
 `
-
-const StyledButton = styled(Menu.Item)``
 
 class AppHeader extends React.Component<RouteComponentProps, any> {
   public render() {
