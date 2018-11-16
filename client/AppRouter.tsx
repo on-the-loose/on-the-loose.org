@@ -3,28 +3,27 @@ import Home from './pages/Home'
 import Trips from './pages/Trips'
 import Profile from './pages/Profile'
 import AppHeader from './components/Header'
+import styled from 'styled-components'
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { Layout } from 'antd'
 
-import 'antd/lib/layout/style/css'
-
-const { Content, Footer } = Layout
+const Layout = styled.div`
+  background-color: rgb(247, 242, 237);
+  height: 100%;
+`
+const Content = styled.div`
+  padding: 6rem 3rem;
+`
 
 const AppRouter = () => (
   <Router>
-    <Layout style={{ height: '100%' }}>
+    <Layout>
       <AppHeader />
-      <Content style={{ padding: '0 50px', marginTop: 64 }}>
-        <div style={{ padding: 24, minHeight: 380 }}>
-          <Route path="/" exact component={Home} />
-          <Route path="/trips/" component={Trips} />
-          <Route path="/profile/" component={Profile} />
-        </div>
+      <Content>
+        <Route path="/" exact component={Home} />
+        <Route path="/trips/" component={Trips} />
+        <Route path="/profile/" component={Profile} />
       </Content>
-      <Footer style={{ textAlign: 'center' }}>
-        On The Loose -- The outdoors club of the Claremont Colleges
-      </Footer>
     </Layout>
   </Router>
 )
