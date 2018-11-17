@@ -8,6 +8,7 @@ import styled from 'styled-components'
 import logo from '../assets/otl_logo_circle_lq.png'
 import 'antd/lib/menu/style/css'
 import 'antd/lib/button/style/css'
+import LoginButton from './LoginButton'
 
 const Logo = styled.img`
   width: 3rem;
@@ -54,7 +55,8 @@ class AppHeader extends React.Component<RouteComponentProps, any> {
             <Link to="/profile">GUIDE</Link>
           </StyledItem>
         </StyledMenu>
-        <Button type="primary">LOGIN</Button>
+
+        <LoginButton type="primary">LOGIN</LoginButton>
       </Header>
     )
   }
