@@ -30,8 +30,8 @@ export default class Trips extends React.Component<any, State> {
       <TripList>
         {this.state && this.state.trips ? (
           this.state.trips.map(doc => (
-            <div>
-              <TripCard key={doc.id} trip={doc} />
+            <div key={doc.id}>
+              <TripCard trip={doc} />
             </div>
           ))
         ) : (
