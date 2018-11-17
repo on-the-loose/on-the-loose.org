@@ -16,7 +16,6 @@ const BackgroundImage = styled.img`
   width: 100%;
   bottom: 0;
   left: 0;
-
   position: fixed;
   mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
   filter: grayscale(100%);
