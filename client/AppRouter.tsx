@@ -7,6 +7,7 @@ import styled from 'styled-components'
 import BackgroundImage from './components/BackgroundImage'
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import Login from './pages/Login'
 
 const Layout = styled.div`
   background-color: rgb(247, 242, 237);
@@ -25,6 +26,7 @@ const AppRouter = () => (
         <Route path="/" exact component={Home} />
         <Route path="/trips/" component={Trips} />
         <Route path="/profile/" component={Profile} />
+        <Route path="/login/" component={Login} />
       </Content>
     </Layout>
   </Router>

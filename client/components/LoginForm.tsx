@@ -6,6 +6,7 @@ import 'antd/lib/form/style/css'
 import 'antd/lib/icon/style/css'
 import 'antd/lib/input/style/css'
 import 'antd/lib/button/style/css'
+import firebase from 'firebase'
 
 export interface State {}
 
@@ -15,9 +16,25 @@ class LoginForm extends React.Component<FormComponentProps, State> {
   handleSubmit = e => {
     e.preventDefault()
     this.props.form.validateFields((err, values) => {
-      if (!err) {
-        console.log('Received values of form: ', values)
+      if (err) return
+
+      const actionCodeSettings = {
+        // URL you want to redirect back to. The domain (www.example.com) for this
+        // URL must be whitelisted in the Firebase Console.
+        url: 'http://localhost:1234/login',
+        // This must be true.
+        handleCodeInApp: true
       }
+
+      firebase
+        .auth()
+        .sendSignInLinkToEmail(values.email, actionCodeSettings)
+        .then(() => {
+          window.localStorage.setItem('emailForSignIn', values.email)
+        })
+        .catch(error => {
+          console.error(error)
+        })
     })
   }
 
@@ -26,23 +43,32 @@ class LoginForm extends React.Component<FormComponentProps, State> {
     return (
       <div>
         <p style={{ fontSize: 16, marginBottom: '2rem' }}>
-          Use your school email from one of the Claremont Colleges to log in to OTL. You'll receive
-          a link to access your account.
+          Use your email from one of the Claremont Colleges to log in to OTL. You'll receive a link
+          to access your account.
         </p>
         <Form onSubmit={this.handleSubmit} className="login-form">
-          <Form.Item>
-            {getFieldDecorator('userName', {
-              // TODO: better form validation
-              rules: [{ required: true, message: 'Please input your email!' }]
+          <Form.Item style={{ height: '1.5rem', marginBottom: '3rem' }}>
+            {getFieldDecorator('email', {
+              rules: [
+                { required: true, message: 'Please enter your email' },
+                {
+                  type: 'email',
+                  message: ' '
+                },
+                {
+                  pattern: /.+(@pomona\.edu|@mymail.pomona\.edu|@cmc\.edu|@hmc\.edu|@g\.hmc\.edu|@scrippscollege\.edu|@pitzer\.edu)/,
+                  message: 'You must use a Claremont Colleges email address.'
+                }
+              ]
             })(
               <Input
-                style={{ minHeight: '1.5rem' }}
                 size="large"
                 prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
                 placeholder="School Email"
               />
             )}
           </Form.Item>
+
           <Button type="primary" htmlType="submit" className="login-form-button">
             Log in
           </Button>
