@@ -1,9 +1,10 @@
 import * as React from 'react'
 import Home from './pages/Home'
-import Trips from './pages/trips/Trips'
+import Trips from './pages/Trips'
 import Profile from './pages/Profile'
 import AppHeader from './components/Header'
 import styled from 'styled-components'
+import BackgroundImage from './components/BackgroundImage'
 
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
@@ -18,6 +19,7 @@ const Content = styled.div`
 const AppRouter = () => (
   <Router>
     <Layout>
+      <BackgroundImage />
       <AppHeader />
       <Content>
         <Route path="/" exact component={Home} />

@@ -8,11 +8,9 @@ const Wrapper = styled.div`
   display: inline-flex;
   text-align: left;
   align-items: center;
-  border-radius: 7px;
   overflow: hidden;
-  border-color: lightgray;
-  border-width: 1px;
-  border-style: solid;
+  border-radius: 7px;
+  border: 1px solid lightgray;
   width: 80%;
   max-width: 50rem;
 `
@@ -29,7 +27,8 @@ const TripImage = styled.img`
   display: inline-block;
   height: 10rem;
   width: 30%;
-  margin-left: -1px;
+  border-left: 1px solid lightgray;
+  z-index: 1;
 `
 
 export interface Props {

@@ -1,7 +1,7 @@
 import * as React from 'react'
-import firebase from '../../firebase'
+import firebase from '../firebase'
 import { Icon } from 'antd'
-import TripCard from './TripCard'
+import TripCard from '../components/TripCard'
 import styled from 'styled-components'
 
 import 'antd/lib/icon/style/css'
@@ -20,10 +20,7 @@ export default class Trips extends React.Component<any, State> {
   public componentDidMount() {
     db.collection('trips')
       .get()
-      .then(qs => {
-        console.log(qs)
-        this.setState({ trips: qs.docs })
-      })
+      .then(qs => this.setState({ trips: qs.docs }))
   }
 
   public render() {
@@ -32,7 +29,7 @@ export default class Trips extends React.Component<any, State> {
         {this.state && this.state.trips ? (
           this.state.trips.map(doc => (
             <div>
-              <TripCard trip={doc} />
+              <TripCard key={doc.id} trip={doc} />
             </div>
           ))
         ) : (
