@@ -21,6 +21,8 @@ export default class Trips extends React.Component<any, State> {
     db.collection('trips')
       .get()
       .then(qs => this.setState({ trips: qs.docs }))
+
+    // TODO: add login prompt on fetch fail
   }
 
   public render() {
