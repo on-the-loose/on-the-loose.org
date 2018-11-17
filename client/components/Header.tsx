@@ -9,6 +9,8 @@ import logo from '../assets/otl_logo_circle_lq.png'
 import 'antd/lib/menu/style/css'
 import 'antd/lib/button/style/css'
 import LoginButton from './LoginButton'
+import firebase from 'firebase'
+import AccountAvatar from './UserAvatar'
 
 const Logo = styled.img`
   width: 3rem;
@@ -36,7 +38,24 @@ const StyledItem = styled(Menu.Item)`
   padding: 0 3rem;
 `
 
-class AppHeader extends React.Component<RouteComponentProps, any> {
+export interface State {
+  user: firebase.User
+}
+
+class AppHeader extends React.Component<RouteComponentProps, State> {
+  state = { user: null }
+  removeAuthListener: firebase.Unsubscribe
+
+  componentDidMount() {
+    this.removeAuthListener = firebase.auth().onAuthStateChanged(user => {
+      this.setState({ user })
+    })
+  }
+
+  componentWillUnmount() {
+    this.removeAuthListener()
+  }
+
   public render() {
     return (
       <Header>
@@ -56,7 +75,11 @@ class AppHeader extends React.Component<RouteComponentProps, any> {
           </StyledItem>
         </StyledMenu>
 
-        <LoginButton type="primary">LOGIN</LoginButton>
+        {this.state.user ? (
+          <AccountAvatar user={this.state.user} />
+        ) : (
+          <LoginButton type="primary">LOGIN</LoginButton>
+        )}
       </Header>
     )
   }

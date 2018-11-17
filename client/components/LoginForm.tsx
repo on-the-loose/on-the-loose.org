@@ -10,6 +10,8 @@ import firebase from 'firebase'
 
 export interface State {}
 
+// TODO preserve login
+
 class LoginForm extends React.Component<FormComponentProps, State> {
   state = {}
 
