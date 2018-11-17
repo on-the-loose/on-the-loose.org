@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Home from './pages/Home'
-import Trips from './pages/Trips'
+import Trips from './pages/trips/Trips'
 import Profile from './pages/Profile'
 import AppHeader from './components/Header'
 import styled from 'styled-components'
