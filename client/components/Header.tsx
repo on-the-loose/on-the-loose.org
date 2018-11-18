@@ -1,16 +1,16 @@
 import * as React from 'react'
 
-import { Menu, Button } from 'antd'
+import { Menu } from 'antd'
 import { Link } from 'react-router-dom'
 import { withRouter, RouteComponentProps } from 'react-router'
 import styled from 'styled-components'
 
 import logo from '../assets/otl_logo_circle_lq.png'
-import 'antd/lib/menu/style/css'
-import 'antd/lib/button/style/css'
 import LoginButton from './LoginButton'
 import firebase from 'firebase'
 import AccountAvatar from './UserAvatar'
+
+import 'antd/lib/menu/style/css'
 
 const Logo = styled.img`
   width: 3rem;
@@ -78,7 +78,7 @@ class AppHeader extends React.Component<RouteComponentProps, State> {
         {this.state.user ? (
           <AccountAvatar user={this.state.user} />
         ) : (
-          <LoginButton type="primary">LOGIN</LoginButton>
+          <LoginButton>LOGIN</LoginButton>
         )}
       </Header>
     )
