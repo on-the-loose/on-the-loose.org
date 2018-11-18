@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Popover, Button } from 'antd'
+import { Link } from 'react-router-dom'
 
 import 'antd/lib/popover/style/css'
 import 'antd/lib/button/style/css'
@@ -33,7 +34,14 @@ export default class AccountAvatar extends React.Component<Props, State> {
     return (
       <Popover
         placement="bottomLeft"
-        content={<a onClick={this.handleSignOut}>Sign out</a>}
+        content={
+          <div style={{ textAlign: 'center' }}>
+            <a onClick={this.handleSignOut}>Sign out</a> |{' '}
+            <Link to={'/profile'} onClick={() => this.setState({ show_popover: false })}>
+              Profile
+            </Link>
+          </div>
+        }
         title={this.props.user.email}
         trigger="click"
         visible={this.state.show_popover}

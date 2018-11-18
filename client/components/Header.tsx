@@ -70,8 +70,8 @@ class AppHeader extends React.Component<RouteComponentProps, State> {
             <Link to="/trips">TRIPS</Link>
           </StyledItem>
 
-          <StyledItem key="/profile">
-            <Link to="/profile">GUIDE</Link>
+          <StyledItem key="/guide">
+            <Link to="/guide">GUIDE</Link>
           </StyledItem>
         </StyledMenu>
 

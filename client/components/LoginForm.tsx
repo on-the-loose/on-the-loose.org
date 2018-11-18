@@ -10,8 +10,6 @@ import firebase from 'firebase'
 
 export interface State {}
 
-// TODO preserve login
-
 class LoginForm extends React.Component<FormComponentProps, State> {
   state = {}
 
@@ -33,6 +31,7 @@ class LoginForm extends React.Component<FormComponentProps, State> {
         .sendSignInLinkToEmail(values.email, actionCodeSettings)
         .then(() => {
           window.localStorage.setItem('emailForSignIn', values.email)
+          // TODO add email sent confirmation
         })
         .catch(error => {
           console.error(error)

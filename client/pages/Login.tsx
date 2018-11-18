@@ -29,8 +29,8 @@ class Login extends React.Component<RouteComponentProps, any> {
           // Additional user info profile not available via:
           // result.additionalUserInfo.profile == null
           // You can check if the user is new or existing:
-          // result.additionalUserInfo.isNewUser
-          this.props.history.push('/new-location')
+          if (!result.additionalUserInfo.isNewUser) this.props.history.push('/home')
+          else this.props.history.push('/profile')
         })
         .catch(error => {
           // Some error occurred, you can inspect the code: error.code

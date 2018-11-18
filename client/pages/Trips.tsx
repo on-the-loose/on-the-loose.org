@@ -6,8 +6,9 @@ import styled from 'styled-components'
 
 import 'antd/lib/icon/style/css'
 
+// TODO chache trip results
+
 const TripList = styled.div`
-  margin-top: 2rem;
   text-align: center;
 `
 const db = firebase.firestore()

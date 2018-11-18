@@ -2,7 +2,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 
 const ClubTitle = styled.div`
-  margin-top: 5rem;
+  margin-top: 3rem;
   font-size: 3rem;
   text-align: center;
   font-weight: bold;
