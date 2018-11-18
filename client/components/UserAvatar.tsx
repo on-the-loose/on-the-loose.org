@@ -1,9 +1,10 @@
 import * as React from 'react'
-import { Popover, Button } from 'antd'
+import { Popover, Button, Avatar } from 'antd'
 import { Link } from 'react-router-dom'
 
 import 'antd/lib/popover/style/css'
 import 'antd/lib/button/style/css'
+import 'antd/lib/avatar/style/css'
 
 import firebase from 'firebase'
 
@@ -31,6 +32,9 @@ export default class AccountAvatar extends React.Component<Props, State> {
   }
 
   public render() {
+    const isFbConnected = this.props.user.providerData[0].providerId == 'facebook.com'
+    const fbData = this.props.user.providerData[0]
+
     return (
       <Popover
         placement="bottomLeft"
@@ -49,7 +53,13 @@ export default class AccountAvatar extends React.Component<Props, State> {
           this.setState({ show_popover })
         }}
       >
-        <Button shape="circle" icon="user" size="large" />
+        {isFbConnected ? (
+          <Button shape="circle" size="large">
+            <Avatar src={fbData.photoURL + '?type=large'} />
+          </Button>
+        ) : (
+          <Button shape="circle" icon="user" size="large" />
+        )}
       </Popover>
     )
 

@@ -38,24 +38,11 @@ const StyledItem = styled(Menu.Item)`
   padding: 0 3rem;
 `
 
-export interface State {
+export interface Props extends RouteComponentProps {
   user: firebase.User
 }
 
-class AppHeader extends React.Component<RouteComponentProps, State> {
-  state = { user: null }
-  removeAuthListener: firebase.Unsubscribe
-
-  componentDidMount() {
-    this.removeAuthListener = firebase.auth().onAuthStateChanged(user => {
-      this.setState({ user })
-    })
-  }
-
-  componentWillUnmount() {
-    this.removeAuthListener()
-  }
-
+class AppHeader extends React.Component<Props, any> {
   public render() {
     return (
       <Header>
@@ -75,8 +62,8 @@ class AppHeader extends React.Component<RouteComponentProps, State> {
           </StyledItem>
         </StyledMenu>
 
-        {this.state.user ? (
-          <AccountAvatar user={this.state.user} />
+        {this.props.user ? (
+          <AccountAvatar user={this.props.user} />
         ) : (
           <LoginButton>LOGIN</LoginButton>
         )}

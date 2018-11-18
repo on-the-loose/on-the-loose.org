@@ -12,13 +12,7 @@ const FbLogo = styled.img`
   height: 1rem;
 `
 
-export interface Props {}
-
-export interface State {}
-
-export default class FbConnectButton extends React.Component<Props, State> {
-  state = {}
-
+export default class FbConnectButton extends React.Component {
   handleClick = () => {
     var provider = new firebase.auth.FacebookAuthProvider()
 
