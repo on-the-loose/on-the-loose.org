@@ -1,10 +1,12 @@
 import * as React from 'react'
 import firebase from '../firebase'
-import { Icon } from 'antd'
+import { Icon, Button } from 'antd'
 import TripCard from '../components/TripCard'
 import styled from 'styled-components'
 
 import 'antd/lib/icon/style/css'
+import 'antd/lib/button/style/css'
+import NewTripForm from '../components/NewTripForm'
 
 // TODO chache trip results
 
@@ -35,15 +37,10 @@ export default class Trips extends React.Component<Props, State> {
     return (
       <Container>
         {this.props.user ? (
-          this.state.trips ? (
-            this.state.trips.map(doc => (
-              <div key={doc.id}>
-                <TripCard trip={doc} />
-              </div>
-            ))
-          ) : (
-            <Icon type="loading" style={{ fontSize: '50px' }} />
-          )
+          <div>
+            <NewTripForm />
+            <TripList trips={this.state.trips} />
+          </div>
         ) : (
           <h2 style={{ marginTop: '4rem' }}>Login to discover trips and sign up for them!</h2>
         )}
@@ -51,3 +48,14 @@ export default class Trips extends React.Component<Props, State> {
     )
   }
 }
+
+const TripList = ({ trips }) =>
+  trips ? (
+    trips.map(doc => (
+      <div key={doc.id}>
+        <TripCard trip={doc} />
+      </div>
+    ))
+  ) : (
+    <Icon type="loading" style={{ fontSize: '50px' }} />
+  )
