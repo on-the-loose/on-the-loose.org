@@ -44,7 +44,7 @@ export default class AppRouter extends React.Component<any, State> {
           <AppHeader user={this.state.user} />
           <Content>
             <Route path="/" exact component={Home} />
-            <Route path="/trips/" component={Trips} />
+            <Route path="/trips/" component={() => <Trips user={this.state.user} />} />
             <Route path="/guide/" component={Guide} />
             <Route path="/profile/" component={() => <Profile user={this.state.user} />} />
             <Route path="/login/" component={Login} />

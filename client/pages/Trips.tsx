@@ -8,37 +8,46 @@ import 'antd/lib/icon/style/css'
 
 // TODO chache trip results
 
-const TripList = styled.div`
+const Container = styled.div`
   text-align: center;
 `
 const db = firebase.firestore()
 
-type State = {
+export interface Props {
+  user: firebase.User
+}
+
+export interface State {
   trips: firebase.firestore.QueryDocumentSnapshot[]
 }
 
-export default class Trips extends React.Component<any, State> {
-  public componentDidMount() {
-    db.collection('trips')
-      .get()
-      .then(qs => this.setState({ trips: qs.docs }))
+export default class Trips extends React.Component<Props, State> {
+  state = { trips: null }
 
-    // TODO: add login prompt on fetch fail
+  public componentDidMount() {
+    if (this.props.user)
+      db.collection('trips')
+        .get()
+        .then(qs => this.setState({ trips: qs.docs }))
   }
 
   public render() {
     return (
-      <TripList>
-        {this.state && this.state.trips ? (
-          this.state.trips.map(doc => (
-            <div key={doc.id}>
-              <TripCard trip={doc} />
-            </div>
-          ))
+      <Container>
+        {this.props.user ? (
+          this.state.trips ? (
+            this.state.trips.map(doc => (
+              <div key={doc.id}>
+                <TripCard trip={doc} />
+              </div>
+            ))
+          ) : (
+            <Icon type="loading" style={{ fontSize: '50px' }} />
+          )
         ) : (
-          <Icon type="loading" style={{ fontSize: '50px' }} />
+          <h2 style={{ marginTop: '4rem' }}>Login to discover trips and sign up for them!</h2>
         )}
-      </TripList>
+      </Container>
     )
   }
 }
