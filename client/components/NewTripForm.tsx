@@ -11,6 +11,8 @@ import 'antd/lib/row/style/css'
 import 'antd/lib/input/style/css'
 import 'antd/lib/select/style/css'
 import 'antd/lib/date-picker/style/css'
+import firebase from 'firebase'
+import * as _ from 'lodash'
 
 const { Option } = Select
 
@@ -31,7 +33,17 @@ class NewTripForm extends React.Component<any, State> {
     e.preventDefault()
     this.props.form.validateFields((err, values) => {
       if (err) return
-      console.log(values)
+
+      const data = _.omitBy(values, _.isUndefined)
+
+      data.dates = { start: data.dates[0].unix(), end: data.dates[1].unix() }
+
+      firebase
+        .firestore()
+        .collection('trips')
+        .add(data)
+        .then(() => console.log('success'))
+        .catch(() => console.log('fail'))
     })
   }
 
@@ -77,7 +89,7 @@ class NewTripForm extends React.Component<any, State> {
               </Col>
               <Col span={12}>
                 <Form.Item label="Destination">
-                  {getFieldDecorator('url', {
+                  {getFieldDecorator('destination', {
                     rules: [{ required: true, message: 'Please enter a destination' }]
                   })(<Input placeholder="Where would you like to go?" />)}
                 </Form.Item>
@@ -85,13 +97,10 @@ class NewTripForm extends React.Component<any, State> {
             </Row>
             <Row gutter={16}>
               <Col span={12}>
-                <Form.Item label="Co-leaders">
-                  {getFieldDecorator('coleaders', {})(
-                    <Select placeholder="Is anyone leading the trip with you?">
-                      <Option value="xiao">Simon Simon</Option>
-                      <Option value="mao">Bob McBob</Option>
-                    </Select>
-                  )}
+                <Form.Item label="Image">
+                  {getFieldDecorator('image', {
+                    rules: [{ required: true, message: 'Please enter a image url' }]
+                  })(<Input placeholder="A link to an image that shows where you're going" />)}
                 </Form.Item>
               </Col>
               <Col span={12}>

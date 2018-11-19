@@ -52,7 +52,7 @@ export default class Trips extends React.Component<Props, State> {
 const TripList = ({ trips }) =>
   trips ? (
     trips.map(doc => (
-      <div key={doc.id}>
+      <div key={doc.id} style={{ marginBottom: '2rem' }}>
         <TripCard trip={doc} />
       </div>
     ))
