@@ -6,7 +6,7 @@
   "author": "simonpfish <simonpfish@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "parcel src/index.html"
+    "dev": "parcel src/main/index.html"
   },
   "dependencies": {
     "antd": "^3.10.7",
