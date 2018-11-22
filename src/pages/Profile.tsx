@@ -1,5 +1,5 @@
 import * as React from 'react'
-import FbConnectButton from '../components/FbConnectButton'
+import FbConnectButton from '../components/account/FbConnectButton'
 import { Avatar } from 'antd'
 
 import 'antd/lib/avatar/style/css'

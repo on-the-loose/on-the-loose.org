@@ -6,20 +6,15 @@
   "author": "simonpfish <simonpfish@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "client": "parcel watch client/index.html",
-    "server": "nodemon --watch server --exec ts-node server/index.ts",
-    "parcel": "parcel client/index.html"
+    "dev": "parcel src/index.html"
   },
   "dependencies": {
-    "@types/styled-components": "^4.1.0",
     "antd": "^3.10.7",
-    "express": "^4.16.4",
     "firebase": "^5.5.8",
     "lodash": "^4.17.11",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-router-dom": "^4.3.1",
-    "reflect-metadata": "^0.1.12",
     "styled-components": "^4.1.1"
   },
   "devDependencies": {
@@ -28,9 +23,9 @@
     "@types/node": "^10.12.9",
     "@types/react": "^16.7.6",
     "@types/react-router": "^4.4.1",
+    "@types/styled-components": "^4.1.0",
     "nodemon": "^1.18.6",
     "parcel-bundler": "^1.10.3",
-    "ts-node": "^7.0.1",
     "typescript": "^3.1.6"
   }
 }
