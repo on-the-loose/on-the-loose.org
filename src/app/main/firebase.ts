@@ -1,4 +1,5 @@
 import 'firebase/firestore'
+import 'firebase/auth'
 
 import firebase from 'firebase/app'
 
@@ -13,9 +14,7 @@ const firebase_config = {
 
 firebase.initializeApp(firebase_config)
 
-const db = firebase.firestore()
-
-db.settings({
+firebase.firestore().settings({
   timestampsInSnapshots: true
 })
 

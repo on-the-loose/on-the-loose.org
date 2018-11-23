@@ -8,7 +8,7 @@ import Home from '../pages/Home'
 import Login from '../pages/Login'
 import Profile from '../pages/Profile'
 import Trips from '../pages/Trips'
-import firebase from 'firebase'
+import firebase from '../main/firebase'
 import styled from 'styled-components'
 
 const Layout = styled.div`

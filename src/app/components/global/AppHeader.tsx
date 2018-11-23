@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import LoginButton from '../account/LoginButton'
 import { Menu } from 'antd'
 import React from 'react'
-import firebase from 'firebase'
+import firebase from '../../main/firebase'
 import logo from 'assets/otl_logo_circle_lq.png'
 import styled from 'styled-components'
 
