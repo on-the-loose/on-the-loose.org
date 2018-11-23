@@ -1,8 +1,3 @@
-import * as React from 'react'
-import { Drawer, Form, Button, Col, Row, Input, Select, DatePicker } from 'antd'
-import { createGlobalStyle } from 'styled-components'
-import moment from 'moment'
-
 import 'antd/lib/form/style/css'
 import 'antd/lib/button/style/css'
 import 'antd/lib/drawer/style/css'
@@ -11,8 +6,14 @@ import 'antd/lib/row/style/css'
 import 'antd/lib/input/style/css'
 import 'antd/lib/select/style/css'
 import 'antd/lib/date-picker/style/css'
+
+import { Button, Col, DatePicker, Drawer, Form, Input, Row, Select } from 'antd'
+
+import React from 'react'
+import _ from 'lodash'
+import { createGlobalStyle } from 'styled-components'
 import firebase from 'firebase'
-import * as _ from 'lodash'
+import moment from 'moment'
 
 const { Option } = Select
 

@@ -1,16 +1,16 @@
+import 'antd/lib/menu/style/css'
+
 import * as React from 'react'
 
-import { Menu } from 'antd'
-import { Link } from 'react-router-dom'
-import { withRouter, RouteComponentProps } from 'react-router'
-import styled from 'styled-components'
+import { RouteComponentProps, withRouter } from 'react-router'
 
-import logo from 'assets/otl_logo_circle_lq.png'
-import LoginButton from '../account/LoginButton'
-import firebase from 'firebase'
 import AccountAvatar from '../account/UserAvatar'
-
-import 'antd/lib/menu/style/css'
+import { Link } from 'react-router-dom'
+import LoginButton from '../account/LoginButton'
+import { Menu } from 'antd'
+import firebase from 'firebase'
+import logo from 'assets/otl_logo_circle_lq.png'
+import styled from 'styled-components'
 
 const Logo = styled.img`
   width: 3rem;

@@ -1,11 +1,11 @@
-import * as React from 'react'
-import { Popover, Button, Avatar } from 'antd'
-import { Link } from 'react-router-dom'
-
 import 'antd/lib/popover/style/css'
 import 'antd/lib/button/style/css'
 import 'antd/lib/avatar/style/css'
 
+import { Avatar, Button, Popover } from 'antd'
+
+import { Link } from 'react-router-dom'
+import React from 'react'
 import firebase from 'firebase'
 
 export interface Props {

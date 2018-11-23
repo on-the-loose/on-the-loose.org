@@ -1,10 +1,11 @@
-import * as React from 'react'
-import { Modal, Button } from 'antd'
-import styled from 'styled-components'
-
 import 'antd/lib/modal/style/css'
 import 'antd/lib/button/style/css'
+
+import { Button, Modal } from 'antd'
+
 import LoginForm from './LoginForm'
+import React from 'react'
+import styled from 'styled-components'
 
 export interface State {
   visible: boolean

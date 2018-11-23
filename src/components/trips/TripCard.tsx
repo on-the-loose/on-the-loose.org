@@ -1,8 +1,8 @@
-import * as React from 'react'
-import { Card } from 'antd'
-import styled from 'styled-components'
-
 import 'antd/lib/card/style/css'
+
+import { Card } from 'antd'
+import React from 'react'
+import styled from 'styled-components'
 
 const Wrapper = styled.div`
   display: inline-flex;

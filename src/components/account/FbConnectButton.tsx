@@ -1,10 +1,10 @@
-import * as React from 'react'
-import firebase from 'firebase'
-import { Button } from 'antd'
-import styled from 'styled-components'
-
-import facebook_f from 'assets/facebook-f.svg'
 import 'antd/lib/button/style/css'
+
+import { Button } from 'antd'
+import React from 'react'
+import facebook_f from 'assets/facebook-f.svg'
+import firebase from 'firebase'
+import styled from 'styled-components'
 
 const FbLogo = styled.img`
   vertical-align: sub;
