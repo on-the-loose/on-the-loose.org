@@ -1,6 +1,3 @@
-import 'antd/lib/modal/style/css'
-import 'antd/lib/button/style/css'
-
 import { Button, Modal } from 'antd'
 
 import LoginForm from './LoginForm'

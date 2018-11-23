@@ -1,7 +1,3 @@
-import 'antd/lib/popover/style/css'
-import 'antd/lib/button/style/css'
-import 'antd/lib/avatar/style/css'
-
 import { Avatar, Button, Popover } from 'antd'
 
 import { Link } from 'react-router-dom'

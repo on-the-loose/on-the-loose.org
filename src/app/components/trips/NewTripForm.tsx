@@ -1,14 +1,6 @@
-import 'antd/lib/form/style/css'
-import 'antd/lib/button/style/css'
-import 'antd/lib/drawer/style/css'
-import 'antd/lib/col/style/css'
-import 'antd/lib/row/style/css'
-import 'antd/lib/input/style/css'
-import 'antd/lib/select/style/css'
-import 'antd/lib/date-picker/style/css'
-
 import { Button, Col, DatePicker, Drawer, Form, Input, Row, Select } from 'antd'
 
+import { FormComponentProps } from 'antd/lib/form'
 import React from 'react'
 import _ from 'lodash'
 import { createGlobalStyle } from 'styled-components'
@@ -27,7 +19,7 @@ export interface State {
   visible: boolean
 }
 
-class NewTripForm extends React.Component<any, State> {
+class NewTripForm extends React.Component<FormComponentProps, State> {
   state = { visible: false }
 
   handleSubmit = e => {

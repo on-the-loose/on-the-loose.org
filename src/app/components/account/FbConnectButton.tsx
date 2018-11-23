@@ -1,5 +1,3 @@
-import 'antd/lib/button/style/css'
-
 import { Button } from 'antd'
 import React from 'react'
 import facebook_f from 'assets/facebook-f.svg'

@@ -1,8 +1,3 @@
-import 'antd/lib/form/style/css'
-import 'antd/lib/icon/style/css'
-import 'antd/lib/input/style/css'
-import 'antd/lib/button/style/css'
-
 import { Button, Form, Icon, Input } from 'antd'
 
 import { FormComponentProps } from 'antd/lib/form'

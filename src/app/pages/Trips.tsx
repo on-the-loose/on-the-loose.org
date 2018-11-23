@@ -1,6 +1,3 @@
-import 'antd/lib/icon/style/css'
-import 'antd/lib/button/style/css'
-
 import { Button, Icon } from 'antd'
 
 import NewTripForm from '../components/trips/NewTripForm'

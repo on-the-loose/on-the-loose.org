@@ -1,5 +1,3 @@
-import 'antd/lib/menu/style/css'
-
 import { RouteComponentProps, withRouter } from 'react-router'
 
 import AccountAvatar from '../account/UserAvatar'
