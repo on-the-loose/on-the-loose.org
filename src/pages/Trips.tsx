@@ -1,12 +1,13 @@
-import * as React from 'react'
-import firebase from '../index/firebase'
-import { Icon, Button } from 'antd'
-import TripCard from '../components/trips/TripCard'
-import styled from 'styled-components'
-
 import 'antd/lib/icon/style/css'
 import 'antd/lib/button/style/css'
+
+import { Button, Icon } from 'antd'
+
 import NewTripForm from '../components/trips/NewTripForm'
+import React from 'react'
+import TripCard from '../components/trips/TripCard'
+import firebase from '../main/firebase'
+import styled from 'styled-components'
 
 // TODO chache trip results
 

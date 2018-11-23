@@ -1,7 +1,7 @@
-import * as React from 'react'
+import React from 'react'
+import { RouteComponentProps } from 'react-router'
 import firebase from 'firebase'
 import { withRouter } from 'react-router-dom'
-import { RouteComponentProps } from 'react-router'
 
 class Login extends React.Component<RouteComponentProps, any> {
   public componentDidMount() {

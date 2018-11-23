@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { withRouter, RouteComponentProps } from 'react-router'
 import styled from 'styled-components'
 
-import logo from '../assets/otl_logo_circle_lq.png'
+import logo from 'assets/otl_logo_circle_lq.png'
 import LoginButton from '../account/LoginButton'
 import firebase from 'firebase'
 import AccountAvatar from '../account/UserAvatar'

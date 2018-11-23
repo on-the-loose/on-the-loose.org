@@ -1,5 +1,5 @@
-import * as React from 'react'
-import background from '../assets/background.jpg'
+import React from 'react'
+import background from 'assets/background.jpg'
 import styled from 'styled-components'
 
 const BackgroundImage = styled.img`

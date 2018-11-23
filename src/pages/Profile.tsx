@@ -1,8 +1,8 @@
-import * as React from 'react'
-import FbConnectButton from '../components/account/FbConnectButton'
-import { Avatar } from 'antd'
-
 import 'antd/lib/avatar/style/css'
+
+import { Avatar } from 'antd'
+import FbConnectButton from '../components/account/FbConnectButton'
+import React from 'react'
 
 export interface Props {
   user: firebase.User
