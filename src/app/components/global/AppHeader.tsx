@@ -1,13 +1,12 @@
 import 'antd/lib/menu/style/css'
 
-import * as React from 'react'
-
 import { RouteComponentProps, withRouter } from 'react-router'
 
 import AccountAvatar from '../account/UserAvatar'
 import { Link } from 'react-router-dom'
 import LoginButton from '../account/LoginButton'
 import { Menu } from 'antd'
+import React from 'react'
 import firebase from 'firebase'
 import logo from 'assets/otl_logo_circle_lq.png'
 import styled from 'styled-components'
@@ -31,6 +30,7 @@ const Header = styled.div`
 const StyledMenu = styled(Menu)`
   margin-left: auto;
   margin-right: auto;
+  background-color: rgba(0, 0, 0, 0);
 `
 
 const StyledItem = styled(Menu.Item)`

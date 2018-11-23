@@ -6,14 +6,15 @@ Hello! This is the codebase of the official website of On The Loose, the Claremo
 
 ```
 .
-├── assets/           # Static assets (images, fonts)
-├── src/              # Client code (React with Typescript)
-│   ├── components/   # Reusable components
-│   ├── index/        # App entry point (the code that always gets executed first)
-│   └── pages/        # Standalone views
-├── package.json      # Dependencies and scripts
-├── tsconfig.json     # Typescript configuration
-├── README.md         # This README
+├── src                 # Client source (React with Typescript)
+│   ├── assets            # Static assets (images, fonts)
+│   ├── app               # React code
+│       ├── components      # Reusable components
+│       ├── index           # App entry point (the code that always gets executed first)
+│       └── pages           # Standalone views
+├── package.json        # Dependencies and scripts
+├── tsconfig.json       # Typescript configuration
+├── README.md           # This README
 └── ...
 ```
 
