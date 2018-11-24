@@ -33,16 +33,14 @@ export interface Props {
   trip: firebase.firestore.QueryDocumentSnapshot
 }
 
-export default class TripCard extends React.Component<Props, any> {
-  public render() {
-    const trip_data = this.props.trip.data()
-    return (
-      <Wrapper>
-        <TripInfo title={trip_data.title}>
-          <p>{trip_data.destination}</p>
-        </TripInfo>
-        <TripImage src={trip_data.image} alt="trip image" />
-      </Wrapper>
-    )
-  }
+export default function TripCard(props: Props) {
+  const trip_data = props.trip.data()
+  return (
+    <Wrapper>
+      <TripInfo title={trip_data.title}>
+        <p>{trip_data.destination}</p>
+      </TripInfo>
+      <TripImage src={trip_data.image} alt="trip image" />
+    </Wrapper>
+  )
 }
