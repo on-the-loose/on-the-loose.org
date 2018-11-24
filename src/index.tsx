@@ -9,10 +9,24 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-render(
-  <div>
-    <GlobalStyle />
-    <App />
-  </div>,
-  document.getElementById('react-app')
-)
+const renderApp = MainComponent => {
+  render(
+    <div>
+      <GlobalStyle />
+      <MainComponent />
+    </div>,
+    document.getElementById('react-app')
+  )
+}
+
+//@ts-ignore
+if (module.hot) {
+  //@ts-ignore
+  module.hot.accept('./react/App', () => {
+    renderApp(require('./react/App').default)
+  })
+}
+
+renderApp(App)
+
+// TODO: register service worker
