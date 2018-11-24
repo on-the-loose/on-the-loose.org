@@ -1,6 +1,6 @@
 import React from 'react'
 import { RouteComponentProps } from 'react-router'
-import firebase from '../main/firebase'
+import firebase from '@/firebase'
 import { withRouter } from 'react-router-dom'
 
 class Login extends React.Component<RouteComponentProps, any> {

@@ -1,7 +1,7 @@
 import { Button } from 'antd'
 import React from 'react'
-import facebook_f from 'assets/facebook-f.svg'
-import firebase from '../../main/firebase'
+import facebook_f from '@/images/facebook-f.svg'
+import firebase from '@/firebase'
 import styled from 'styled-components'
 
 const FbLogo = styled.img`

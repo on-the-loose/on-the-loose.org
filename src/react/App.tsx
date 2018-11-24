@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 
-import AppHeader from '../components/global/AppHeader'
-import BackgroundImage from '../components/global/BackgroundImage'
-import Guide from '../pages/Guide'
-import Home from '../pages/Home'
-import Login from '../pages/Login'
-import Profile from '../pages/Profile'
-import Trips from '../pages/Trips'
-import firebase from '../main/firebase'
+import AppHeader from './components/global/AppHeader'
+import BackgroundImage from './components/global/BackgroundImage'
+import Guide from './pages/Guide'
+import Home from './pages/Home'
+import Login from './pages/Login'
+import Profile from './pages/Profile'
+import Trips from './pages/Trips'
+import firebase from '@/firebase'
 import styled from 'styled-components'
 
 const Layout = styled.div`

@@ -2,7 +2,7 @@ import { Button, Form, Icon, Input } from 'antd'
 
 import { FormComponentProps } from 'antd/lib/form'
 import React from 'react'
-import firebase from '../../main/firebase'
+import firebase from '@/firebase'
 
 export interface State {}
 

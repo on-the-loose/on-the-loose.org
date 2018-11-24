@@ -4,7 +4,7 @@ import { FormComponentProps } from 'antd/lib/form'
 import React from 'react'
 import _ from 'lodash'
 import { createGlobalStyle } from 'styled-components'
-import firebase from '../../main/firebase'
+import firebase from '@/firebase'
 import moment from 'moment'
 
 const { Option } = Select

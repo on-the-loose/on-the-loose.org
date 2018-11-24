@@ -3,7 +3,7 @@ import { Button, Icon } from 'antd'
 import NewTripForm from '../components/trips/NewTripForm'
 import React from 'react'
 import TripCard from '../components/trips/TripCard'
-import firebase from '../main/firebase'
+import firebase from '@/firebase'
 import styled from 'styled-components'
 
 // TODO chache trip results

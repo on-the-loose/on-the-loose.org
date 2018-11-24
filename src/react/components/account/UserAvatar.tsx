@@ -2,7 +2,7 @@ import { Avatar, Button, Popover } from 'antd'
 
 import { Link } from 'react-router-dom'
 import React from 'react'
-import firebase from '../../main/firebase'
+import firebase from '@/firebase'
 
 export interface Props {
   user: firebase.User
