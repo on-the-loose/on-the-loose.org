@@ -50,7 +50,7 @@ export default class Trips extends React.Component<Props, State> {
 const TripList = ({ trips }) =>
   trips ? (
     trips.map(doc => (
-      <div key={doc.id} style={{ marginBottom: '2rem' }}>
+      <div key={doc.id} style={{ marginBottom: '1rem' }}>
         <TripCard trip={doc} />
       </div>
     ))
