@@ -23,7 +23,7 @@ const Header = styled.div`
   position: fixed;
   width: 100%;
   z-index: 10;
-  background-color: rgb(247, 242, 237);
+  background-color: rgb(247, 242, 237, 0.95);
 `
 
 const StyledMenu = styled(Menu)`
