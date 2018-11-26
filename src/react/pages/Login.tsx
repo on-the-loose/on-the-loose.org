@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { RouteComponentProps } from 'react-router'
 import firebase from '@/firebase'
 import { withRouter } from 'react-router-dom'
+import { Icon } from 'antd'
 
-class Login extends React.Component<RouteComponentProps, any> {
-  public componentDidMount() {
+function Login(props: RouteComponentProps) {
+  const [hasLoginError, setHasLoginError] = useState<boolean>(false)
+
+  useEffect(() => {
     // Confirm the link is a sign-in with email link.
     if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
       // Additional state parameters can also be passed via URL.
@@ -29,18 +32,33 @@ class Login extends React.Component<RouteComponentProps, any> {
           // Additional user info profile not available via:
           // result.additionalUserInfo.profile == null
           // You can check if the user is new or existing:
-          if (!result.additionalUserInfo.isNewUser) this.props.history.push('/home')
-          else this.props.history.push('/profile')
+          if (!result.additionalUserInfo.isNewUser) props.history.replace('/')
+          else props.history.replace('/profile')
         })
         .catch(error => {
           // Some error occurred, you can inspect the code: error.code
           // Common errors could be invalid email and invalid or expired OTPs.
+          setHasLoginError(true)
+          console.log(error.code)
         })
+    } else {
+      props.history.replace('/')
     }
-  }
-  public render() {
-    return <div />
-  }
+  }, [])
+
+  return (
+    <div style={{ textAlign: 'center' }}>
+      {hasLoginError ? (
+        <h2 style={{ margin: '4rem' }}>Login error. Try again.</h2>
+      ) : (
+        <div>
+          {' '}
+          <h2 style={{ margin: '4rem' }}>Logging in</h2>
+          <Icon type="loading" style={{ fontSize: '50px' }} />
+        </div>
+      )}
+    </div>
+  )
 }
 
 export default withRouter(Login)

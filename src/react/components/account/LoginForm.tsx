@@ -32,9 +32,6 @@ function LoginForm(props: FormComponentProps) {
 
           window.localStorage.setItem('emailForSignIn', values.email)
         })
-        .catch(error => {
-          console.error(error)
-        })
     })
   }
 
