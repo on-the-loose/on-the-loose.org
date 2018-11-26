@@ -6,7 +6,7 @@ import LoginButton from '../account/LoginButton'
 import { Menu } from 'antd'
 import React from 'react'
 import firebase from '@/firebase'
-import logo from '@/images/otl_logo_circle_lq.png'
+import logo from '@/assets/otl_logo_circle_lq.png'
 import styled from 'styled-components'
 
 const Logo = styled.img`
