@@ -29,7 +29,7 @@ class NewTripForm extends React.Component<FormComponentProps, State> {
 
       const data = _.omitBy(values, _.isUndefined)
 
-      data.dates = { start: data.dates[0].unix(), end: data.dates[1].unix() }
+      data.dates = { start: data.dates[0].toDate(), end: data.dates[1].toDate() }
 
       firebase
         .firestore()
