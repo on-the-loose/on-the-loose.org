@@ -2,6 +2,7 @@ import App from './react/App'
 import React from 'react'
 import { createGlobalStyle } from 'styled-components'
 import { render } from 'react-dom'
+import firebase from '@/firebase'
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -9,11 +10,16 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
+let user = firebase.auth().currentUser
+firebase.auth().onAuthStateChanged(u => {
+  user = u
+})
+
 const renderApp = MainComponent => {
   render(
     <div>
       <GlobalStyle />
-      <MainComponent />
+      <MainComponent user={user} />
     </div>,
     document.getElementById('react-app')
   )
@@ -27,6 +33,7 @@ if (module.hot) {
   })
 }
 
-renderApp(App)
+// make sure auth is initialized before initial render
+firebase.auth().onAuthStateChanged(u => renderApp(App))
 
 // TODO: register service worker

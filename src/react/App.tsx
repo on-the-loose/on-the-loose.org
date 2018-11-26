@@ -20,14 +20,7 @@ const Content = styled.div`
 `
 
 export default function App() {
-  const [user, setUser] = useState(null)
-
-  useEffect(() => {
-    const removeAuthListener = firebase.auth().onAuthStateChanged(u => {
-      setUser(u)
-    })
-    return () => removeAuthListener()
-  }, [])
+  const user = firebase.auth().currentUser
 
   return (
     <Router>
