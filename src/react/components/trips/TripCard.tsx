@@ -15,9 +15,10 @@ const Wrapper = styled.div`
   max-width: 50rem;
 
   &:hover {
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2), 0 4px 16px 0 rgba(0, 0, 0, 0.19);
-    transform: translateY(-1px);
-    border: 1px solid rgba(0, 0, 0, 0);
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1), 0 4px 16px 0 rgba(0, 0, 0, 0.09);
+    position: relative;
+    top: -1px;
+    transition: top 0.3s, box-shadow 0.25s;
   }
 `
 
