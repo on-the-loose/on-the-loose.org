@@ -57,7 +57,7 @@ export default function App() {
 
   return (
     <div>
-      <s.Button/> <-- A styled component declared bellow
+      <s.Button/> <-- A styled component declared below
     </div>
   )
 }
