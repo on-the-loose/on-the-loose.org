@@ -41,34 +41,29 @@ export interface Props extends RouteComponentProps {
   user: firebase.User
 }
 
-class AppHeader extends React.Component<Props, any> {
-  public render() {
-    return (
-      <Header>
-        <Logo src={logo} alt="logo" />
+function AppHeader(props: Props) {
+  const current_page = props.location.pathname.split('/')[1]
+  return (
+    <Header>
+      <Logo src={logo} alt="logo" />
 
-        <StyledMenu mode="horizontal" selectedKeys={[this.props.location.pathname]}>
-          <StyledItem key="/">
-            <Link to="/">HOME</Link>
-          </StyledItem>
+      <StyledMenu mode="horizontal" selectedKeys={[current_page ? current_page : '/']}>
+        <StyledItem key="/">
+          <Link to="/">HOME</Link>
+        </StyledItem>
 
-          <StyledItem key="/trips">
-            <Link to="/trips">TRIPS</Link>
-          </StyledItem>
+        <StyledItem key="trips">
+          <Link to="/trips">TRIPS</Link>
+        </StyledItem>
 
-          <StyledItem key="/guide">
-            <Link to="/guide">GUIDE</Link>
-          </StyledItem>
-        </StyledMenu>
+        <StyledItem key="guide">
+          <Link to="/guide">GUIDE</Link>
+        </StyledItem>
+      </StyledMenu>
 
-        {this.props.user ? (
-          <AccountAvatar user={this.props.user} />
-        ) : (
-          <LoginButton>LOGIN</LoginButton>
-        )}
-      </Header>
-    )
-  }
+      {props.user ? <AccountAvatar user={props.user} /> : <LoginButton>LOGIN</LoginButton>}
+    </Header>
+  )
 }
 
 export default withRouter(AppHeader)

@@ -37,7 +37,7 @@ export default class Trips extends React.Component<Props, State> {
         {this.props.user ? (
           <div>
             <NewTripForm />
-            <TripList trips={this.state.trips} />
+            <TripCardsList trips={this.state.trips} />
           </div>
         ) : (
           <h2 style={{ marginTop: '4rem' }}>Login to discover trips and sign up for them!</h2>
@@ -47,7 +47,7 @@ export default class Trips extends React.Component<Props, State> {
   }
 }
 
-const TripList = ({ trips }) =>
+const TripCardsList = ({ trips }) =>
   trips ? (
     trips.map(doc => (
       <div key={doc.id} style={{ marginBottom: '1rem' }}>
