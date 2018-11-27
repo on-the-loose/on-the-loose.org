@@ -39,7 +39,6 @@ function Login(props: RouteComponentProps) {
           // Some error occurred, you can inspect the code: error.code
           // Common errors could be invalid email and invalid or expired OTPs.
           setHasLoginError(true)
-          console.log(error.code)
         })
     } else {
       props.history.replace('/')

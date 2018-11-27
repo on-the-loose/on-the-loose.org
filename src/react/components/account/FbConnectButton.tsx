@@ -21,7 +21,6 @@ export default class FbConnectButton extends React.Component {
         // Accounts successfully linked.
         var credential = result.credential
         var user = result.user
-        console.log(user)
       })
     // .catch(function(error) {
     // Handle Errors here.

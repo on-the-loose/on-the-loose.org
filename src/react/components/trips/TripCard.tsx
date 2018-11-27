@@ -44,7 +44,7 @@ export interface Props {
 
 export default function TripCard(props: Props) {
   const trip_data = props.trip.data()
-  console.log(trip_data.dates)
+
   return (
     <Link to={`/trips/${props.trip.id}`}>
       <Wrapper>

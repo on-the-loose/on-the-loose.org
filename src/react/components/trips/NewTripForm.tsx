@@ -31,6 +31,7 @@ class NewTripForm extends React.Component<FormComponentProps, State> {
 
       data.dates = { start: data.dates[0].toDate(), end: data.dates[1].toDate() }
 
+      // TODO add loading indicators
       firebase
         .firestore()
         .collection('trips')

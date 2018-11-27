@@ -12,8 +12,6 @@ export default class Profile extends React.Component<Props> {
       const isFbConnected = this.props.user.providerData[0].providerId == 'facebook.com'
       const fbData = this.props.user.providerData[0]
 
-      console.log(fbData)
-
       return isFbConnected ? (
         <div style={{ textAlign: 'center' }}>
           <Avatar size={200} src={fbData.photoURL + '?type=large'} />

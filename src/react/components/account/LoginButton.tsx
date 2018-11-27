@@ -19,14 +19,12 @@ export default class LoginButton extends React.Component<any, State> {
   }
 
   handleOk = e => {
-    console.log(e)
     this.setState({
       visible: false
     })
   }
 
   handleCancel = e => {
-    console.log(e)
     this.setState({
       visible: false
     })
