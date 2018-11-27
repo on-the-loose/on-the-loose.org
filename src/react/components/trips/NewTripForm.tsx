@@ -7,14 +7,6 @@ import { createGlobalStyle } from 'styled-components'
 import firebase from '@/firebase'
 import moment from 'moment'
 
-const { Option } = Select
-
-const AlignCloseButton = createGlobalStyle`
-  .ant-drawer-close-x {
-    margin-top: 1rem;
-  }
-`
-
 export interface State {
   visible: boolean
 }
@@ -57,7 +49,6 @@ class NewTripForm extends React.Component<FormComponentProps, State> {
     const { getFieldDecorator } = this.props.form
     return (
       <div>
-        <AlignCloseButton />
         <Button onClick={this.showDrawer} icon="plus" style={{ marginBottom: '2rem' }}>
           Create trip
         </Button>

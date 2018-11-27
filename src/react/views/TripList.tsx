@@ -8,9 +8,6 @@ import styled from 'styled-components'
 
 // TODO chache trip results
 
-const Container = styled.div`
-  text-align: center;
-`
 const db = firebase.firestore()
 
 export interface Props {
@@ -33,7 +30,7 @@ export default class Trips extends React.Component<Props, State> {
 
   public render() {
     return (
-      <Container>
+      <div style={{ textAlign: 'center' }}>
         {this.props.user ? (
           <div>
             <NewTripForm />
@@ -42,7 +39,7 @@ export default class Trips extends React.Component<Props, State> {
         ) : (
           <h2 style={{ marginTop: '4rem' }}>Login to discover trips and sign up for them!</h2>
         )}
-      </Container>
+      </div>
     )
   }
 }

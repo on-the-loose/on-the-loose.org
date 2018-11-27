@@ -4,40 +4,6 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 
-const Wrapper = styled.div`
-  display: inline-flex;
-  text-align: left;
-  align-items: center;
-  overflow: hidden;
-  border-radius: 8px;
-  border: 1px solid #e8e8e8;
-  width: 80%;
-  max-width: 50rem;
-
-  &:hover {
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1), 0 4px 16px 0 rgba(0, 0, 0, 0.09);
-    position: relative;
-    top: -1px;
-    transition: top 0.3s, box-shadow 0.25s;
-  }
-`
-
-const TripInfoCard = styled(Card)`
-  display: inline-block;
-  height: 10rem;
-  width: 70%;
-  border-radius: 0px;
-  border-style: none;
-`
-
-// Add loading state for image
-const TripImage = styled.img`
-  display: inline-block;
-  height: 10rem;
-  width: 30%;
-  z-index: 1;
-`
-
 export interface Props {
   trip: firebase.firestore.QueryDocumentSnapshot
 }
@@ -47,8 +13,8 @@ export default function TripCard(props: Props) {
 
   return (
     <Link to={`/trips/${props.trip.id}`}>
-      <Wrapper>
-        <TripInfoCard
+      <s.Wrapper>
+        <s.TripInfoCard
           title={trip_data.title}
           bordered={false}
           bodyStyle={{
@@ -64,9 +30,45 @@ export default function TripCard(props: Props) {
             </span>
             - {trip_data.description}
           </div>
-        </TripInfoCard>
-        <TripImage src={trip_data.image} alt="trip image" />
-      </Wrapper>
+        </s.TripInfoCard>
+        {/* TODO Add loading state for image */}
+        <s.TripImage src={trip_data.image} alt="trip image" />
+      </s.Wrapper>
     </Link>
   )
+}
+
+const s = {
+  Wrapper: styled.div`
+    display: inline-flex;
+    text-align: left;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid #e8e8e8;
+    width: 80%;
+    max-width: 50rem;
+
+    &:hover {
+      box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1), 0 4px 16px 0 rgba(0, 0, 0, 0.09);
+      position: relative;
+      top: -1px;
+      transition: top 0.3s, box-shadow 0.25s;
+    }
+  `,
+
+  TripInfoCard: styled(Card)`
+    display: inline-block;
+    height: 10rem;
+    width: 70%;
+    border-radius: 0px;
+    border-style: none;
+  `,
+
+  TripImage: styled.img`
+    display: inline-block;
+    height: 10rem;
+    width: 30%;
+    z-index: 1;
+  `
 }

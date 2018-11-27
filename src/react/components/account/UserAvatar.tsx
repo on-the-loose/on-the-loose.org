@@ -58,7 +58,5 @@ export default class AccountAvatar extends React.Component<Props, State> {
         )}
       </Popover>
     )
-
-    // <Avatar size="large">{this.props.user.email[0].toUpperCase()}</Avatar>
   }
 }
