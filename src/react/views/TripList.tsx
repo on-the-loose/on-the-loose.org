@@ -1,12 +1,11 @@
-import { Button, Icon } from 'antd'
+import { Icon } from 'antd'
 
 import NewTripForm from '../components/trips/NewTripForm'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import TripCard from '../components/trips/TripCard'
 import firebase from '@/firebase'
-import styled from 'styled-components'
 
-// TODO chache trip results
+// TODO pre-fetch trips
 
 const db = firebase.firestore()
 
@@ -18,30 +17,28 @@ export interface State {
   trips: firebase.firestore.QueryDocumentSnapshot[]
 }
 
-export default class Trips extends React.Component<Props, State> {
-  state = { trips: null }
+export default function Trips(props: Props) {
+  const [trips, setTrips] = useState<firebase.firestore.QueryDocumentSnapshot[]>(null)
 
-  public componentDidMount() {
-    if (this.props.user)
+  useEffect(() => {
+    if (props.user)
       db.collection('trips')
         .get()
-        .then(qs => this.setState({ trips: qs.docs }))
-  }
+        .then(qs => setTrips(qs.docs))
+  }, [])
 
-  public render() {
-    return (
-      <div style={{ textAlign: 'center' }}>
-        {this.props.user ? (
-          <div>
-            <NewTripForm />
-            <TripCardsList trips={this.state.trips} />
-          </div>
-        ) : (
-          <h2 style={{ marginTop: '4rem' }}>Login to discover trips and sign up for them!</h2>
-        )}
-      </div>
-    )
-  }
+  return (
+    <div style={{ textAlign: 'center' }}>
+      {props.user ? (
+        <div>
+          <NewTripForm />
+          <TripCardsList trips={trips} />
+        </div>
+      ) : (
+        <h2 style={{ marginTop: '4rem' }}>Login to discover trips and sign up for them!</h2>
+      )}
+    </div>
+  )
 }
 
 const TripCardsList = ({ trips }) =>
