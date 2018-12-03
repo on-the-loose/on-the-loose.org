@@ -69,6 +69,5 @@ const s = {
     display: inline-block;
     height: 10rem;
     width: 30%;
-    z-index: 1;
   `
 }

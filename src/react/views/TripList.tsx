@@ -13,10 +13,6 @@ export interface Props {
   user: firebase.User
 }
 
-export interface State {
-  trips: firebase.firestore.QueryDocumentSnapshot[]
-}
-
 export default function Trips(props: Props) {
   const [trips, setTrips] = useState<firebase.firestore.QueryDocumentSnapshot[]>(null)
 
