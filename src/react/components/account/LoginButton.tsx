@@ -38,8 +38,8 @@ export default class LoginButton extends React.Component<any, State> {
         </Button>
         <Modal
           bodyStyle={{
-            minHeight: 300,
-            minWidth: 400,
+            minHeight: 200,
+            minWidth: 300,
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',

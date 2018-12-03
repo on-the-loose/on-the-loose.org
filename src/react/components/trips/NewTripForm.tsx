@@ -1,11 +1,12 @@
-import { Button, Col, DatePicker, Drawer, Form, Input, Row, Select } from 'antd'
+import { Button, Col, DatePicker, Form, Input, Row, Drawer } from 'antd'
 
 import { FormComponentProps } from 'antd/lib/form'
 import React, { useState } from 'react'
 import _ from 'lodash'
-import { createGlobalStyle } from 'styled-components'
+import styled from 'styled-components'
 import firebase from '@/firebase'
 import moment from 'moment'
+import { DrawerProps } from 'antd/lib/drawer'
 
 export interface State {
   visible: boolean
@@ -54,10 +55,6 @@ function NewTripForm(props: FormComponentProps) {
         placement="bottom"
         onClose={() => setIsVisible(false)}
         visible={isVisible}
-        style={{
-          overflow: 'auto',
-          padding: '4rem 6rem'
-        }}
       >
         <Form layout="vertical" onSubmit={handleSubmit}>
           <Row gutter={16}>

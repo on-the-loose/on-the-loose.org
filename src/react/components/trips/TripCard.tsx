@@ -46,8 +46,12 @@ const s = {
     overflow: hidden;
     border-radius: 8px;
     border: 1px solid #e8e8e8;
-    width: 80%;
     max-width: 50rem;
+    width: 80%;
+
+    @media (max-width: 700px) {
+      width: 90%;
+    }
 
     &:hover {
       box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1), 0 4px 16px 0 rgba(0, 0, 0, 0.09);
@@ -63,11 +67,19 @@ const s = {
     width: 70%;
     border-radius: 0px;
     border-style: none;
+
+    @media (max-width: 700px) {
+      width: 100%;
+    }
   `,
 
   TripImage: styled.img`
     display: inline-block;
     height: 10rem;
     width: 30%;
+
+    @media (max-width: 700px) {
+      display: none;
+    }
   `
 }

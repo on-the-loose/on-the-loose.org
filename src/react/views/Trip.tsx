@@ -57,10 +57,18 @@ function TripInfo({ trip_data }) {
 const s = {
   Container: styled.div`
     position: absolute;
+
+    top: 8rem;
+    bottom: 4rem;
     left: 10rem;
     right: 10rem;
-    bottom: 4rem;
-    top: 8rem;
+
+    @media (max-width: 750px) {
+      top: 8rem;
+      bottom: 4rem;
+      left: 1rem;
+      right: 1rem;
+    }
 
     background-color: white;
     border-radius: 0.5rem;

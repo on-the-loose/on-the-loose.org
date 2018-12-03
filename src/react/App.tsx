@@ -40,5 +40,9 @@ const s = {
 
   Content: styled.div`
     padding: 8rem 4rem 4rem 4rem;
+
+    @media (max-width: 700px) {
+      padding: 8rem 1rem 4rem 1rem;
+    }
   `
 }

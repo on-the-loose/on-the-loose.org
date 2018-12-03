@@ -54,12 +54,21 @@ const s = {
     width: 100%;
     z-index: 10;
     background-color: rgb(247, 242, 237, 0.95);
+
+    @media (max-width: 700px) {
+      padding: 2.5rem 2rem 1.5rem 2rem;
+    }
   `,
 
   Menu: styled(Menu)`
     margin-left: auto;
     margin-right: auto;
     background-color: rgba(0, 0, 0, 0);
+    text-align: center;
+
+    @media (max-width: 700px) {
+      width: 4rem;
+    }
   `,
 
   Item: styled(Menu.Item)`
