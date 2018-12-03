@@ -6,6 +6,7 @@ import { withRouter } from 'react-router'
 import { RouteComponentProps } from 'react-router'
 import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
+import moment from 'moment'
 
 export interface Props extends RouteComponentProps {
   id: string
@@ -28,6 +29,10 @@ function Trip(props: Props) {
 function TripInfo({ trip_data }) {
   console.log('​TripInfo -> trip_data', trip_data)
 
+  const start = moment(trip_data.dates.start.toDate())
+  const end = moment(trip_data.dates.end.toDate())
+  const duration = end.diff(start, 'days')
+
   return (
     <div>
       <s.ImageWrap>
@@ -35,6 +40,10 @@ function TripInfo({ trip_data }) {
       </s.ImageWrap>
       <s.Content>
         <h2>{trip_data.title}</h2>
+        <p>
+          <i>{start.calendar()}</i> {duration == 0 ? '' : <i> -- {duration} Nights</i>}
+        </p>
+
         <ReactMarkdown source={trip_data.description} />
       </s.Content>
     </div>
@@ -52,6 +61,9 @@ const s = {
     background-color: white;
     border-radius: 0.5rem;
     overflow: hidden;
+    min-height: min-content;
+    max-width: 50rem;
+    margin: auto;
   `,
 
   ImageWrap: styled.div`
