@@ -35,7 +35,6 @@ export default function App() {
 
 const s = {
   Layout: styled.div`
-    background-color: rgb(247, 242, 237);
     height: 100%;
   `,
 

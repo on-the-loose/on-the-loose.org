@@ -9,6 +9,7 @@ const BackgroundImage = styled.img`
   position: fixed;
   mask-image: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
   filter: grayscale(100%);
+  z-index: -1;
 `
 
 export default () => <BackgroundImage src={background} />
