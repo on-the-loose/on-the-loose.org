@@ -21,6 +21,10 @@ export default function Trips(props: Props) {
       db.collection('trips')
         .get()
         .then(qs => setTrips(qs.docs))
+
+    const unsubscribe = db.collection('trips').onSnapshot(qs => setTrips(qs.docs))
+
+    return () => unsubscribe()
   }, [])
 
   return (
