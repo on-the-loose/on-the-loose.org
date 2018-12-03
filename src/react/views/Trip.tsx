@@ -21,7 +21,11 @@ function Trip(props: Props) {
   return (
     <s.Container>
       {' '}
-      {loading ? <s.LoadingIcon type="loading" /> : !error && <TripInfo trip_data={value.data()} />}
+      {loading ? (
+        <s.LoadingIcon type="loading" />
+      ) : (
+        value.exists && <TripInfo trip_data={value.data()} />
+      )}
     </s.Container>
   )
 }
