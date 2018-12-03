@@ -1,6 +1,6 @@
 # OTL Website
 
-Hello! This is the codebase of the official website of On The Loose, the Claremont Colleges outdoors club.
+Hello! This is the codebase for the new main website of On The Loose, the Claremont Colleges outdoors club. This project is in development and we have [a demo](https://on-the-loose.firebaseapp.com/) of our progress so far.
 
 # Project Structure
 
@@ -23,7 +23,7 @@ Hello! This is the codebase of the official website of On The Loose, the Claremo
 └── ...
 ```
 
-We use Parcel as a bundler because it requires no configuration, and TypeScript to keep our code typed and maintainable.
+We use TypeScript to keep our code typed and maintainable. This project was bootstrapped with create-react-app.
 
 # Development
 
@@ -70,4 +70,4 @@ const s = {
 }
 ```
 
-When adding new components, please adhere to this structure to keep the codebase consistent and readable.
+When adding new components follow this structure to keep the codebase consistent and readable.
