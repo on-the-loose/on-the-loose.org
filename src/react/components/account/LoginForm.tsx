@@ -20,8 +20,8 @@ function LoginForm(props: FormComponentProps) {
         // URL must be whitelisted in the Firebase Console.
         url:
           process.env.NODE_ENV == 'production'
-            ? 'http://localhost:3000/login'
-            : 'https://on-the-loose.firebaseapp.com/login',
+            ? 'https://on-the-loose.firebaseapp.com/login'
+            : 'http://localhost:3000/login',
         // This must be true.
         handleCodeInApp: true
       }
