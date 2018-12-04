@@ -66,7 +66,7 @@ const s = {
     background-color: rgba(0, 0, 0, 0);
     text-align: center;
 
-    @media (max-width: 700px) {
+    @media (max-width: 550px) {
       width: 4rem;
     }
   `,

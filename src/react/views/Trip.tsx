@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDocument } from 'react-firebase-hooks/firestore'
 import firebase from '@/firebase'
-import { Icon } from 'antd'
+import { Icon, Button } from 'antd'
 import { withRouter } from 'react-router'
 import { RouteComponentProps } from 'react-router'
 import styled from 'styled-components'
@@ -49,6 +49,8 @@ function TripInfo({ trip_data }) {
         </p>
 
         <ReactMarkdown source={trip_data.description} />
+
+        <Button> Sign up for trip </Button>
       </s.Content>
     </div>
   )
