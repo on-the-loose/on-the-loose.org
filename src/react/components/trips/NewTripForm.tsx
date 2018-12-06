@@ -115,18 +115,6 @@ function NewTripForm(props: FormComponentProps) {
               </Form.Item>
             </Col>
           </Row>
-          <Row gutter={16}>
-            <Col span={24}>
-              <Form.Item label="Gear">
-                {getFieldDecorator('gear', {})(
-                  <Input.TextArea
-                    rows={4}
-                    placeholder="What gear will participants need to bring?"
-                  />
-                )}
-              </Form.Item>
-            </Col>
-          </Row>
           <div
             style={{
               position: 'absolute',
