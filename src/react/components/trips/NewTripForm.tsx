@@ -1,12 +1,11 @@
-import { Button, Col, DatePicker, Form, Input, Row, Drawer } from 'antd'
+import React, { useState } from 'react'
+import { Button, Col, DatePicker, Drawer, Form, Input, Row } from 'antd'
 
 import { FormComponentProps } from 'antd/lib/form'
-import React, { useState } from 'react'
 import _ from 'lodash'
-import styled from 'styled-components'
 import firebase from '@/firebase'
 import moment from 'moment'
-import { DrawerProps } from 'antd/lib/drawer'
+import imageValidator from '@/utils/imageValidator'
 
 export interface State {
   visible: boolean
@@ -77,7 +76,17 @@ function NewTripForm(props: FormComponentProps) {
             <Col span={12}>
               <Form.Item label="Image">
                 {getFieldDecorator('image', {
-                  rules: [{ required: true, message: 'Please enter a image url' }]
+                  rules: [
+                    { required: true, message: 'An image is required.' },
+                    {
+                      validator: (rule, value, cb) => {
+                        imageValidator({ url: value })
+                          .then(() => cb()) // TODO: preview image
+                          .catch(() => cb(true))
+                      },
+                      message: 'Please enter a valid image url.'
+                    }
+                  ]
                 })(<Input placeholder="A link to an image that shows where you're going" />)}
               </Form.Item>
             </Col>
