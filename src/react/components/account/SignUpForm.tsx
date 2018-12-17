@@ -18,18 +18,23 @@ function SignUpForm(props: Props) {
     props.form.validateFields((err, values) => {
       if (err) return
 
+      console.log(values)
+
       setIsLoading(true)
 
-      // createAndVerifyAccount({
-      //   email: props.email,
-      //   url:
-      //     process.env.NODE_ENV == 'production'
-      //       ? 'https://on-the-loose.firebaseapp.com/login'
-      //       : 'http://localhost:3000/login'
-      // }).then(res => {
-      //   setIsLoading(false)
-      //   setIsEmailSent(true)
-      // })
+      firebase
+        .functions()
+        .httpsCallable('createAndVerifyAccount')({
+          account: values,
+          url:
+            process.env.NODE_ENV == 'production'
+              ? 'https://on-the-loose.firebaseapp.com/login'
+              : 'http://localhost:3000/login'
+        })
+        .then(res => {
+          setIsLoading(false)
+          setIsEmailSent(true)
+        })
 
       window.localStorage.setItem('emailForSignIn', values.email)
     })
@@ -97,7 +102,7 @@ function SignUpForm(props: Props) {
         </Form.Item>
 
         <Form.Item>
-          {getFieldDecorator('telNo', {
+          {getFieldDecorator('tel', {
             rules: [{ required: true, message: 'Please enter your phone number' }]
           })(
             <Input
@@ -130,6 +135,7 @@ function SignUpForm(props: Props) {
             <Select size="large" placeholder="Graduation year">
               {[0, 1, 2, 3, 4].map(i => (
                 <Select.Option
+                  key={i.toString()}
                   value={moment()
                     .add(i, 'year')
                     .year()}

@@ -32,24 +32,26 @@ function LoginForm(props: Props) {
         handleCodeInApp: true
       }
 
-      const checkProfileExists = firebase.functions().httpsCallable('checkProfileExists')
-      checkProfileExists({ email: values.email }).then(res => {
-        if (res.data) {
-          firebase
-            .auth()
-            .sendSignInLinkToEmail(values.email, actionCodeSettings)
-            .then(() => {
-              setIsLoading(false)
-              setIsEmailSent(true)
+      firebase
+        .functions()
+        .httpsCallable('checkProfileExists')({ email: values.email })
+        .then(res => {
+          if (res.data) {
+            firebase
+              .auth()
+              .sendSignInLinkToEmail(values.email, actionCodeSettings)
+              .then(() => {
+                setIsLoading(false)
+                setIsEmailSent(true)
 
-              window.localStorage.setItem('emailForSignIn', values.email)
-            })
-        } else {
-          setIsLoading(false)
-          setPromptSignup(true)
-          props.setEmail(values.email)
-        }
-      })
+                window.localStorage.setItem('emailForSignIn', values.email)
+              })
+          } else {
+            setIsLoading(false)
+            setPromptSignup(true)
+            props.setEmail(values.email)
+          }
+        })
     })
   }
 
