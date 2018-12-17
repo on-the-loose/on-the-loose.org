@@ -1,4 +1,4 @@
-import { Button, Form, Icon, Input, DatePicker } from 'antd'
+import { Button, Form, Icon, Input, DatePicker, Select } from 'antd'
 
 import { FormComponentProps } from 'antd/lib/form'
 import React, { useState } from 'react'
@@ -96,8 +96,55 @@ function SignUpForm(props: Props) {
           )}
         </Form.Item>
 
+        <Form.Item>
+          {getFieldDecorator('telNo', {
+            rules: [{ required: true, message: 'Please enter your phone number' }]
+          })(
+            <Input
+              type="tel"
+              size="large"
+              prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              placeholder="Phone number"
+            />
+          )}
+        </Form.Item>
+
+        <Form.Item>
+          {getFieldDecorator('school', {
+            rules: [{ required: true, message: 'Please enter your school' }]
+          })(
+            <Select size="large" placeholder="School">
+              <Select.Option value="pom">Pomona</Select.Option>
+              <Select.Option value="hmc">Harvey Mudd</Select.Option>
+              <Select.Option value="cmc">Claremont Mckenna</Select.Option>
+              <Select.Option value="scr">Scripps</Select.Option>
+              <Select.Option value="pit">Pitzer</Select.Option>
+            </Select>
+          )}
+        </Form.Item>
+
+        <Form.Item>
+          {getFieldDecorator('gradYear', {
+            rules: [{ required: true, message: 'Please enter your graduation year' }]
+          })(
+            <Select size="large" placeholder="Graduation year">
+              {[0, 1, 2, 3, 4].map(i => (
+                <Select.Option
+                  value={moment()
+                    .add(i, 'year')
+                    .year()}
+                >
+                  {moment()
+                    .add(i, 'year')
+                    .year()}
+                </Select.Option>
+              ))}
+            </Select>
+          )}
+        </Form.Item>
+
         {isEmailSent ? (
-          <p>A login link has been sent to your email</p>
+          <p>Welcome! A log in link has been sent to your email</p>
         ) : (
           <Button
             type="primary"

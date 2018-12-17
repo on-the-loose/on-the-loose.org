@@ -45,6 +45,7 @@ function LoginForm(props: Props) {
               window.localStorage.setItem('emailForSignIn', values.email)
             })
         } else {
+          setIsLoading(false)
           setPromptSignup(true)
           props.setEmail(values.email)
         }
