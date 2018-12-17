@@ -22,6 +22,7 @@ function Login(props: RouteComponentProps) {
         email = window.prompt('Please provide your email for confirmation')
       }
       // The client SDK will parse the code from the link for you.
+
       firebase
         .auth()
         .signInWithEmailLink(email, window.location.href)
@@ -32,6 +33,7 @@ function Login(props: RouteComponentProps) {
           // Additional user info profile not available via:
           // result.additionalUserInfo.profile == null
           // You can check if the user is new or existing:
+
           if (!result.additionalUserInfo.isNewUser) props.history.replace('/')
           else props.history.replace('/profile')
         })

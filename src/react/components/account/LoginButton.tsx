@@ -1,62 +1,50 @@
 import { Button, Modal } from 'antd'
 
 import LoginForm from './LoginForm'
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import SignUpForm from './SignUpForm'
 
 export interface State {
   visible: boolean
   loading: boolean
 }
 
-export default class LoginButton extends React.Component<any, State> {
-  state = { visible: false, loading: false }
+let email = ''
 
-  showModal = () => {
-    this.setState({
-      visible: true
-    })
-  }
+export default function LoginButton(props) {
+  const [isSignUp, setIsSignUp] = useState(false)
+  const [showModal, setShowModal] = useState(false)
 
-  handleOk = e => {
-    this.setState({
-      visible: false
-    })
-  }
-
-  handleCancel = e => {
-    this.setState({
-      visible: false
-    })
-  }
-
-  render() {
-    return (
-      <div>
-        <Button type="primary" onClick={this.showModal}>
-          Log in
-        </Button>
-        <Modal
-          bodyStyle={{
-            minHeight: 200,
-            minWidth: 300,
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            padding: '3rem'
-          }}
-          style={{
-            textAlign: 'center'
-          }}
-          closable={false}
-          centered
-          visible={this.state.visible}
-          footer={null}
-          onCancel={this.handleCancel}
-        >
-          <LoginForm />
-        </Modal>
-      </div>
-    )
-  }
+  return (
+    <div>
+      <Button type="primary" onClick={() => setShowModal(true)}>
+        Log in
+      </Button>
+      <Modal
+        bodyStyle={{
+          minHeight: 200,
+          minWidth: 300,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          padding: '3rem'
+        }}
+        style={{
+          textAlign: 'center'
+        }}
+        closable={false}
+        centered
+        visible={showModal}
+        footer={null}
+        onCancel={() => setShowModal(false)}
+      >
+        {isSignUp ? (
+          <SignUpForm email={email} />
+        ) : (
+          <LoginForm setIsSignUp={setIsSignUp} setEmail={e => (email = e)} />
+        )}
+      </Modal>
+    </div>
+  )
 }

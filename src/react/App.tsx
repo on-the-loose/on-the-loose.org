@@ -12,20 +12,18 @@ import TripList from './views/TripList'
 import firebase from '@/firebase'
 import styled from 'styled-components'
 
-export default function App() {
-  const user = firebase.auth().currentUser
-
+export default function App(props: { user: firebase.User }) {
   return (
     <Router>
       <s.Layout>
         <BackgroundImage />
-        <AppHeader user={user} />
+        <AppHeader user={props.user} />
         <s.Content>
           <Route path="/" exact component={Home} />
-          <Route path="/trips/" exact component={() => <TripList user={user} />} />
+          <Route path="/trips/" exact component={() => <TripList user={props.user} />} />
           <Route path="/trips/:id" component={({ match }) => <Trip id={match.params.id} />} />
           <Route path="/guide/" component={Guide} />
-          <Route path="/profile/" component={() => <Profile user={user} />} />
+          <Route path="/profile/" component={() => <Profile user={props.user} />} />
           <Route path="/login/" component={Login} />
         </s.Content>
       </s.Layout>

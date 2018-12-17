@@ -11,9 +11,7 @@ const GlobalStyle = createGlobalStyle`
 `
 
 let user = firebase.auth().currentUser
-firebase.auth().onAuthStateChanged(u => {
-  user = u
-})
+firebase.auth().onAuthStateChanged(u => (user = u))
 
 const renderApp = MainComponent => {
   render(
