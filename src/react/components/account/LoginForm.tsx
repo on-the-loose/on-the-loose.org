@@ -34,7 +34,7 @@ function LoginForm(props: Props) {
 
       firebase
         .functions()
-        .httpsCallable('checkProfileExists')({ email: values.email })
+        .httpsCallable('checkAccountExists')({ email: values.email })
         .then(res => {
           if (res.data) {
             firebase
@@ -84,6 +84,7 @@ function LoginForm(props: Props) {
               placeholder="School Email"
               onChange={() => {
                 if (promptSignup) setPromptSignup(false)
+                if (isEmailSent) setIsEmailSent(false)
               }}
             />
           )}

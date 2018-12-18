@@ -17,29 +17,25 @@ firebase.initializeApp({
   messagingSenderId: '816227148735'
 })
 
-export const checkProfileExists = functions.https.onCall((data, context) => {
-  const usersRef = db.collection('users')
-  const query = usersRef.where('email', '==', data.email)
-
-  return query
+export const checkAccountExists = functions.https.onCall((data, context) => {
+  return db
+    .doc(`users/${data.email}`)
     .get()
-    .then(value => !value.empty)
+    .then(value => value.exists && value.data().verified)
     .catch(console.log)
 })
 
-export const createAndVerifyAccount = functions.https.onCall((data, context) => {
+export const createAccount = functions.https.onCall((data, context) => {
   data.account.bday = new Date(data.account.bday)
-
-  // Edge case: this is called but account is not verified
+  data.account.verified = false
 
   return db
-    .collection('users')
-    .where('email', '==', data.account.email)
+    .doc(`users/${data.account.email}`)
     .get()
     .then(value => {
-      if (value.empty)
+      if (!(value.exists && value.data().verified))
         return Promise.all([
-          db.collection('users').add(data.account),
+          db.doc(`users/${data.account.email}`).set(data.account),
           firebase.auth().sendSignInLinkToEmail(data.account.email, {
             url: data.url,
             handleCodeInApp: true
@@ -47,4 +43,8 @@ export const createAndVerifyAccount = functions.https.onCall((data, context) => 
         ])
       else throw new Error('Account already exists')
     })
+})
+
+export const verifyAccount = functions.auth.user().onCreate(user => {
+  return db.doc(`users/${user.email}`).update({ verified: true })
 })

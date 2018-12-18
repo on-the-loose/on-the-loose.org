@@ -5,6 +5,9 @@ import React, { useState } from 'react'
 import firebase from '@/firebase'
 import moment from 'moment'
 
+// TODO: handle errors
+// TODO: add cancel button
+
 export interface Props extends FormComponentProps {
   email: string
 }
@@ -12,19 +15,19 @@ export interface Props extends FormComponentProps {
 function SignUpForm(props: Props) {
   const [isLoading, setIsLoading] = useState(false)
   const [isEmailSent, setIsEmailSent] = useState(false)
+  const [isDisabled, setIsDisabled] = useState(false)
 
   const handleSubmit = e => {
     e.preventDefault()
     props.form.validateFields((err, values) => {
       if (err) return
 
-      console.log(values)
-
       setIsLoading(true)
+      setIsDisabled(true)
 
       firebase
         .functions()
-        .httpsCallable('createAndVerifyAccount')({
+        .httpsCallable('createAccount')({
           account: values,
           url:
             process.env.NODE_ENV == 'production'
@@ -64,6 +67,7 @@ function SignUpForm(props: Props) {
             ]
           })(
             <Input
+              disabled={isDisabled}
               size="large"
               prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
               placeholder="School Email"
@@ -76,6 +80,7 @@ function SignUpForm(props: Props) {
             rules: [{ required: true, message: 'Please enter your date of birth' }]
           })(
             <Input
+              disabled={isDisabled}
               size="large"
               prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
               placeholder="Name"
@@ -88,6 +93,7 @@ function SignUpForm(props: Props) {
             rules: [{ required: true, message: 'Please enter your date of birth' }]
           })(
             <Input
+              disabled={isDisabled}
               onFocus={e => (e.currentTarget.type = 'date')}
               max={
                 moment()
@@ -106,6 +112,7 @@ function SignUpForm(props: Props) {
             rules: [{ required: true, message: 'Please enter your phone number' }]
           })(
             <Input
+              disabled={isDisabled}
               type="tel"
               size="large"
               prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />}
@@ -118,7 +125,7 @@ function SignUpForm(props: Props) {
           {getFieldDecorator('school', {
             rules: [{ required: true, message: 'Please enter your school' }]
           })(
-            <Select size="large" placeholder="School">
+            <Select size="large" placeholder="School" disabled={isDisabled}>
               <Select.Option value="pom">Pomona</Select.Option>
               <Select.Option value="hmc">Harvey Mudd</Select.Option>
               <Select.Option value="cmc">Claremont Mckenna</Select.Option>
@@ -132,7 +139,7 @@ function SignUpForm(props: Props) {
           {getFieldDecorator('gradYear', {
             rules: [{ required: true, message: 'Please enter your graduation year' }]
           })(
-            <Select size="large" placeholder="Graduation year">
+            <Select size="large" placeholder="Graduation year" disabled={isDisabled}>
               {[0, 1, 2, 3, 4].map(i => (
                 <Select.Option
                   key={i.toString()}
