@@ -18,6 +18,7 @@ firebase.initializeApp({
 })
 
 export const checkAccountExists = functions.https.onCall((data, context) => {
+  // TODO: switch from 'verified' to admin.auth().getUserByEmail(email)
   return db
     .doc(`users/${data.email}`)
     .get()

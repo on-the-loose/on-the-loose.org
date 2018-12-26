@@ -1,6 +1,6 @@
 import { RouteComponentProps, withRouter } from 'react-router'
 
-import AccountAvatar from '../account/UserAvatar'
+import AccountAvatar from '../account/AccountAvatar'
 import { Link } from 'react-router-dom'
 import LoginButton from '../account/LoginButton'
 import { Menu } from 'antd'

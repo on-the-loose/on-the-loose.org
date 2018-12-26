@@ -10,10 +10,7 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
-let user = firebase.auth().currentUser
-firebase.auth().onAuthStateChanged(u => (user = u))
-
-const renderApp = MainComponent => {
+const renderApp = (MainComponent, user) => {
   render(
     <div>
       <GlobalStyle />
@@ -23,15 +20,20 @@ const renderApp = MainComponent => {
   )
 }
 
+// make sure auth is initialized before initial render
+let user = firebase.auth().currentUser
+firebase.auth().onAuthStateChanged(u => {
+  user = u
+  renderApp(App, user)
+})
+
+// hot reloading
 //@ts-ignore
 if (module.hot) {
   //@ts-ignore
   module.hot.accept('./react/App', () => {
-    renderApp(require('./react/App').default)
+    renderApp(require('./react/App').default, user)
   })
 }
-
-// make sure auth is initialized before initial render
-firebase.auth().onAuthStateChanged(u => renderApp(App))
 
 // TODO: register service worker
