@@ -6,13 +6,7 @@ import { useDocument } from 'react-firebase-hooks/firestore'
 import styled from 'styled-components'
 import useCurrentProfile from '../hooks/useCurrentProfile'
 
-export interface Props {
-  user: firebase.User
-}
-
-export default function Profile({ user }: Props) {
-  if (!user) return <div />
-
+export default function Profile() {
   const profile = useCurrentProfile()
 
   return !profile ? (

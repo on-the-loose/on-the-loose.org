@@ -15,9 +15,10 @@ export interface Props {
 
 export default function Trips(props: Props) {
   const [trips, setTrips] = useState<firebase.firestore.QueryDocumentSnapshot[]>(null)
+  const user = firebase.auth().currentUser
 
   useEffect(() => {
-    if (props.user)
+    if (user)
       db.collection('trips')
         .get()
         .then(qs => setTrips(qs.docs))
@@ -29,7 +30,7 @@ export default function Trips(props: Props) {
 
   return (
     <div style={{ textAlign: 'center' }}>
-      {props.user ? (
+      {user ? (
         <div>
           <NewTripForm />
           <TripCardsList trips={trips} />
