@@ -32,11 +32,13 @@ export default function Trips(props: Props) {
     <div style={{ textAlign: 'center' }}>
       {user ? (
         <div>
-          <Link to="/create">
-            <Button icon="plus" style={{ marginBottom: '2rem' }}>
-              Create trip
-            </Button>
-          </Link>
+          <div>
+            <Link to="/create">
+              <Button icon="plus" style={{ marginBottom: '2rem' }}>
+                Create trip
+              </Button>
+            </Link>
+          </div>
           <TripCardsList trips={trips} />
         </div>
       ) : (
