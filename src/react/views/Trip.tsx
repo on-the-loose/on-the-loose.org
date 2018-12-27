@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDocument } from 'react-firebase-hooks/firestore'
 import firebase from '@/firebase'
 import { Icon, Button } from 'antd'
@@ -7,6 +7,7 @@ import { RouteComponentProps } from 'react-router'
 import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
 import moment from 'moment'
+import useCurrentProfile from '../hooks/useCurrentProfile'
 
 export interface Props extends RouteComponentProps {
   id: string
@@ -24,16 +25,37 @@ function Trip(props: Props) {
       {loading ? (
         <s.LoadingIcon type="loading" />
       ) : (
-        value.exists && <TripInfo trip_data={value.data()} />
+        value.exists && <TripInfo id={props.id} trip_data={value.data()} />
       )}
     </s.Container>
   )
 }
 
-function TripInfo({ trip_data }) {
+function TripInfo({ id, trip_data }) {
   const start = moment(trip_data.dates.start.toDate())
   const end = moment(trip_data.dates.end.toDate())
   const duration = end.diff(start, 'days')
+
+  const [isLoading, setIsLoading] = useState(false)
+  const profile = useCurrentProfile()
+
+  const signUp = () => {
+    setIsLoading(true)
+
+    firebase
+      .firestore()
+      .doc(`trips/${id}`)
+      .update({
+        signUps: firebase.firestore.FieldValue.arrayUnion({
+          email: profile.email,
+          name: profile.name
+        })
+      })
+      .then(res => {
+        setIsLoading(false)
+      })
+      .catch(() => console.log('failed'))
+  }
 
   return (
     <div>
@@ -45,10 +67,15 @@ function TripInfo({ trip_data }) {
         <p>
           <i>{start.calendar()}</i> {duration == 0 ? '' : <i> -- {duration} Nights</i>}
         </p>
-
         <ReactMarkdown source={trip_data.description} />
-
-        <Button> Sign up for trip </Button>
+        <h3>Sign ups</h3>
+        <ol>
+          {trip_data.signUps &&
+            trip_data.signUps.map(user => <li key={user.email}>{user.name}</li>)}
+        </ol>
+        <Button onClick={signUp} loading={isLoading}>
+          Sign up for trip
+        </Button>
       </s.Content>
     </div>
   )
