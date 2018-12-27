@@ -1,19 +1,18 @@
 import React, { useState } from 'react'
-import { Button, Col, DatePicker, Drawer, Form, Input, Row } from 'antd'
+import { Button, Col, DatePicker, Drawer, Form, Input, Row, Icon } from 'antd'
 
 import { FormComponentProps } from 'antd/lib/form'
 import _ from 'lodash'
 import firebase from '@/firebase'
 import moment from 'moment'
 import imageValidator from '@/utils/imageValidator'
+import styled from 'styled-components'
+import { RouteComponentProps, withRouter } from 'react-router-dom'
 
-export interface State {
-  visible: boolean
-}
+export interface Props extends RouteComponentProps, FormComponentProps {}
 
-function NewTripForm(props: FormComponentProps) {
+function TripCreation(props: Props) {
   const [isLoading, setIsLoading] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -30,12 +29,11 @@ function NewTripForm(props: FormComponentProps) {
         .firestore()
         .collection('trips')
         .add(data)
-        .then(() => {
-          console.log('success')
+        .then(res => {
           setIsLoading(false)
-          setIsVisible(false)
+          props.history.replace(`/trips/${res.id}`)
         })
-        .catch(() => console.log('fail'))
+        .catch(() => console.log('failed'))
 
       // TODO: add error indicator
     })
@@ -44,17 +42,8 @@ function NewTripForm(props: FormComponentProps) {
   const { getFieldDecorator } = props.form
 
   return (
-    <div>
-      <Button onClick={() => setIsVisible(true)} icon="plus" style={{ marginBottom: '2rem' }}>
-        Create trip
-      </Button>
-      <Drawer
-        title="Create Trip"
-        height="100%"
-        placement="bottom"
-        onClose={() => setIsVisible(false)}
-        visible={isVisible}
-      >
+    <s.Container>
+      <s.Content>
         <Form layout="vertical" onSubmit={handleSubmit}>
           <Row gutter={16}>
             <Col span={12}>
@@ -141,7 +130,7 @@ function NewTripForm(props: FormComponentProps) {
               style={{
                 marginRight: 8
               }}
-              onClick={() => setIsVisible(false)}
+              onClick={() => props.history.push(`/trips`)}
             >
               Cancel
             </Button>
@@ -150,9 +139,60 @@ function NewTripForm(props: FormComponentProps) {
             </Button>
           </div>
         </Form>
-      </Drawer>
-    </div>
+      </s.Content>
+    </s.Container>
   )
 }
 
-export default Form.create()(NewTripForm)
+const s = {
+  Container: styled.div`
+    position: absolute;
+
+    top: 8rem;
+    bottom: 4rem;
+    left: 10rem;
+    right: 10rem;
+
+    @media (max-width: 750px) {
+      top: 8rem;
+      bottom: 4rem;
+      left: 1rem;
+      right: 1rem;
+    }
+
+    background-color: white;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    min-height: min-content;
+    max-width: 50rem;
+    margin: auto;
+  `,
+
+  ImageWrap: styled.div`
+    width: 100%;
+    height: 10rem;
+    overflow: hidden;
+    vertical-align: middle;
+  `,
+
+  Image: styled.img`
+    width: 100%;
+
+    transform: translateY(-25%);
+  `,
+
+  LoadingIcon: styled(Icon)`
+    font-size: 50px;
+    margin: auto;
+    display: block;
+  `,
+
+  Content: styled.div`
+    padding: 1rem 2rem;
+    @media (min-width: 700px) {
+      margin-top: 20%;
+    }
+  `
+}
+
+export default withRouter(Form.create()(TripCreation))

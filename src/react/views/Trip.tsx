@@ -31,8 +31,6 @@ function Trip(props: Props) {
 }
 
 function TripInfo({ trip_data }) {
-  console.log('​TripInfo -> trip_data', trip_data)
-
   const start = moment(trip_data.dates.start.toDate())
   const end = moment(trip_data.dates.end.toDate())
   const duration = end.diff(start, 'days')

@@ -1,9 +1,9 @@
-import { Icon } from 'antd'
+import { Icon, Button } from 'antd'
 
-import NewTripForm from '../components/trips/NewTripForm'
 import React, { useState, useEffect } from 'react'
 import TripCard from '../components/trips/TripCard'
 import firebase from '@/firebase'
+import { Link } from 'react-router-dom'
 
 // TODO pre-fetch trips
 
@@ -32,7 +32,11 @@ export default function Trips(props: Props) {
     <div style={{ textAlign: 'center' }}>
       {user ? (
         <div>
-          <NewTripForm />
+          <Link to="/create">
+            <Button icon="plus" style={{ marginBottom: '2rem' }}>
+              Create trip
+            </Button>
+          </Link>
           <TripCardsList trips={trips} />
         </div>
       ) : (
