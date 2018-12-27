@@ -40,9 +40,9 @@ function AppHeader(props: Props) {
 
 const s = {
   Logo: styled.img`
-    width: 3rem;
-    height: 3rem;
-    @media (max-width: 550px) {
+    width: 2.5rem;
+    height: 2.5rem;
+    @media (max-width: 350px) {
       display: none;
     }
   `,
@@ -59,7 +59,7 @@ const s = {
     background-color: rgb(247, 242, 237, 0.95);
 
     @media (max-width: 700px) {
-      padding: 2.5rem 2rem 1.5rem 2rem;
+      padding: 2rem 1rem 1.5rem 1rem;
     }
   `,
 
@@ -68,15 +68,15 @@ const s = {
     margin-right: auto;
     background-color: rgba(0, 0, 0, 0);
     text-align: center;
-
-    @media (max-width: 550px) {
-      width: 4rem;
-    }
   `,
 
   Item: styled(Menu.Item)`
     margin-left: auto;
     padding: 0 3rem;
+
+    @media (max-width: 550px) {
+      padding: 0 1rem;
+    }
   `
 }
 
