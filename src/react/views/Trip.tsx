@@ -37,16 +37,24 @@ function TripInfo({ id, trip_data }) {
   const duration = end.diff(start, 'days')
 
   const [isLoading, setIsLoading] = useState(false)
+
   const profile = useCurrentProfile()
 
-  const signUp = () => {
+  const isSignedUp =
+    trip_data.signUps && trip_data.signUps.map(e => e.email).includes(profile.email)
+
+  const toggleSignUp = () => {
     setIsLoading(true)
+
+    const operation = isSignedUp
+      ? firebase.firestore.FieldValue.arrayRemove
+      : firebase.firestore.FieldValue.arrayUnion
 
     firebase
       .firestore()
       .doc(`trips/${id}`)
       .update({
-        signUps: firebase.firestore.FieldValue.arrayUnion({
+        signUps: operation({
           email: profile.email,
           name: profile.name
         })
@@ -73,8 +81,9 @@ function TripInfo({ id, trip_data }) {
           {trip_data.signUps &&
             trip_data.signUps.map(user => <li key={user.email}>{user.name}</li>)}
         </ol>
-        <Button onClick={signUp} loading={isLoading}>
-          Sign up for trip
+
+        <Button onClick={toggleSignUp} loading={isLoading} type={isSignedUp ? 'danger' : 'primary'}>
+          {isSignedUp ? 'Withdraw' : 'Sign up'}
         </Button>
       </s.Content>
     </div>
