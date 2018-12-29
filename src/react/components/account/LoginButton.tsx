@@ -3,7 +3,7 @@ import { Button, Modal } from 'antd'
 import LoginForm from './LoginForm'
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import SignUpForm from './SignUpForm'
+import SignUp from './SignUp'
 
 export interface State {
   visible: boolean
@@ -43,7 +43,7 @@ export default function LoginButton(props) {
           onCancel={() => setShowModal(false)}
         >
           {isSignUp ? (
-            <SignUpForm email={email} />
+            <SignUp email={email} />
           ) : (
             <LoginForm setIsSignUp={setIsSignUp} setEmail={e => (email = e)} />
           )}
