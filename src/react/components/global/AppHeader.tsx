@@ -33,7 +33,7 @@ function AppHeader(props: Props) {
         </s.Item>
       </s.Menu>
 
-      {props.user ? <AccountAvatar user={props.user} /> : <LoginButton>LOGIN</LoginButton>}
+      {props.user ? <AccountAvatar /> : <LoginButton>LOGIN</LoginButton>}
     </s.Header>
   )
 }

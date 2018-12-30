@@ -23,12 +23,11 @@ export default function useCurrentProfile() {
   if (cachedProfile == null || cachedUser != user) {
     cachedUser = user
 
-    const userDoc = firebase
+    firebase
       .firestore()
       .collection('users')
       .doc(user.email)
-      .get()
-      .then(doc => {
+      .onSnapshot(doc => {
         cachedProfile = doc.data() as Profile
         updateProfile(cachedProfile)
       })

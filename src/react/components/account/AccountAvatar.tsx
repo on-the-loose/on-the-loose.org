@@ -5,15 +5,7 @@ import React, { useState } from 'react'
 import firebase from '@/firebase'
 import useCurrentProfile from '@/react/hooks/useCurrentProfile'
 
-export interface Props {
-  user: firebase.User
-}
-
-export interface State {
-  show_popover: boolean
-}
-
-export default function AccountAvatar(props: Props) {
+export default function AccountAvatar(props) {
   const [showPopover, setShowPopover] = useState(false)
 
   const handleSignOut = () => {
@@ -41,7 +33,9 @@ export default function AccountAvatar(props: Props) {
           </Link>
         </div>
       }
-      title={profile ? profile.name : 'loading'}
+      title={
+        <div style={{ textAlign: 'center' }}>{profile ? profile.name : 'Loading profile...'}</div>
+      }
       trigger="click"
       visible={showPopover}
       onVisibleChange={setShowPopover}
