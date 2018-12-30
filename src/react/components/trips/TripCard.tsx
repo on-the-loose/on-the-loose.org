@@ -3,6 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
+import useCurrentProfile from '@/react/hooks/useCurrentProfile'
 
 export interface Props {
   trip: firebase.firestore.QueryDocumentSnapshot
@@ -11,11 +12,20 @@ export interface Props {
 export default function TripCard(props: Props) {
   const trip_data = props.trip.data()
 
+  const profile = useCurrentProfile()
+  const isSignedUp =
+    trip_data.signUps && trip_data.signUps.map(e => e.email).includes(profile.email)
+
   return (
     <Link to={`/trips/${props.trip.id}`}>
       <s.Wrapper>
         <s.TripInfoCard
-          title={trip_data.title}
+          title={
+            <span>
+              {trip_data.title}
+              <s.SignedUpText>{isSignedUp && ' – SIGNED UP'}</s.SignedUpText>
+            </span>
+          }
           bordered={false}
           bodyStyle={{
             padding: '0.6rem 1.5rem',
@@ -81,5 +91,11 @@ const s = {
     @media (max-width: 700px) {
       display: none;
     }
+  `,
+
+  SignedUpText: styled.span`
+    color: gray;
+    font-size: 0.8rem;
+    font-weight: lighter;
   `
 }
