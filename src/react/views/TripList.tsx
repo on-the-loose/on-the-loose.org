@@ -6,6 +6,8 @@ import firebase from '@/firebase'
 import { Link } from 'react-router-dom'
 
 // TODO pre-fetch trips
+// TODO fix top button spacing on mobile
+// TODO improve loading indicators
 
 const db = firebase.firestore()
 

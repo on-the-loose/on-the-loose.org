@@ -131,6 +131,7 @@ const s = {
     font-size: 50px;
     margin: auto;
     display: block;
+    margin-top: 40%;
   `,
 
   Content: styled.div`
