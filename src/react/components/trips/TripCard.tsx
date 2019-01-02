@@ -5,19 +5,13 @@ import { Link } from 'react-router-dom'
 import moment from 'moment'
 import useCurrentProfile from '@/react/hooks/useCurrentProfile'
 
-export interface Props {
-  trip: firebase.firestore.QueryDocumentSnapshot
-}
-
-export default function TripCard(props: Props) {
-  const trip_data = props.trip.data()
-
+export default function TripCard({ id, trip_data }) {
   const profile = useCurrentProfile()
   const isSignedUp =
     trip_data.signUps && trip_data.signUps.map(e => e.email).includes(profile.email)
 
   return (
-    <Link to={`/trips/${props.trip.id}`}>
+    <Link to={`/trips/${id}`}>
       <s.Wrapper>
         <s.TripInfoCard
           title={
@@ -56,12 +50,6 @@ const s = {
     overflow: hidden;
     border-radius: 8px;
     border: 1px solid #e8e8e8;
-    max-width: 50rem;
-    width: 80%;
-
-    @media (max-width: 700px) {
-      width: 90%;
-    }
 
     &:hover {
       box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1), 0 4px 16px 0 rgba(0, 0, 0, 0.09);
