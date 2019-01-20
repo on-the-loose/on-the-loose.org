@@ -21,12 +21,18 @@ function Trip(props: Props) {
 
   return (
     <s.Container>
-      {' '}
       {loading ? (
         <s.LoadingIcon type="loading" />
       ) : (
         value.exists && <TripInfo id={props.id} trip_data={value.data()} />
       )}
+      <Button
+        shape="circle"
+        icon="close"
+        ghost
+        style={{ position: 'absolute', right: ' 0.5rem', top: ' 0.5rem' }}
+        onClick={() => props.history.replace('/trips')}
+      />
     </s.Container>
   )
 }
