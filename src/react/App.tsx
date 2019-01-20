@@ -6,7 +6,8 @@ import BackgroundImage from './components/global/BackgroundImage'
 import Guide from './views/Guide'
 import Home from './views/Home'
 import Login from './views/Login'
-import TripCreation from './views/TripCreation'
+import TripCreate from './views/TripCreate'
+import TripEdit from './views/TripEdit'
 import Profile from './views/Profile'
 import Trip from './views/Trip'
 import TripList from './views/TripList'
@@ -21,9 +22,16 @@ export default function App(props: { user: firebase.User }) {
         <AppHeader user={props.user} />
         <s.Content>
           <Route path="/" exact component={Home} />
+
           <Route path="/trips/" exact component={TripList} />
           <Route path="/trips/:id" exact component={({ match }) => <Trip id={match.params.id} />} />
-          <Route path="/create" exact component={TripCreation} />
+          <Route
+            path="/trips/:id/edit"
+            exact
+            component={({ match }) => <TripEdit id={match.params.id} />}
+          />
+          <Route path="/create" exact component={TripCreate} />
+
           <Route path="/guide/" component={Guide} />
           <Route path="/profile/" component={Profile} />
           <Route path="/login/" component={Login} />

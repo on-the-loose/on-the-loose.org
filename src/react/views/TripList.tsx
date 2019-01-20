@@ -10,6 +10,7 @@ import useCurrentProfile from '../hooks/useCurrentProfile'
 // TODO pre-fetch trips
 // TODO fix top button spacing on mobile
 // TODO improve loading indicators
+// TODO sort trips by date
 
 const db = firebase.firestore()
 

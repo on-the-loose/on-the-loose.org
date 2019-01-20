@@ -8,6 +8,7 @@ import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
 import moment from 'moment'
 import useCurrentProfile from '../hooks/useCurrentProfile'
+import { Link } from 'react-router-dom'
 
 export interface Props extends RouteComponentProps {
   id: string
@@ -78,16 +79,14 @@ function TripInfo({ id, trip_data }) {
         <s.Image src={trip_data.image} alt="trip image" />
       </s.ImageWrap>
       <s.Content>
-        <h2>{trip_data.title}</h2>
-
-        {isLeader && (
-          <Button
-            shape="circle"
-            icon="close"
-            ghost
-            style={{ position: 'absolute', right: ' 0.5rem', top: ' 0.5rem' }}
-          />
-        )}
+        <h2>
+          {trip_data.title}{' '}
+          {isLeader && (
+            <Link to={`${id}/edit`}>
+              <Button style={{ float: 'right' }}>Edit Trip</Button>
+            </Link>
+          )}
+        </h2>
 
         <p>
           {duration == 0 ? (
@@ -101,6 +100,7 @@ function TripInfo({ id, trip_data }) {
             {start.format('ddd, MMM Do, h:mma')} - {end.format('ddd, MMM Do, h:mma')}{' '}
           </i>
         </p>
+
         <ReactMarkdown source={trip_data.description} />
         <h3>Participants</h3>
         <ol>

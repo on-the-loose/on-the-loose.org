@@ -7,10 +7,11 @@ import _ from 'lodash'
 import moment from 'moment'
 import imageValidator from '@/utils/imageValidator'
 import styled from 'styled-components'
-import { RouteComponentProps, withRouter } from 'react-router-dom'
 
-export interface Props extends RouteComponentProps, FormComponentProps {
-  onSubmit: (Event) => void
+export interface Props extends FormComponentProps {
+  onSubmit: (Event, WrappedFormUtils) => void
+  submitText: string
+  onCancel: () => void
   loading: boolean
   initialTripData?: any
 }
@@ -18,15 +19,21 @@ export interface Props extends RouteComponentProps, FormComponentProps {
 function TripForm(props: Props) {
   const { getFieldDecorator } = props.form
 
+  const dates = props.initialTripData && [
+    moment(props.initialTripData.dates.start.toDate()),
+    moment(props.initialTripData.dates.end.toDate())
+  ]
+
   return (
     <s.Container>
       <s.Content>
-        <Form layout="vertical" onSubmit={props.onSubmit}>
+        <Form layout="vertical" onSubmit={e => props.onSubmit(e, props.form)}>
           <Row gutter={16}>
             <Col span={24}>
               <Form.Item label="Title">
                 {getFieldDecorator('title', {
-                  rules: [{ required: true, message: 'Enter a trip title' }]
+                  rules: [{ required: true, message: 'Enter a trip title' }],
+                  initialValue: props.initialTripData && props.initialTripData.title
                 })(<Input placeholder="Give your trip a fun title" />)}
               </Form.Item>
             </Col>
@@ -35,6 +42,7 @@ function TripForm(props: Props) {
             <Col span={12}>
               <Form.Item label="Destination">
                 {getFieldDecorator('destination', {
+                  initialValue: props.initialTripData && props.initialTripData.destination,
                   rules: [{ required: true, message: 'Enter a destination' }]
                 })(<Input placeholder="Where would you like to go?" />)}
               </Form.Item>
@@ -42,6 +50,7 @@ function TripForm(props: Props) {
             <Col span={12}>
               <Form.Item label="Image">
                 {getFieldDecorator('image', {
+                  initialValue: props.initialTripData && props.initialTripData.image,
                   rules: [
                     { required: true, message: 'An image is required.' },
                     {
@@ -61,6 +70,7 @@ function TripForm(props: Props) {
             <Col span={12}>
               <Form.Item label="Dates">
                 {getFieldDecorator('dates', {
+                  initialValue: dates,
                   rules: [{ required: true, message: 'Choose the trip dates' }]
                 })(
                   <DatePicker.RangePicker
@@ -80,6 +90,7 @@ function TripForm(props: Props) {
             <Col span={12}>
               <Form.Item label="Maximum participants">
                 {getFieldDecorator('max_participants', {
+                  initialValue: props.initialTripData && props.initialTripData.max_participants,
                   rules: [{ required: true, message: 'Enter a number' }]
                 })(<InputNumber style={{ width: '100%' }} />)}
               </Form.Item>
@@ -89,6 +100,7 @@ function TripForm(props: Props) {
             <Col span={24}>
               <Form.Item label="Description">
                 {getFieldDecorator('description', {
+                  initialValue: props.initialTripData && props.initialTripData.description,
                   rules: [
                     {
                       required: true,
@@ -116,12 +128,12 @@ function TripForm(props: Props) {
               style={{
                 marginRight: 8
               }}
-              onClick={() => props.history.push(`/trips`)}
+              onClick={props.onCancel}
             >
               Cancel
             </Button>
             <Button htmlType="submit" type="primary" loading={props.loading}>
-              Create
+              {props.submitText}
             </Button>
           </div>
         </Form>
@@ -160,4 +172,4 @@ const s = {
   `
 }
 
-export default withRouter(Form.create()(TripForm))
+export default Form.create()(TripForm)
