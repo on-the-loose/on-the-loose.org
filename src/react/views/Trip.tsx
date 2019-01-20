@@ -79,8 +79,27 @@ function TripInfo({ id, trip_data }) {
       </s.ImageWrap>
       <s.Content>
         <h2>{trip_data.title}</h2>
+
+        {isLeader && (
+          <Button
+            shape="circle"
+            icon="close"
+            ghost
+            style={{ position: 'absolute', right: ' 0.5rem', top: ' 0.5rem' }}
+          />
+        )}
+
         <p>
-          <i>{start.calendar()}</i> {duration == 0 ? '' : <i> -- {duration} Nights</i>}
+          {duration == 0 ? (
+            'Day trip: '
+          ) : (
+            <i>
+              <b>{duration} Nights: </b>
+            </i>
+          )}
+          <i>
+            {start.format('ddd, MMM Do, h:mma')} - {end.format('ddd, MMM Do, h:mma')}{' '}
+          </i>
         </p>
         <ReactMarkdown source={trip_data.description} />
         <h3>Participants</h3>

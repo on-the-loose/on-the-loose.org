@@ -29,7 +29,8 @@ export default function TripCard({ id, trip_data }) {
             height: '6.5rem',
             overflow: 'hidden'
           }}
-          extra={moment(trip_data.dates.start.toDate()).format('MMM Do YY')}
+          extra={moment(trip_data.dates.start.toDate()).format('ddd, MMM Do')}
+          // TODO display year for past trips
         >
           <div style={{ overflow: 'hidden', height: '100%' }}>
             <span style={{ fontWeight: 'bold', marginBottom: '-0.5rem' }}>
