@@ -42,6 +42,7 @@ function TripInfo({ id, trip_data }) {
 
   const isSignedUp =
     trip_data.signUps && trip_data.signUps.map(e => e.email).includes(profile.email)
+  const isLeader = trip_data.leader.email == profile.email
 
   const toggleSignUp = () => {
     setIsLoading(true)
@@ -76,15 +77,24 @@ function TripInfo({ id, trip_data }) {
           <i>{start.calendar()}</i> {duration == 0 ? '' : <i> -- {duration} Nights</i>}
         </p>
         <ReactMarkdown source={trip_data.description} />
-        <h3>Sign ups</h3>
+        <h3>Participants</h3>
         <ol>
+          <li>
+            <b>Leader: </b> {trip_data.leader.name}
+          </li>
           {trip_data.signUps &&
             trip_data.signUps.map(user => <li key={user.email}>{user.name}</li>)}
         </ol>
 
-        <Button onClick={toggleSignUp} loading={isLoading} type={isSignedUp ? 'danger' : 'primary'}>
-          {isSignedUp ? 'Withdraw' : 'Sign up'}
-        </Button>
+        {!isLeader && (
+          <Button
+            onClick={toggleSignUp}
+            loading={isLoading}
+            type={isSignedUp ? 'danger' : 'primary'}
+          >
+            {isSignedUp ? 'Withdraw' : 'Sign up'}
+          </Button>
+        )}
       </s.Content>
     </div>
   )
