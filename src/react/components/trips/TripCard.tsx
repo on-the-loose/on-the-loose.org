@@ -10,6 +10,8 @@ export default function TripCard({ id, trip_data }) {
   const isSignedUp =
     trip_data.signUps && trip_data.signUps.map(e => e.email).includes(profile.email)
 
+  const isLeader = trip_data.leader.email == profile.email
+
   return (
     <Link to={`/trips/${id}`}>
       <s.Wrapper>
@@ -17,7 +19,8 @@ export default function TripCard({ id, trip_data }) {
           title={
             <span>
               {trip_data.title}
-              <s.SignedUpText>{isSignedUp && ' – SIGNED UP'}</s.SignedUpText>
+              <s.Subtitle>{isSignedUp && ' – SIGNED UP'}</s.Subtitle>
+              <s.Subtitle>{isLeader && ' – LEADING'}</s.Subtitle>
             </span>
           }
           bordered={false}
@@ -81,7 +84,7 @@ const s = {
     }
   `,
 
-  SignedUpText: styled.span`
+  Subtitle: styled.span`
     color: gray;
     font-size: 0.8rem;
     font-weight: lighter;

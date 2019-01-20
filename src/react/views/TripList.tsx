@@ -54,21 +54,36 @@ const TripCardsList = ({ trip_docs }) => {
 
   const trips = trip_docs.map(doc => [doc.id, doc.data()])
   const isSignedUp = trips.map(
-    ([_, td]) => td.signUps && td.signUps.map(e => e.email).includes(profile.email)
+    ([_, t]) => t.signUps && t.signUps.map(e => e.email).includes(profile.email)
   )
-  const my_trips = trips.filter((_, index) => isSignedUp[index])
-  const other_trips = trips.filter((_, index) => !isSignedUp[index])
+  const isLeader = trips.map(([_, t]) => t.leader.email == profile.email)
+
+  const signed_up_trips = trips.filter((_, index) => isSignedUp[index])
+  const leader_trips = trips.filter((_, index) => isLeader[index])
+
+  const other_trips = trips.filter((_, index) => !isSignedUp[index] && !isLeader[index])
 
   return (
     <s.Cards>
-      {my_trips.length > 0 && <Divider orientation="left">My Trips</Divider>}
-      {my_trips.map(([id, trip_data]) => (
+      {signed_up_trips.length + leader_trips.length > 0 && (
+        <Divider orientation="left">My Trips</Divider>
+      )}
+
+      {leader_trips.map(([id, trip_data]) => (
+        <div key={id} style={{ marginBottom: '1rem' }}>
+          <TripCard trip_data={trip_data} id={id} />
+        </div>
+      ))}
+      {signed_up_trips.map(([id, trip_data]) => (
         <div key={id} style={{ marginBottom: '1rem' }}>
           <TripCard trip_data={trip_data} id={id} />
         </div>
       ))}
 
-      {my_trips.length > 0 && <Divider orientation="left" style={{ marginTop: '2.5rem' }} />}
+      {signed_up_trips.length + leader_trips.length > 0 && (
+        <Divider orientation="left" style={{ marginTop: '2.5rem' }} />
+      )}
+
       {other_trips.map(([id, trip_data]) => (
         <div key={id} style={{ marginBottom: '1rem' }}>
           <TripCard trip_data={trip_data} id={id} />

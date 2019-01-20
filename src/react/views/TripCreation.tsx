@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Col, DatePicker, Drawer, Form, Input, Row, Icon } from 'antd'
+import { Button, Col, DatePicker, Drawer, Form, Input, Row, Icon, InputNumber } from 'antd'
 
 import { FormComponentProps } from 'antd/lib/form'
 import _ from 'lodash'
@@ -8,11 +8,13 @@ import moment from 'moment'
 import imageValidator from '@/utils/imageValidator'
 import styled from 'styled-components'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
+import useCurrentProfile from '../hooks/useCurrentProfile'
 
 export interface Props extends RouteComponentProps, FormComponentProps {}
 
 function TripCreation(props: Props) {
   const [isLoading, setIsLoading] = useState(false)
+  const profile = useCurrentProfile()
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -22,6 +24,7 @@ function TripCreation(props: Props) {
       const data = _.omitBy(values, _.isUndefined)
 
       data.dates = { start: data.dates[0].toDate(), end: data.dates[1].toDate() }
+      data.leader = { name: profile.name, email: profile.email }
 
       setIsLoading(true)
 
@@ -46,22 +49,22 @@ function TripCreation(props: Props) {
       <s.Content>
         <Form layout="vertical" onSubmit={handleSubmit}>
           <Row gutter={16}>
-            <Col span={12}>
+            <Col span={24}>
               <Form.Item label="Title">
                 {getFieldDecorator('title', {
-                  rules: [{ required: true, message: 'Please enter a trip title' }]
+                  rules: [{ required: true, message: 'Enter a trip title' }]
                 })(<Input placeholder="Give your trip a fun title" />)}
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item label="Destination">
-                {getFieldDecorator('destination', {
-                  rules: [{ required: true, message: 'Please enter a destination' }]
-                })(<Input placeholder="Where would you like to go?" />)}
               </Form.Item>
             </Col>
           </Row>
           <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item label="Destination">
+                {getFieldDecorator('destination', {
+                  rules: [{ required: true, message: 'Enter a destination' }]
+                })(<Input placeholder="Where would you like to go?" />)}
+              </Form.Item>
+            </Col>
             <Col span={12}>
               <Form.Item label="Image">
                 {getFieldDecorator('image', {
@@ -73,16 +76,18 @@ function TripCreation(props: Props) {
                           .then(() => cb()) // TODO: preview image
                           .catch(() => cb(true))
                       },
-                      message: 'Please enter a valid image url.'
+                      message: 'Enter a valid image url.'
                     }
                   ]
                 })(<Input placeholder="A link to an image that shows where you're going" />)}
               </Form.Item>
             </Col>
+          </Row>
+          <Row gutter={16}>
             <Col span={12}>
               <Form.Item label="Dates">
                 {getFieldDecorator('dates', {
-                  rules: [{ required: true, message: 'Please choose the trip dates' }]
+                  rules: [{ required: true, message: 'Choose the trip dates' }]
                 })(
                   <DatePicker.RangePicker
                     style={{ width: '100%' }}
@@ -98,6 +103,13 @@ function TripCreation(props: Props) {
                 )}
               </Form.Item>
             </Col>
+            <Col span={12}>
+              <Form.Item label="Maximum participants">
+                {getFieldDecorator('max_participants', {
+                  rules: [{ required: true, message: 'Enter a number' }]
+                })(<InputNumber style={{ width: '100%' }} />)}
+              </Form.Item>
+            </Col>
           </Row>
           <Row gutter={16}>
             <Col span={24}>
@@ -106,7 +118,7 @@ function TripCreation(props: Props) {
                   rules: [
                     {
                       required: true,
-                      message: 'Please enter a description for your trip'
+                      message: 'Enter a description for your trip'
                     }
                   ]
                 })(<Input.TextArea rows={4} placeholder="Details about your trip" />)}
