@@ -10,7 +10,6 @@ import useCurrentProfile from '../hooks/useCurrentProfile'
 // TODO pre-fetch trips
 // TODO fix top button spacing on mobile
 // TODO improve loading indicators
-// TODO sort trips by date
 
 const db = firebase.firestore()
 
@@ -22,6 +21,7 @@ export default function Trips(props) {
   useEffect(() => {
     if (user)
       db.collection('trips')
+        .orderBy('dates.start', 'asc')
         .get()
         .then(qs => setTrips(qs.docs))
 
