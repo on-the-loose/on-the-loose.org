@@ -60,6 +60,7 @@ const s = {
 
     @media (max-width: 700px) {
       padding: 2rem 1rem 1.5rem 1rem;
+      position: initial;
     }
   `,
 

@@ -135,8 +135,8 @@ const s = {
     right: 10rem;
 
     @media (max-width: 750px) {
-      top: 8rem;
-      bottom: 4rem;
+      top: 6rem;
+      bottom: 2rem;
       left: 1rem;
       right: 1rem;
     }
