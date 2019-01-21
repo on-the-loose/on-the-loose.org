@@ -129,10 +129,17 @@ const s = {
   Container: styled.div`
     position: absolute;
 
-    top: 8rem;
-    bottom: 4rem;
+    top: 7rem;
+    bottom: 2rem;
     left: 10rem;
     right: 10rem;
+
+    @media (max-width: 950px) {
+      top: 6rem;
+      bottom: 2rem;
+      left: 5rem;
+      right: 5rem;
+    }
 
     @media (max-width: 750px) {
       top: 6rem;
@@ -141,12 +148,14 @@ const s = {
       right: 1rem;
     }
 
+    margin: auto;
+
     background-color: white;
     border-radius: 0.5rem;
-    overflow: hidden;
-    min-height: min-content;
+
     max-width: 50rem;
-    margin: auto;
+    max-height: 100%;
+    overflow: scroll;
   `,
 
   ImageWrap: styled.div`
@@ -154,6 +163,7 @@ const s = {
     height: 10rem;
     overflow: hidden;
     vertical-align: middle;
+    border-radius: 0.5rem 0.5rem 0rem 0rem;
   `,
 
   Image: styled.img`

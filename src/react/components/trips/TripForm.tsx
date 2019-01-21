@@ -111,19 +111,8 @@ function TripForm(props: Props) {
               </Form.Item>
             </Col>
           </Row>
-          <div
-            style={{
-              position: 'absolute',
-              bottom: 0,
-              width: '100%',
-              borderTop: '1px solid #e8e8e8',
-              padding: '10px 16px',
-              textAlign: 'right',
-              left: 0,
-              background: '#fff',
-              borderRadius: '0 0 4px 4px'
-            }}
-          >
+
+          <s.Buttons>
             <Button
               style={{
                 marginRight: 8
@@ -135,7 +124,7 @@ function TripForm(props: Props) {
             <Button htmlType="submit" type="primary" loading={props.loading}>
               {props.submitText}
             </Button>
-          </div>
+          </s.Buttons>
         </Form>
       </s.Content>
     </s.Container>
@@ -147,28 +136,52 @@ const s = {
     position: absolute;
 
     top: 8rem;
-    bottom: 4rem;
+    bottom: 2rem;
     left: 10rem;
     right: 10rem;
 
+    @media (max-width: 950px) {
+      top: 6rem;
+      bottom: 2rem;
+      left: 5rem;
+      right: 5rem;
+    }
+
     @media (max-width: 750px) {
-      top: 8rem;
-      bottom: 4rem;
+      top: 6rem;
+      bottom: 2rem;
       left: 1rem;
       right: 1rem;
     }
 
+    margin: auto;
+
     background-color: white;
     border-radius: 0.5rem;
-    overflow: hidden;
-    min-height: min-content;
+
     max-width: 50rem;
-    margin: auto;
+    max-height: 100%;
+    overflow: scroll;
   `,
 
   Content: styled.div`
     padding: 1rem 2rem;
     margin-top: 10%;
+  `,
+
+  Buttons: styled.div`
+    @media (min-height: 700px) {
+      position: absolute;
+    }
+
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid #e8e8e8;
+    padding: 10px 16px;
+    text-align: right;
+    left: 0;
+    background: #fff;
+    border-radius: 0 0 4px 4px;
   `
 }
 
