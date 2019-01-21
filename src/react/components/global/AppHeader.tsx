@@ -21,15 +21,11 @@ function AppHeader(props: Props) {
 
       <s.Menu mode="horizontal" selectedKeys={[current_page ? current_page : '/']}>
         <s.Item key="/">
-          <Link to="/">HOME</Link>
+          <Link to="/">ABOUT</Link>
         </s.Item>
 
         <s.Item key="trips">
           <Link to="/trips">TRIPS</Link>
-        </s.Item>
-
-        <s.Item key="guide">
-          <Link to="/guide">GUIDE</Link>
         </s.Item>
       </s.Menu>
 
@@ -42,9 +38,6 @@ const s = {
   Logo: styled.img`
     width: 2.5rem;
     height: 2.5rem;
-    @media (max-width: 350px) {
-      display: none;
-    }
   `,
 
   Header: styled.div`
@@ -76,7 +69,7 @@ const s = {
     padding: 0 3rem;
 
     @media (max-width: 550px) {
-      padding: 0 1rem;
+      padding: 0 1.5rem;
     }
   `
 }

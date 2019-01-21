@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 
 import AppHeader from './components/global/AppHeader'
+import About from './views/About'
 import BackgroundImage from './components/global/BackgroundImage'
-import Guide from './views/Guide'
-import Home from './views/Home'
 import Login from './views/Login'
 import TripCreate from './views/TripCreate'
 import TripEdit from './views/TripEdit'
@@ -21,7 +20,7 @@ export default function App(props: { user: firebase.User }) {
         <BackgroundImage />
         <AppHeader user={props.user} />
         <s.Content>
-          <Route path="/" exact component={Home} />
+          <Route path="/" exact component={About} />
 
           <Route path="/trips/" exact component={TripList} />
           <Route path="/trips/:id" exact component={({ match }) => <Trip id={match.params.id} />} />
@@ -32,7 +31,6 @@ export default function App(props: { user: firebase.User }) {
           />
           <Route path="/create" exact component={TripCreate} />
 
-          <Route path="/guide/" component={Guide} />
           <Route path="/profile/" component={Profile} />
           <Route path="/login/" component={Login} />
         </s.Content>
