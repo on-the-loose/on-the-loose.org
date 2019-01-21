@@ -10,25 +10,44 @@ import useCurrentProfile from '../hooks/useCurrentProfile'
 // TODO pre-fetch trips
 // TODO fix top button spacing on mobile
 // TODO improve loading indicators
+// TODO add limit to trips fetched
 
 const db = firebase.firestore()
 
 export default function Trips(props) {
+  const [hidePastTrips, setHidePastTrips] = useState(true)
   const [trips, setTrips] = useState<firebase.firestore.QueryDocumentSnapshot[]>(null)
+  const [pastTrips, setPastTrips] = useState<firebase.firestore.QueryDocumentSnapshot[]>(null)
 
   const user = firebase.auth().currentUser
 
-  useEffect(() => {
-    if (user)
-      db.collection('trips')
+  useEffect(
+    () => {
+      if (!user) return
+
+      let trips = db
+        .collection('trips')
+        .where('dates.start', '>', firebase.firestore.Timestamp.now())
         .orderBy('dates.start', 'asc')
-        .get()
-        .then(qs => setTrips(qs.docs))
 
-    const unsubscribe = db.collection('trips').onSnapshot(qs => setTrips(qs.docs))
+      const unsubscribe = trips.onSnapshot(qs => setTrips(qs.docs))
 
-    return () => unsubscribe()
-  }, [])
+      if (hidePastTrips) return () => unsubscribe()
+
+      let past_trips = db
+        .collection('trips')
+        .where('dates.start', '<', firebase.firestore.Timestamp.now())
+        .orderBy('dates.start', 'asc')
+
+      const unsubscribe_past = past_trips.onSnapshot(qs => setPastTrips(qs.docs))
+
+      return () => {
+        unsubscribe()
+        unsubscribe_past()
+      }
+    },
+    [hidePastTrips]
+  )
 
   return (
     <div style={{ textAlign: 'center' }}>
@@ -40,6 +59,12 @@ export default function Trips(props) {
             </Link>
           </s.Buttons>
           <TripCardsList trip_docs={trips} />
+          <s.Buttons style={{ marginTop: '3rem' }}>
+            <Button onClick={() => setHidePastTrips(!hidePastTrips)}>
+              {hidePastTrips ? 'Show Past Trips' : 'Hide Past Trips'}
+            </Button>
+          </s.Buttons>
+          {!hidePastTrips && <TripCardsList trip_docs={pastTrips} />}
         </div>
       ) : (
         <h2 style={{ marginTop: '4rem' }}>Login to discover trips and sign up for them!</h2>
