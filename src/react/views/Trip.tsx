@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDocument } from 'react-firebase-hooks/firestore'
 import firebase from '@/firebase'
 import { Icon, Button } from 'antd'
@@ -15,17 +15,23 @@ export interface Props extends RouteComponentProps {
 }
 
 function Trip(props: Props) {
-  const trip_doc = firebase.firestore().doc(`trips/${props.id}`)
-  const { error, loading, value } = useDocument(trip_doc)
+  const [tripDoc, setTripDoc] = useState(null)
 
-  if (value && !value.exists) props.history.replace('/trips')
+  useEffect(() => {
+    return firebase
+      .firestore()
+      .doc(`trips/${props.id}`)
+      .onSnapshot(doc => setTripDoc(doc))
+  }, [])
+
+  if (tripDoc && !tripDoc.exists) props.history.replace('/trips')
 
   return (
     <s.Container>
-      {loading ? (
+      {!tripDoc ? (
         <s.LoadingIcon type="loading" />
       ) : (
-        value.exists && <TripInfo id={props.id} trip_data={value.data()} />
+        tripDoc.exists && <TripInfo id={props.id} trip_data={tripDoc.data()} />
       )}
       <Button
         shape="circle"
@@ -39,6 +45,8 @@ function Trip(props: Props) {
 }
 
 function TripInfo({ id, trip_data }) {
+  const db = firebase.firestore()
+
   const start = moment(trip_data.dates.start.toDate())
   const end = moment(trip_data.dates.end.toDate())
   const duration = end.diff(start, 'days')
@@ -58,14 +66,28 @@ function TripInfo({ id, trip_data }) {
       ? firebase.firestore.FieldValue.arrayRemove
       : firebase.firestore.FieldValue.arrayUnion
 
-    firebase
-      .firestore()
-      .doc(`trips/${id}`)
+    db.doc(`trips/${id}`)
       .update({
         signUps: operation({
           email: profile.email,
-          name: profile.name
+          name: profile.name,
+          confirmed: false
         })
+      })
+      .then(res => {
+        setIsLoading(false)
+      })
+      .catch(() => console.log('failed'))
+  }
+
+  const setIsConfirmed = (email, isConfirmed) => {
+    const operation = !isConfirmed
+      ? firebase.firestore.FieldValue.arrayRemove
+      : firebase.firestore.FieldValue.arrayUnion
+
+    db.doc(`trips/${id}`)
+      .update({
+        confirmedParticipants: operation(email)
       })
       .then(res => {
         setIsLoading(false)
@@ -108,7 +130,29 @@ function TripInfo({ id, trip_data }) {
             <b>Leader: </b> {trip_data.leader.name}
           </li>
           {trip_data.signUps &&
-            trip_data.signUps.map(user => <li key={user.email}>{user.name}</li>)}
+            trip_data.signUps.map(user => {
+              const isConfirmed =
+                trip_data.confirmedParticipants &&
+                trip_data.confirmedParticipants.includes(user.email)
+              return (
+                <li key={user.email}>
+                  {user.name} {isConfirmed && <i> - Confirmed</i>}
+                  {isLeader && (
+                    <a onClick={() => setIsConfirmed(user.email, !isConfirmed)}>
+                      {' '}
+                      {!isConfirmed ? (
+                        'Confirm'
+                      ) : (
+                        <Icon
+                          type="close"
+                          style={{ verticalAlign: 'middle', lineHeight: '1rem' }}
+                        />
+                      )}
+                    </a>
+                  )}
+                </li>
+              )
+            })}
         </ol>
 
         {!isLeader && (
