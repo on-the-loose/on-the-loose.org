@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 
-import AppHeader from './components/global/AppHeader'
-import About from './views/About'
-import BackgroundImage from './components/global/BackgroundImage'
+import Header from './components/Header'
+import Home from './views/Home'
+import BackgroundImage from './components/BackgroundImage'
 import Login from './views/Login'
 import TripCreate from './views/TripCreate'
 import TripEdit from './views/TripEdit'
@@ -12,15 +12,17 @@ import Trip from './views/Trip'
 import TripList from './views/TripList'
 import firebase from '@/firebase'
 import styled from 'styled-components'
+import Info from './views/Info'
 
 export default function App(props: { user: firebase.User }) {
   return (
     <Router>
       <s.Layout>
         <BackgroundImage />
-        <AppHeader user={props.user} />
+        <Header user={props.user} />
         <s.Content>
-          <Route path="/" exact component={About} />
+          <Route path="/" exact component={Home} />
+          <Route path="/info" exact component={Info} />
 
           <Route path="/trips/" exact component={TripList} />
           <Route path="/trips/:id" exact component={({ match }) => <Trip id={match.params.id} />} />

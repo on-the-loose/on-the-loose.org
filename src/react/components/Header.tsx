@@ -1,8 +1,8 @@
 import { RouteComponentProps, withRouter } from 'react-router'
 
-import AccountAvatar from '../account/AccountAvatar'
+import AccountAvatar from './account/AccountAvatar'
 import { Link } from 'react-router-dom'
-import LoginButton from '../account/LoginButton'
+import LoginButton from './account/LoginButton'
 import { Menu } from 'antd'
 import React from 'react'
 import firebase from '@/firebase'
@@ -13,7 +13,7 @@ export interface Props extends RouteComponentProps {
   user: firebase.User
 }
 
-function AppHeader(props: Props) {
+function Header(props: Props) {
   const current_page = props.location.pathname.split('/')[1]
   return (
     <s.Header>
@@ -21,11 +21,15 @@ function AppHeader(props: Props) {
 
       <s.Menu mode="horizontal" selectedKeys={[current_page ? current_page : '/']}>
         <s.Item key="/">
-          <Link to="/">ABOUT</Link>
+          <Link to="/">HOME</Link>
         </s.Item>
 
         <s.Item key="trips">
           <Link to="/trips">TRIPS</Link>
+        </s.Item>
+
+        <s.Item key="info">
+          <Link to="/info">INFO</Link>
         </s.Item>
       </s.Menu>
 
@@ -69,9 +73,9 @@ const s = {
     padding: 0 3rem;
 
     @media (max-width: 550px) {
-      padding: 0 1.5rem;
+      padding: 0 1rem;
     }
   `
 }
 
-export default withRouter(AppHeader)
+export default withRouter(Header)
