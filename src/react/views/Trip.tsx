@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDocument } from 'react-firebase-hooks/firestore'
 import firebase from '@/firebase'
-import { Icon, Button } from 'antd'
+import { Icon, Button, Modal, Input } from 'antd'
 import { withRouter } from 'react-router'
 import { RouteComponentProps } from 'react-router'
 import styled from 'styled-components'
@@ -52,6 +52,7 @@ function TripInfo({ id, trip_data }) {
   const duration = end.diff(start, 'days')
 
   const [isLoading, setIsLoading] = useState(false)
+  const [showEmailModal, setShowEmailModal] = useState(false)
 
   const profile = useCurrentProfile()
 
@@ -154,6 +155,38 @@ function TripInfo({ id, trip_data }) {
               )
             })}
         </ol>
+
+        {isLeader && <Button onClick={() => setShowEmailModal(true)}> Email Participants </Button>}
+
+        <Modal
+          title="Emails"
+          visible={showEmailModal}
+          onCancel={() => setShowEmailModal(false)}
+          footer={null}
+          closable
+          centered
+        >
+          <h3>Confirmed</h3>
+          <p>
+            <Input.TextArea rows={4} value={trip_data.confirmedParticipants.join('\n')} />
+          </p>
+
+          <h3>Unconfirmed</h3>
+          <p>
+            <Input.TextArea
+              rows={4}
+              value={trip_data.signUps
+                .map(x => x.email)
+                .filter(x => !trip_data.confirmedParticipants.includes(x))
+                .join('\n')}
+            />
+          </p>
+
+          <h3>All</h3>
+          <p>
+            <Input.TextArea rows={4} value={trip_data.signUps.map(x => x.email).join('\n')} />
+          </p>
+        </Modal>
 
         {!isLeader && (
           <Button
