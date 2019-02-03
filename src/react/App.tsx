@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Route, BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom'
 
 import Header from './components/Header'
 import Home from './views/Home'
@@ -14,6 +14,12 @@ import firebase from '@/firebase'
 import Info from './views/Info'
 import css from '@emotion/css'
 
+const user = firebase.auth().currentUser
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={props => (user ? <Component {...props} /> : <Redirect to="/" />)} />
+)
+
 export default function App(props: { user: firebase.User }) {
   return (
     <Router>
@@ -24,17 +30,21 @@ export default function App(props: { user: firebase.User }) {
           <Route path="/" exact component={Home} />
           <Route path="/info" exact component={Info} />
 
-          <Route path="/trips/" exact component={TripList} />
-          <Route path="/trips/:id" exact component={({ match }) => <Trip id={match.params.id} />} />
-          <Route
+          <Route path="/trips" exact component={TripList} />
+          <PrivateRoute
+            path="/trips/:id"
+            exact
+            component={({ match }) => <Trip id={match.params.id} />}
+          />
+          <PrivateRoute
             path="/trips/:id/edit"
             exact
             component={({ match }) => <TripEdit id={match.params.id} />}
           />
-          <Route path="/create" exact component={TripCreate} />
+          <PrivateRoute path="/create" exact component={TripCreate} />
 
-          <Route path="/profile/" component={Profile} />
-          <Route path="/login/" component={Login} />
+          <PrivateRoute path="/profile" component={Profile} />
+          <Route path="/login" component={Login} />
         </div>
       </div>
     </Router>
