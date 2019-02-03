@@ -7,7 +7,7 @@ import { Menu } from 'antd'
 import React from 'react'
 import firebase from '@/firebase'
 import logo from '@/assets/otl_logo_circle_lq.png'
-import styled from 'styled-components'
+import css from '@emotion/css'
 
 export interface Props extends RouteComponentProps {
   user: firebase.User
@@ -16,35 +16,35 @@ export interface Props extends RouteComponentProps {
 function Header(props: Props) {
   const current_page = props.location.pathname.split('/')[1]
   return (
-    <s.Header>
-      <s.Logo src={logo} alt="logo" />
+    <div css={styles.header}>
+      <img css={styles.logo} src={logo} alt="logo" />
 
-      <s.Menu mode="horizontal" selectedKeys={[current_page ? current_page : '/']}>
-        <s.Item key="/">
+      <Menu css={styles.menu} mode="horizontal" selectedKeys={[current_page ? current_page : '/']}>
+        <Menu.Item css={styles.item} key="/">
           <Link to="/">HOME</Link>
-        </s.Item>
+        </Menu.Item>
 
-        <s.Item key="trips">
+        <Menu.Item css={styles.item} key="trips">
           <Link to="/trips">TRIPS</Link>
-        </s.Item>
+        </Menu.Item>
 
-        <s.Item key="info">
+        <Menu.Item css={styles.item} key="info">
           <Link to="/info">INFO</Link>
-        </s.Item>
-      </s.Menu>
+        </Menu.Item>
+      </Menu>
 
       {props.user ? <AccountAvatar /> : <LoginButton>LOGIN</LoginButton>}
-    </s.Header>
+    </div>
   )
 }
 
-const s = {
-  Logo: styled.img`
+const styles = {
+  logo: css`
     width: 2.5rem;
     height: 2.5rem;
   `,
 
-  Header: styled.div`
+  header: css`
     align-items: center;
     padding: 2.5rem 4rem 1.5rem 4rem;
     display: flex;
@@ -61,14 +61,14 @@ const s = {
     }
   `,
 
-  Menu: styled(Menu)`
+  menu: css`
     margin-left: auto;
     margin-right: auto;
     background-color: rgba(0, 0, 0, 0);
     text-align: center;
   `,
 
-  Item: styled(Menu.Item)`
+  item: css`
     margin-left: auto;
     padding: 0 3rem;
 

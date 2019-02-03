@@ -1,6 +1,6 @@
 import { Card } from 'antd'
 import React from 'react'
-import styled from 'styled-components'
+import { css } from '@emotion/core'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 import useCurrentProfile from '@/react/hooks/useCurrentProfile'
@@ -14,13 +14,14 @@ export default function TripCard({ id, trip_data }) {
 
   return (
     <Link to={`/trips/${id}`}>
-      <s.Wrapper>
-        <s.TripInfoCard
+      <div css={styles.wrapper}>
+        <Card
+          css={styles.tripInfoCard}
           title={
             <span>
               {trip_data.title}
-              <s.Subtitle>{isSignedUp && ' – SIGNED UP'}</s.Subtitle>
-              <s.Subtitle>{isLeader && ' – LEADING'}</s.Subtitle>
+              <span css={styles.subtitle}>{isSignedUp && ' – SIGNED UP'}</span>
+              <span css={styles.subtitle}>{isLeader && ' – LEADING'}</span>
             </span>
           }
           bordered={false}
@@ -32,22 +33,32 @@ export default function TripCard({ id, trip_data }) {
           extra={moment(trip_data.dates.start.toDate()).format('ddd, MMM Do')}
           // TODO display year for past trips
         >
-          <div style={{ overflow: 'hidden', height: '100%' }}>
-            <span style={{ fontWeight: 'bold', marginBottom: '-0.5rem' }}>
+          <div
+            css={css`
+              overflow: hidden;
+              height: 100%;
+            `}
+          >
+            <span
+              css={css`
+                font-weight: 'bold';
+                margin-bottom: -0.5rem;
+              `}
+            >
               {trip_data.destination + ' '}
             </span>
             - {trip_data.description}
           </div>
-        </s.TripInfoCard>
+        </Card>
         {/* TODO Add loading state for image */}
-        <s.TripImage src={trip_data.image} alt="trip image" />
-      </s.Wrapper>
+        <img css={styles.tripImage} src={trip_data.image} alt="trip image" />
+      </div>
     </Link>
   )
 }
 
-const s = {
-  Wrapper: styled.div`
+const styles = {
+  wrapper: css`
     max-width: 100%;
     display: inline-flex;
     text-align: left;
@@ -64,7 +75,7 @@ const s = {
     }
   `,
 
-  TripInfoCard: styled(Card)`
+  tripInfoCard: css`
     display: inline-block;
     height: 10rem;
     width: 70%;
@@ -76,7 +87,7 @@ const s = {
     }
   `,
 
-  TripImage: styled.img`
+  tripImage: css`
     display: inline-block;
     height: 10rem;
     width: 30%;
@@ -86,7 +97,7 @@ const s = {
     }
   `,
 
-  Subtitle: styled.span`
+  subtitle: css`
     color: gray;
     font-size: 0.8rem;
     font-weight: lighter;

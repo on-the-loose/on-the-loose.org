@@ -11,16 +11,16 @@ import Profile from './views/Profile'
 import Trip from './views/Trip'
 import TripList from './views/TripList'
 import firebase from '@/firebase'
-import styled from 'styled-components'
 import Info from './views/Info'
+import css from '@emotion/css'
 
 export default function App(props: { user: firebase.User }) {
   return (
     <Router>
-      <s.Layout>
+      <div css={styles.layout}>
         <BackgroundImage />
         <Header user={props.user} />
-        <s.Content>
+        <div css={styles.content}>
           <Route path="/" exact component={Home} />
           <Route path="/info" exact component={Info} />
 
@@ -35,18 +35,18 @@ export default function App(props: { user: firebase.User }) {
 
           <Route path="/profile/" component={Profile} />
           <Route path="/login/" component={Login} />
-        </s.Content>
-      </s.Layout>
+        </div>
+      </div>
     </Router>
   )
 }
 
-const s = {
-  Layout: styled.div`
+const styles = {
+  layout: css`
     height: 100%;
   `,
 
-  Content: styled.div`
+  content: css`
     padding: 8rem 4rem 4rem 4rem;
 
     @media (max-width: 700px) {

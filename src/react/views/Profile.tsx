@@ -2,14 +2,18 @@ import React from 'react'
 
 import UpdateInfoButton from '../components/account/UpdateInfoButton'
 
-import styled from 'styled-components'
 import useCurrentProfile from '../hooks/useCurrentProfile'
+import css from '@emotion/css'
 
 export default function Profile() {
   const profile = useCurrentProfile()
 
   return (
-    <s.Center>
+    <div
+      css={css`
+        text-align: center;
+      `}
+    >
       {!profile ? (
         <div>
           <h1> Welcome to On The Loose! </h1>
@@ -19,12 +23,6 @@ export default function Profile() {
         <h1>{profile.name}</h1>
       )}
       <UpdateInfoButton />
-    </s.Center>
+    </div>
   )
-}
-
-const s = {
-  Center: styled.div`
-    text-align: center;
-  `
 }

@@ -2,7 +2,6 @@ import { Button, Modal } from 'antd'
 
 import LoginForm from './LoginForm'
 import React, { useState } from 'react'
-import styled from 'styled-components'
 import SignUp from './SignUp'
 
 export interface State {

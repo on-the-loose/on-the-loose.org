@@ -6,7 +6,7 @@ import _ from 'lodash'
 
 import moment from 'moment'
 import imageValidator from '@/utils/imageValidator'
-import styled from 'styled-components'
+import css from '@emotion/css'
 
 export interface Props extends FormComponentProps {
   onSubmit: (Event, WrappedFormUtils) => void
@@ -25,8 +25,8 @@ function TripForm(props: Props) {
   ]
 
   return (
-    <s.Container>
-      <s.Content>
+    <div css={styles.container}>
+      <div css={styles.content}>
         <Form layout="vertical" onSubmit={e => props.onSubmit(e, props.form)}>
           <Row gutter={16}>
             <Col span={24}>
@@ -112,7 +112,7 @@ function TripForm(props: Props) {
             </Col>
           </Row>
 
-          <s.Buttons>
+          <div css={styles.buttons}>
             <Button
               style={{
                 marginRight: 8
@@ -124,15 +124,15 @@ function TripForm(props: Props) {
             <Button htmlType="submit" type="primary" loading={props.loading}>
               {props.submitText}
             </Button>
-          </s.Buttons>
+          </div>
         </Form>
-      </s.Content>
-    </s.Container>
+      </div>
+    </div>
   )
 }
 
-const s = {
-  Container: styled.div`
+const styles = {
+  container: css`
     position: absolute;
 
     top: 8rem;
@@ -164,12 +164,12 @@ const s = {
     overflow: scroll;
   `,
 
-  Content: styled.div`
+  content: css`
     padding: 1rem 2rem;
     margin-top: 10%;
   `,
 
-  Buttons: styled.div`
+  buttons: css`
     @media (min-height: 700px) {
       position: absolute;
     }

@@ -4,11 +4,11 @@ import firebase from '@/firebase'
 import { Icon, Button, Modal, Input } from 'antd'
 import { withRouter } from 'react-router'
 import { RouteComponentProps } from 'react-router'
-import styled from 'styled-components'
 import ReactMarkdown from 'react-markdown'
 import moment from 'moment'
 import useCurrentProfile from '../hooks/useCurrentProfile'
 import { Link } from 'react-router-dom'
+import css from '@emotion/css'
 
 export interface Props extends RouteComponentProps {
   id: string
@@ -27,9 +27,9 @@ function Trip(props: Props) {
   if (tripDoc && !tripDoc.exists) props.history.replace('/trips')
 
   return (
-    <s.Container>
+    <div css={styles.container}>
       {!tripDoc ? (
-        <s.LoadingIcon type="loading" />
+        <Icon css={styles.loadingIcon} type="loading" />
       ) : (
         tripDoc.exists && <TripInfo id={props.id} trip_data={tripDoc.data()} />
       )}
@@ -40,7 +40,7 @@ function Trip(props: Props) {
         style={{ position: 'absolute', right: ' 0.5rem', top: ' 0.5rem' }}
         onClick={() => props.history.replace('/trips')}
       />
-    </s.Container>
+    </div>
   )
 }
 
@@ -98,10 +98,10 @@ function TripInfo({ id, trip_data }) {
 
   return (
     <div>
-      <s.ImageWrap>
-        <s.Image src={trip_data.image} alt="trip image" />
-      </s.ImageWrap>
-      <s.Content>
+      <div css={styles.imageWrap}>
+        <img css={styles.tripImage} src={trip_data.image} alt="trip image" />
+      </div>
+      <div css={styles.content}>
         <h2>
           {trip_data.title}{' '}
           {isLeader && (
@@ -168,7 +168,10 @@ function TripInfo({ id, trip_data }) {
         >
           <h3>Confirmed</h3>
           <p>
-            <Input.TextArea rows={4} value={trip_data.confirmedParticipants.join('\n')} />
+            <Input.TextArea
+              rows={4}
+              value={trip_data.confirmedParticipants && trip_data.confirmedParticipants.join('\n')}
+            />
           </p>
 
           <h3>Unconfirmed</h3>
@@ -177,7 +180,12 @@ function TripInfo({ id, trip_data }) {
               rows={4}
               value={trip_data.signUps
                 .map(x => x.email)
-                .filter(x => !trip_data.confirmedParticipants.includes(x))
+                .filter(
+                  x =>
+                    !(
+                      trip_data.confirmedParticipants && trip_data.confirmedParticipants.includes(x)
+                    )
+                )
                 .join('\n')}
             />
           </p>
@@ -197,13 +205,13 @@ function TripInfo({ id, trip_data }) {
             {isSignedUp ? 'Withdraw' : 'Sign up'}
           </Button>
         )}
-      </s.Content>
+      </div>
     </div>
   )
 }
 
-const s = {
-  Container: styled.div`
+const styles = {
+  container: css`
     position: absolute;
 
     top: 7rem;
@@ -235,7 +243,7 @@ const s = {
     overflow: scroll;
   `,
 
-  ImageWrap: styled.div`
+  imageWrap: css`
     width: 100%;
     height: 10rem;
     overflow: hidden;
@@ -243,20 +251,20 @@ const s = {
     border-radius: 0.5rem 0.5rem 0rem 0rem;
   `,
 
-  Image: styled.img`
+  tripImage: css`
     width: 100%;
 
     transform: translateY(-25%);
   `,
 
-  LoadingIcon: styled(Icon)`
+  loadingIcon: css`
     font-size: 50px;
     margin: auto;
     display: block;
     margin-top: 40%;
   `,
 
-  Content: styled.div`
+  content: css`
     padding: 1rem 2rem;
   `
 }

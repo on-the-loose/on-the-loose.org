@@ -4,8 +4,8 @@ import React, { useState, useEffect } from 'react'
 import TripCard from '../components/trips/TripCard'
 import firebase from '@/firebase'
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
 import useCurrentProfile from '../hooks/useCurrentProfile'
+import css from '@emotion/css'
 
 // TODO pre-fetch trips
 // TODO fix top button spacing on mobile
@@ -21,49 +21,51 @@ export default function Trips(props) {
 
   const user = firebase.auth().currentUser
 
-  useEffect(
-    () => {
-      if (!user) return
+  useEffect(() => {
+    if (!user) return
 
-      let trips = db
-        .collection('trips')
-        .where('dates.start', '>', firebase.firestore.Timestamp.now())
-        .orderBy('dates.start', 'asc')
+    let trips = db
+      .collection('trips')
+      .where('dates.start', '>', firebase.firestore.Timestamp.now())
+      .orderBy('dates.start', 'asc')
 
-      const unsubscribe = trips.onSnapshot(qs => setTrips(qs.docs))
+    const unsubscribe = trips.onSnapshot(qs => setTrips(qs.docs))
 
-      if (hidePastTrips) return () => unsubscribe()
+    if (hidePastTrips) return () => unsubscribe()
 
-      let past_trips = db
-        .collection('trips')
-        .where('dates.start', '<', firebase.firestore.Timestamp.now())
-        .orderBy('dates.start', 'asc')
+    let past_trips = db
+      .collection('trips')
+      .where('dates.start', '<', firebase.firestore.Timestamp.now())
+      .orderBy('dates.start', 'asc')
 
-      const unsubscribe_past = past_trips.onSnapshot(qs => setPastTrips(qs.docs))
+    const unsubscribe_past = past_trips.onSnapshot(qs => setPastTrips(qs.docs))
 
-      return () => {
-        unsubscribe()
-        unsubscribe_past()
-      }
-    },
-    [hidePastTrips]
-  )
+    return () => {
+      unsubscribe()
+      unsubscribe_past()
+    }
+  }, [hidePastTrips])
 
   return (
     <div style={{ textAlign: 'center' }}>
       {user ? (
         <div>
-          <s.Buttons>
+          <div css={styles.buttons}>
             <Link to="/create">
               <Button icon="plus">Create trip</Button>
             </Link>
-          </s.Buttons>
+          </div>
           <TripCardsList trip_docs={trips} />
-          <s.Buttons style={{ marginTop: '3rem' }}>
+          <div
+            css={css`
+              ${styles.buttons};
+              margin-top: 3rem;
+            `}
+          >
             <Button onClick={() => setHidePastTrips(!hidePastTrips)}>
               {hidePastTrips ? 'Show Past Trips' : 'Hide Past Trips'}
             </Button>
-          </s.Buttons>
+          </div>
           {!hidePastTrips && <TripCardsList trip_docs={pastTrips} />}
         </div>
       ) : (
@@ -90,7 +92,7 @@ const TripCardsList = ({ trip_docs }) => {
   const other_trips = trips.filter((_, index) => !isSignedUp[index] && !isLeader[index])
 
   return (
-    <s.Cards>
+    <div css={styles.cards}>
       {signed_up_trips.length + leader_trips.length > 0 && (
         <Divider orientation="left">My Trips</Divider>
       )}
@@ -115,18 +117,18 @@ const TripCardsList = ({ trip_docs }) => {
           <TripCard trip_data={trip_data} id={id} />
         </div>
       ))}
-    </s.Cards>
+    </div>
   )
 }
 
-const s = {
-  Buttons: styled.div`
+const styles = {
+  buttons: css`
     margin-bottom: 2rem;
     & > * {
       padding: 0rem 1rem;
     }
   `,
-  Cards: styled.div`
+  cards: css`
     margin: auto;
     max-width: 50rem;
     width: 90%;

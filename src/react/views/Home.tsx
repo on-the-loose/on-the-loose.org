@@ -1,13 +1,13 @@
 import React from 'react'
-import styled from 'styled-components'
+import css from '@emotion/css'
 
 export default function Home() {
   return (
     <div>
-      <s.ClubTitle>On The Loose</s.ClubTitle>
-      <s.ClubSubTitle>The outdoors club of the Claremont Colleges</s.ClubSubTitle>
+      <div css={styles.clubTitle}>On The Loose</div>
+      <div css={styles.clubSubTitle}>The outdoors club of the Claremont Colleges</div>
 
-      <s.ClubDescription>
+      <div css={styles.clubDescription}>
         <p>
           Welcome! OTL helps students organize trips to destinations across California and the
           Southwestern states.
@@ -24,13 +24,13 @@ export default function Home() {
           off. Whatever your level of experience, we hope to see you soon on trail, in the surf, on
           the rocks, or in a big comfy couch at one of our Shindigs! Happy trails!
         </p>
-      </s.ClubDescription>
+      </div>
     </div>
   )
 }
 
-const s = {
-  ClubTitle: styled.div`
+const styles = {
+  clubTitle: css`
     margin-top: 1rem;
     font-size: 3rem;
     text-align: center;
@@ -42,12 +42,12 @@ const s = {
     }
   `,
 
-  ClubSubTitle: styled.div`
+  clubSubTitle: css`
     text-align: center;
     font-size: 1.2rem;
   `,
 
-  ClubDescription: styled.div`
+  clubDescription: css`
     margin: 4rem auto;
     max-width: 40rem;
     font-size: 1.1rem;

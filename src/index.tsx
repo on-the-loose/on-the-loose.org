@@ -1,19 +1,19 @@
 import App from './react/App'
 import React from 'react'
-import { createGlobalStyle } from 'styled-components'
+import { Global, css } from '@emotion/core'
 import { render } from 'react-dom'
 import firebase from '@/firebase'
-
-const GlobalStyle = createGlobalStyle`
-  body {
-    background-color: rgb(247, 242, 237);
-  }
-`
 
 const renderApp = (MainComponent, user) => {
   render(
     <div>
-      <GlobalStyle />
+      <Global
+        styles={css`
+          body {
+            background-color: rgb(247, 242, 237);
+          }
+        `}
+      />
       <MainComponent user={user} />
     </div>,
     document.getElementById('react-app')
