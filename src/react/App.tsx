@@ -14,18 +14,19 @@ import firebase from '@/firebase'
 import Info from './views/Info'
 import css from '@emotion/css'
 
-const user = firebase.auth().currentUser
+export default function App({ user }: { user: firebase.User }) {
+  const PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route
+      {...rest}
+      render={props => (user != null ? <Component {...props} /> : <Redirect to="/" />)}
+    />
+  )
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={props => (user ? <Component {...props} /> : <Redirect to="/" />)} />
-)
-
-export default function App(props: { user: firebase.User }) {
   return (
     <Router>
       <div css={styles.layout}>
         <BackgroundImage />
-        <Header user={props.user} />
+        <Header user={user} />
         <div css={styles.content}>
           <Route path="/" exact component={Home} />
           <Route path="/info" exact component={Info} />
