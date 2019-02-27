@@ -23,9 +23,20 @@ Hello! This is the codebase for the new main website of On The Loose, the Clarem
 └── ...
 ```
 
-We use TypeScript to keep our code typed and maintainable. This project was bootstrapped with create-react-app.
+This project was bootstrapped with create-react-app.
 
 # Development
+
+We use the following stack of technologies:
+  - [React](https://reactjs.org/) for our front-end.
+  - [Firebase](https://firebase.google.com/) for our back-end.
+  - [TypeScript](https://www.typescriptlang.org/) to keep our code typed and maintainable. 
+  - [Emotion](https://emotion.sh/) for styling components.
+  - [Ant Design](https://ant.design/docs/react/introduce) as a design framework and component library. 
+
+Make sure to familiarize yourself with these tools before contributing. 
+
+## Setup
 
 To work on the project, first [install yarn](https://yarnpkg.com/en/docs/install). Make sure to also install _Node_ (most _yarn_ installations will do this automatically for you).
 
@@ -40,11 +51,9 @@ And you're ready to go! Point your browser to http://localhost:3000 to see the w
 
 We recommend that you use [VSCode](https://code.visualstudio.com/) as an editor because of its top notch autocomplete and linting for TypeScript. Additionally, the use of [prettier](https://prettier.io/) to automatically format the code is also highly encouraged to keep the code nice and clean.
 
-# Coding guidelines
+## Guidelines
 
-We use react to build this web app. This modern JS framework allows us to be able to easily build rich and interactive views.
-
-Each of the React components used are structured in the following way:
+For the sake of consistency, the general structure of a component you create should look like this:
 
 ```tsx
 import React from 'react'
@@ -53,21 +62,28 @@ import React from 'react'
 // ... helper functions ....
 
 export default function App() {
-  // ... component logic ....
+  // ... component logic with react hooks ....
 
   return (
     <div>
-      <s.Button/> <-- A styled component declared below
+      <Button css={styles.button}/>
     </div>
   )
 }
 
-const s = {
-  Button: styled.button`
+// ... styles in the same file, but outside of jsx ....
+const styles = {
+  button: css`
     padding: 8rem 4rem 4rem 4rem;
   `
   // ... more styles ....
 }
 ```
 
-When adding new components follow this structure to keep the codebase consistent and readable.
+### Managing State
+
+We encourage the use of [React Hooks](https://reactjs.org/docs/hooks-intro.html) for managing state, and generally try to stay away from classes. 
+
+### Styling Components
+We keep all of our styles in the same TypeScript file as our component, except in cases in which we want to reuse the same style over multiple components. Usually we just end up reusing the component itself instead of reusing styles though, making things more maintanable. 
+
