@@ -69,8 +69,8 @@ export default function Trips(props) {
           {!hidePastTrips && <TripCardsList trip_docs={pastTrips} />}
         </div>
       ) : (
-        <h2 style={{ marginTop: '4rem' }}>Login to discover trips and sign up for them!</h2>
-      )}
+          <h2 style={{ marginTop: '4rem' }}>Login to discover trips and sign up for them!</h2>
+        )}
     </div>
   )
 }
@@ -93,6 +93,7 @@ const TripCardsList = ({ trip_docs }) => {
 
   return (
     <div css={styles.cards}>
+      {signed_up_trips.length == 0 && <h3> No upcoming trips </h3>}
       {signed_up_trips.length + leader_trips.length > 0 && (
         <Divider orientation="left">My Trips</Divider>
       )}
