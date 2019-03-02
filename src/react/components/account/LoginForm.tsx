@@ -73,7 +73,7 @@ function LoginForm(props: Props) {
                 message: ' '
               },
               {
-                pattern: /.+(@pomona\.edu|@mymail.pomona\.edu|@cmc\.edu|@hmc\.edu|@g\.hmc\.edu|@scrippscollege\.edu|@pitzer\.edu)/,
+                pattern: /.+(@pomona\.edu|@mymail.pomona\.edu|@cmc\.edu|@hmc\.edu|@g\.hmc\.edu|@scrippscollege\.edu|@pitzer\.edu|@students\.pitzer\.edu)/,
                 message: 'You must use a Claremont Colleges email address.'
               }
             ]
@@ -100,10 +100,10 @@ function LoginForm(props: Props) {
         ) : isEmailSent ? (
           <p>A login link has been sent to your email</p>
         ) : (
-          <Button type="primary" htmlType="submit" loading={isLoading}>
-            Log in
+              <Button type="primary" htmlType="submit" loading={isLoading}>
+                Log in
           </Button>
-        )}
+            )}
       </Form>
     </div>
   )
