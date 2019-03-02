@@ -31,8 +31,8 @@ function Trip(props: Props) {
       {!tripDoc ? (
         <Icon css={styles.loadingIcon} type="loading" />
       ) : (
-        tripDoc.exists && <TripInfo id={props.id} trip_data={tripDoc.data()} />
-      )}
+          tripDoc.exists && <TripInfo id={props.id} trip_data={tripDoc.data()} />
+        )}
       <Button
         shape="circle"
         icon="close"
@@ -115,10 +115,10 @@ function TripInfo({ id, trip_data }) {
           {duration == 0 ? (
             'Day trip: '
           ) : (
-            <i>
-              <b>{duration} Nights: </b>
-            </i>
-          )}
+              <i>
+                <b>{duration} Nights: </b>
+              </i>
+            )}
           <i>
             {start.format('ddd, MMM Do, h:mma')} - {end.format('ddd, MMM Do, h:mma')}{' '}
           </i>
@@ -144,11 +144,11 @@ function TripInfo({ id, trip_data }) {
                       {!isConfirmed ? (
                         'Confirm'
                       ) : (
-                        <Icon
-                          type="close"
-                          style={{ verticalAlign: 'middle', lineHeight: '1rem' }}
-                        />
-                      )}
+                          <Icon
+                            type="close"
+                            style={{ verticalAlign: 'middle', lineHeight: '1rem' }}
+                          />
+                        )}
                     </a>
                   )}
                 </li>
@@ -178,7 +178,7 @@ function TripInfo({ id, trip_data }) {
           <p>
             <Input.TextArea
               rows={4}
-              value={trip_data.signUps
+              value={trip_data.signUps && trip_data.signUps
                 .map(x => x.email)
                 .filter(
                   x =>
@@ -192,7 +192,7 @@ function TripInfo({ id, trip_data }) {
 
           <h3>All</h3>
           <p>
-            <Input.TextArea rows={4} value={trip_data.signUps.map(x => x.email).join('\n')} />
+            <Input.TextArea rows={4} value={trip_data.signUps && trip_data.signUps.map(x => x.email).join('\n')} />
           </p>
         </Modal>
 

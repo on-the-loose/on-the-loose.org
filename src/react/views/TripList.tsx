@@ -93,7 +93,8 @@ const TripCardsList = ({ trip_docs }) => {
 
   return (
     <div css={styles.cards}>
-      {signed_up_trips.length == 0 && <h3> No upcoming trips </h3>}
+      {trips.length == 0 && <h3> No upcoming trips </h3>}
+
       {signed_up_trips.length + leader_trips.length > 0 && (
         <Divider orientation="left">My Trips</Divider>
       )}
