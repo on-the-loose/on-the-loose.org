@@ -44,7 +44,7 @@ Then follow these steps to start developing:
 
 1. Go ahead and clone this repo.
 2. Open terminal (or equivalent) and `cd` to the cloned directory.
-3. Run `yarn install` to install all the necessary dependencies.
+3. Run `yarn; cd functions; npm i; cd ..` to install all the necessary dependencies.  
 4. Run `yarn start` to start the development server.
 
 And you're ready to go! Point your browser to http://localhost:3000 to see the website. The page will automatically reload when you make changes in the code.
