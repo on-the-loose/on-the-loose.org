@@ -13,6 +13,8 @@ import TripList from './views/trips/TripList'
 import firebase from '@/firebase'
 import Info from './views/info/Info'
 import css from '@emotion/css'
+import LeaderInfo from './views/info/LeaderInfo'
+import SkillsInfo from './views/info/SkillsInfo'
 
 export default function App({ user }: { user: firebase.User }) {
   const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -30,6 +32,8 @@ export default function App({ user }: { user: firebase.User }) {
         <div css={styles.content}>
           <Route path="/" exact component={Home} />
           <Route path="/info" exact component={Info} />
+          <Route path="/info/leader" exact component={LeaderInfo} />
+          <Route path="/info/skills" exact component={SkillsInfo} />
 
           <Route path="/trips" exact component={TripList} />
           <PrivateRoute
