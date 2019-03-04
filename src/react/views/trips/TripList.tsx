@@ -1,10 +1,10 @@
 import { Icon, Button, Switch, Divider } from 'antd'
 
 import React, { useState, useEffect } from 'react'
-import TripCard from '../components/trips/TripCard'
+import TripCard from '../../components/trips/TripCard'
 import firebase from '@/firebase'
 import { Link } from 'react-router-dom'
-import useCurrentProfile from '../hooks/useCurrentProfile'
+import useCurrentProfile from '../../hooks/useCurrentProfile'
 import css from '@emotion/css'
 
 // TODO pre-fetch trips
@@ -69,8 +69,8 @@ export default function Trips(props) {
           {!hidePastTrips && <TripCardsList trip_docs={pastTrips} />}
         </div>
       ) : (
-          <h2 style={{ marginTop: '4rem' }}>Login to discover trips and sign up for them!</h2>
-        )}
+        <h2 style={{ marginTop: '4rem' }}>Login to discover trips and sign up for them!</h2>
+      )}
     </div>
   )
 }

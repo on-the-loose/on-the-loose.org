@@ -1,8 +1,8 @@
 import React from 'react'
 
-import UpdateInfoButton from '../components/account/UpdateInfoButton'
+import UpdateInfoButton from '../../components/account/UpdateInfoButton'
 
-import useCurrentProfile from '../hooks/useCurrentProfile'
+import useCurrentProfile from '../../hooks/useCurrentProfile'
 import css from '@emotion/css'
 
 export default function Profile() {

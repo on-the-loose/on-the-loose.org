@@ -1,22 +1,17 @@
 import React, { useState } from 'react'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 
-import TripForm from '../components/trips/TripForm'
+import TripForm from '../../components/trips/TripForm'
 import { WrappedFormUtils } from 'antd/lib/form/Form'
 import _ from 'lodash'
 import firebase from '@/firebase'
-import useCurrentProfile from '../hooks/useCurrentProfile'
-import { useDocument } from 'react-firebase-hooks/firestore'
+import useCurrentProfile from '../../hooks/useCurrentProfile'
 
-export interface Props extends RouteComponentProps {
-  id: string
-}
+export interface Props extends RouteComponentProps {}
 
-function TripEdit(props: Props) {
+function TripCreate(props: Props) {
   const [isLoading, setIsLoading] = useState(false)
   const profile = useCurrentProfile()
-  const { error, loading, value } = useDocument(firebase.firestore().doc(`trips/${props.id}`))
-  if (value && !value.exists) props.history.replace('/trips')
 
   const handleSubmit = (e: Event, form: WrappedFormUtils) => {
     e.preventDefault()
@@ -32,11 +27,11 @@ function TripEdit(props: Props) {
 
       firebase
         .firestore()
-        .doc(`trips/${props.id}`)
-        .set(data)
-        .then(() => {
+        .collection('trips')
+        .add(data)
+        .then(res => {
           setIsLoading(false)
-          props.history.replace(`/trips/${props.id}`)
+          props.history.replace(`/trips/${res.id}`)
         })
         .catch(() => console.log('failed'))
 
@@ -47,12 +42,11 @@ function TripEdit(props: Props) {
   return (
     <TripForm
       onSubmit={handleSubmit}
-      onCancel={() => props.history.push(`/trips/${props.id}`)}
-      submitText="Save"
-      loading={isLoading || loading}
-      initialTripData={value && value.data()}
+      onCancel={() => props.history.push(`/trips`)}
+      submitText="Create"
+      loading={isLoading}
     />
   )
 }
 
-export default withRouter(TripEdit)
+export default withRouter(TripCreate)
