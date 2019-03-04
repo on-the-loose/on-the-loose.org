@@ -2,6 +2,11 @@ import React from 'react'
 import { Collapse } from 'antd'
 import css from '@emotion/css'
 
+import leader_icon from '@/assets/noun_leader.svg'
+import camping_icon from '@/assets/noun_camping.svg'
+
+import { Link } from 'react-router-dom'
+
 export default function Info() {
   return (
     <div
@@ -10,6 +15,29 @@ export default function Info() {
         margin: auto;
       `}
     >
+      <div
+        css={css`
+          display: flex;
+          justify-content: center;
+          text-align: center;
+          margin-bottom: 2rem;
+        `}
+      >
+        <div css={styles.linkBox}>
+          <Link to="info/leader">
+            <img css={styles.linkIcon} src={leader_icon} alt="Leader Icon" />
+          </Link>
+          <div>Leader info</div>
+        </div>
+
+        <div css={styles.linkBox}>
+          <Link to="info/skills">
+            <img css={styles.linkIcon} src={camping_icon} alt="Camping Icon" />
+          </Link>
+          <div>Skill Tutorials</div>
+        </div>
+      </div>
+
       <Collapse accordion>
         <Collapse.Panel header={<b>What is OTL?</b>} key="1">
           On the Loose (OTL) is the outdoors club of the 5C’s! It is our mission to get as many
@@ -98,4 +126,31 @@ export default function Info() {
       </Collapse>
     </div>
   )
+}
+
+const styles = {
+  linkIcon: css`
+    width: 8rem;
+    height: 8rem;
+    filter: invert(0.4);
+
+    @media (max-width: 700px) {
+      width: 5rem;
+      height: 5rem;
+    }
+  `,
+  linkBox: css`
+    display: inline-block;
+    padding: 0.5rem;
+    border-bottom: 2px solid transparent;
+    margin: 0 2.5rem;
+    &:hover {
+      transition: border-bottom 0.5s;
+      border-bottom: 2px solid #1890ff;
+    }
+
+    @media (max-width: 700px) {
+      margin: 0 1rem;
+    }
+  `
 }
