@@ -30,7 +30,7 @@ function ProfileForm(props: Props) {
               message: ' '
             },
             {
-              pattern: /.+(@pomona\.edu|@mymail.pomona\.edu|@cmc\.edu|@hmc\.edu|@g\.hmc\.edu|@scrippscollege\.edu|@pitzer\.edu)/,
+              pattern: /.+(@pomona\.edu|@mymail.pomona\.edu|@cmc\.edu|@hmc\.edu|@g\.hmc\.edu|@scrippscollege\.edu|@pitzer\.edu|@students\.pitzer\.edu)/,
               message: 'You must use a Claremont Colleges email address.'
             }
           ]
