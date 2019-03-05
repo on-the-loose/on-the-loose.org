@@ -39,7 +39,7 @@ export default function Info() {
       </div>
 
       <Collapse accordion>
-        <Collapse.Panel header={<b>What is OTL?</b>} key="1">
+        <Collapse.Panel header={<b>What is OTL?</b>} key="otl">
           On the Loose (OTL) is the outdoors club of the 5C’s! It is our mission to get as many
           students into the outdoors as possible. This can be anywhere from Griffith Park to the
           tippy top of Mt. Whitney! This club is MEMBER LED. This is to say that all trips are
@@ -47,7 +47,7 @@ export default function Info() {
           info. Our club’s name is based on the book On the Loose by Renny and Terry Russell!
           <a href="https://www.goodreads.com/book/show/1142380.On_the_Loose"> Check it out.</a>
         </Collapse.Panel>
-        <Collapse.Panel header={<b>Trip Leaders</b>} key="7">
+        <Collapse.Panel header={<b>Trip Leaders</b>} key="trip_leaders">
           <p>
             OTL Leaders are the backbone of the club and are in charge of all OTL trips. They pick
             where to go, what to do, and get the gear and funding (to be reimbursed) that they need
@@ -65,12 +65,12 @@ export default function Info() {
             of these certifications or higher.
           </p>
         </Collapse.Panel>
-        <Collapse.Panel header={<b>OTL Staff</b>} key="2">
+        <Collapse.Panel header={<b>OTL Staff</b>} key="staff">
           Hello! We are a small team of 5C students that volunteer our time to run OTL. If you have
           any questions or suggestions for us to improve the club, we’d love to hear them. You can
           email us at <a href="mailto:otl.staff@gmail.com">otl.staff@gmail.com</a>
         </Collapse.Panel>
-        <Collapse.Panel header={<b>Difference between OTL and the OEC</b>} key="3">
+        <Collapse.Panel header={<b>Difference between OTL and the OEC</b>} key="otl_oec">
           OTL is a student club created to help students plan, lead, and enjoy trips. The OEC (
           <a href="https://www.pomona.edu/administration/outdoor-education-center">
             Outdoor Education Center
@@ -83,12 +83,12 @@ export default function Info() {
           the amazing stuff going on. The OEC is located on the first floor of Dialynas hall at
           Pomona, just east of Frary.
         </Collapse.Panel>
-        <Collapse.Panel header={<b>Gear We Lend</b>} key="5">
+        <Collapse.Panel header={<b>Gear We Lend</b>} key="gear">
           OTL and the OEC (Pomona) have a partnership that allows OTL members and any 5C students to
           check out gear at no cost. Pitzer: POA gear closet. Scripps: OWL gear closet. Harvey Mudd:
           Delta H.
         </Collapse.Panel>
-        <Collapse.Panel header={<b>Places we go</b>} key="6">
+        <Collapse.Panel header={<b>Places we go</b>} key="places">
           On the Loose sends trips all over Southern California and Southwestern States, from
           Anza-Borrego to Zion. OTL maintains an extensive guide that describes many of our favorite
           destinations. OTL-ers enjoy all types and intensities of outdoor activities including rock
@@ -96,7 +96,7 @@ export default function Info() {
           skiing/snowboarding, watercoloring, and taking photos. If you have an inkling of interest
           in the outdoors regardless of your experience, we can keep you busy.
         </Collapse.Panel>
-        <Collapse.Panel header={<b>Cars and Transportation</b>} key="8">
+        <Collapse.Panel header={<b>Cars and Transportation</b>} key="cars">
           Cars:
           <p>
             Plan ahead! Reach out to trip participants to see how many cars you have available. If
@@ -118,7 +118,11 @@ export default function Info() {
             etc depending on campus
           </p>
         </Collapse.Panel>
-        <Collapse.Panel header={<b>Contact Info</b>} key="4">
+        <Collapse.Panel header={<b>Liability Waiver</b>} key="liability_waiver">
+          For legal reasons, by signing up to a trip through the OTL website, you agree to the
+          liability waiver <Link to="info/liability">available here</Link>.
+        </Collapse.Panel>
+        <Collapse.Panel header={<b>Contact Info</b>} key="contact_info">
           Contact OTL Staff via email at
           <a href="mailto:otl.staff@gmail.com"> otl.staff@gmail.com</a>. Or stop by the OEC from 1pm
           to 8pm to catch OEC Staff on shift.

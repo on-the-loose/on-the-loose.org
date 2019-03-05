@@ -15,6 +15,7 @@ import Info from './views/info/Info'
 import css from '@emotion/css'
 import LeaderInfo from './views/info/LeaderInfo'
 import SkillsInfo from './views/info/SkillsInfo'
+import LiabilityWaiver from './views/info/LiabilityWaiver'
 
 export default function App({ user }: { user: firebase.User }) {
   const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -34,6 +35,7 @@ export default function App({ user }: { user: firebase.User }) {
           <Route path="/info" exact component={Info} />
           <Route path="/info/leader" exact component={LeaderInfo} />
           <Route path="/info/skills" exact component={SkillsInfo} />
+          <Route path="/info/liability" exact component={LiabilityWaiver} />
 
           <Route path="/trips" exact component={TripList} />
           <PrivateRoute
