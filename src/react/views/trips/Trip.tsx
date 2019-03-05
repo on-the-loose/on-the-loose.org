@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDocument } from 'react-firebase-hooks/firestore'
 import firebase from '@/firebase'
-import { Icon, Button, Modal, Input } from 'antd'
+import { Icon, Button, Modal, Input, Popover } from 'antd'
 import { withRouter } from 'react-router'
 import { RouteComponentProps } from 'react-router'
 import ReactMarkdown from 'react-markdown'
@@ -9,6 +9,7 @@ import moment from 'moment'
 import useCurrentProfile from '../../hooks/useCurrentProfile'
 import { Link } from 'react-router-dom'
 import css from '@emotion/css'
+import SignUpButton from '@/react/components/trips/SignUpButton'
 
 export interface Props extends RouteComponentProps {
   id: string
@@ -51,35 +52,11 @@ function TripInfo({ id, trip_data }) {
   const end = moment(trip_data.dates.end.toDate())
   const duration = end.diff(start, 'days')
 
-  const [isLoading, setIsLoading] = useState(false)
   const [showEmailModal, setShowEmailModal] = useState(false)
 
   const profile = useCurrentProfile()
 
-  const isSignedUp =
-    trip_data.signUps && trip_data.signUps.map(e => e.email).includes(profile.email)
   const isLeader = trip_data.leader.email == profile.email
-
-  const toggleSignUp = () => {
-    setIsLoading(true)
-
-    const operation = isSignedUp
-      ? firebase.firestore.FieldValue.arrayRemove
-      : firebase.firestore.FieldValue.arrayUnion
-
-    db.doc(`trips/${id}`)
-      .update({
-        signUps: operation({
-          email: profile.email,
-          name: profile.name,
-          confirmed: false
-        })
-      })
-      .then(res => {
-        setIsLoading(false)
-      })
-      .catch(() => console.log('failed'))
-  }
 
   const setIsConfirmed = (email, isConfirmed) => {
     const operation = !isConfirmed
@@ -89,9 +66,6 @@ function TripInfo({ id, trip_data }) {
     db.doc(`trips/${id}`)
       .update({
         confirmedParticipants: operation(email)
-      })
-      .then(res => {
-        setIsLoading(false)
       })
       .catch(() => console.log('failed'))
   }
@@ -204,13 +178,13 @@ function TripInfo({ id, trip_data }) {
         </Modal>
 
         {!isLeader && (
-          <Button
-            onClick={toggleSignUp}
-            loading={isLoading}
-            type={isSignedUp ? 'danger' : 'primary'}
-          >
-            {isSignedUp ? 'Withdraw' : 'Sign up'}
-          </Button>
+          <SignUpButton
+            isSignedUp={
+              trip_data.signUps && trip_data.signUps.map(e => e.email).includes(profile.email)
+            }
+            profile={profile}
+            tripId={id}
+          />
         )}
       </div>
     </div>
