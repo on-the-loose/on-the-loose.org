@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { RouteComponentProps } from 'react-router'
 import firebase from '@/firebase'
 import { withRouter } from 'react-router-dom'
-import { Icon } from 'antd'
+import { Spin } from 'antd'
 
 function Login(props: RouteComponentProps) {
   const [hasLoginError, setHasLoginError] = useState<boolean>(false)
@@ -55,7 +55,7 @@ function Login(props: RouteComponentProps) {
         <div>
           {' '}
           <h2 style={{ margin: '4rem' }}>Logging in</h2>
-          <Icon type="loading" style={{ fontSize: '50px' }} />
+          <Spin size="large" delay={500} />
         </div>
       )}
     </div>

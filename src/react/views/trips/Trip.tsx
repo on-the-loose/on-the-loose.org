@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDocument } from 'react-firebase-hooks/firestore'
 import firebase from '@/firebase'
-import { Icon, Button, Modal, Input, Popover } from 'antd'
+import { Icon, Button, Modal, Input, Popover, Spin } from 'antd'
 import { withRouter } from 'react-router'
 import { RouteComponentProps } from 'react-router'
 import ReactMarkdown from 'react-markdown'
@@ -30,7 +30,7 @@ function Trip(props: Props) {
   return (
     <div css={styles.container}>
       {!tripDoc ? (
-        <Icon css={styles.loadingIcon} type="loading" />
+        <Spin css={styles.spinner} size="large" delay={500} />
       ) : (
         tripDoc.exists && <TripInfo id={props.id} trip_data={tripDoc.data()} />
       )}
@@ -238,8 +238,7 @@ const styles = {
     transform: translateY(-25%);
   `,
 
-  loadingIcon: css`
-    font-size: 50px;
+  spinner: css`
     margin: auto;
     display: block;
     margin-top: 40%;

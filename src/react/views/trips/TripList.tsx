@@ -1,4 +1,4 @@
-import { Icon, Button, Switch, Divider } from 'antd'
+import { Icon, Button, Switch, Divider, Spin } from 'antd'
 
 import React, { useState, useEffect } from 'react'
 import TripCard from '../../components/trips/TripCard'
@@ -9,7 +9,6 @@ import css from '@emotion/css'
 
 // TODO pre-fetch trips
 // TODO fix top button spacing on mobile
-// TODO improve loading indicators
 // TODO add limit to trips fetched
 
 const db = firebase.firestore()
@@ -76,7 +75,7 @@ export default function Trips(props) {
 }
 
 const TripCardsList = ({ trip_docs }) => {
-  if (trip_docs == null) return <Icon type="loading" style={{ fontSize: '50px' }} />
+  if (trip_docs == null) return <Spin size="large" delay={500} />
 
   const profile = useCurrentProfile()
 
