@@ -42,27 +42,27 @@ export default function Info() {
         <Collapse.Panel header={<b>What is OTL?</b>} key="otl">
           On the Loose (OTL) is the outdoors club of the 5C’s! It is our mission to get as many
           students into the outdoors as possible. This can be anywhere from Griffith Park to the
-          tippy top of Mt. Whitney! This club is MEMBER LED. This is to say that all trips are
-          student led and planned! Join the Facebook group titled OTL and like the OTL page for more
-          info. Our club’s name is based on the book On the Loose by Renny and Terry Russell!
-          <a href="https://www.goodreads.com/book/show/1142380.On_the_Loose"> Check it out.</a>
+          tippy top of Mt. Whitney. Join the Facebook group titled OTL and like the OTL page for
+          more info. Our club’s name is based on the book On the Loose by Renny and Terry Russell,
+          <a href="https://www.goodreads.com/book/show/1142380.On_the_Loose"> check it out.</a>
         </Collapse.Panel>
         <Collapse.Panel header={<b>Trip Leaders</b>} key="trip_leaders">
           <p>
             OTL Leaders are the backbone of the club and are in charge of all OTL trips. They pick
-            where to go, what to do, and get the gear and funding (to be reimbursed) that they need
-            to make it happen. To become a leader: Attend one of OTL’s Leader Training Session
-            trips, and lead a trip!
+            where to go, what to do, and make trips happen. To become a leader you just gotta attend
+            one of OTL’s Leader Trainings, and then lead a trip.
           </p>
+        </Collapse.Panel>
+        <Collapse.Panel header={<b>First Aid Certifications</b>} key="safety">
           <p>
-            Front Country trips: (less than 3 hours from advanced medical care) that don’t involve
+            Front Country trips (less than 3 hours from advanced medical care) that don’t involve
             any high risk activities, need a leader or participant with a first aid certification or
             higher.
           </p>
           <p>
-            Backcountry trips: (more than 3 hours from advanced medical care) Though OTL leaders do
-            not need Wilderness First Aid/Responder, there must be a trip participant that with one
-            of these certifications or higher.
+            Backcountry trips (more than 3 hours from advanced medical care) need a leader or
+            participant with a Wilderness First Aid (WFA) or Wilderness First Responder (WFR)
+            certication.
           </p>
         </Collapse.Panel>
         <Collapse.Panel header={<b>OTL Staff</b>} key="staff">
@@ -119,7 +119,7 @@ export default function Info() {
           </p>
         </Collapse.Panel>
         <Collapse.Panel header={<b>Liability Waiver</b>} key="liability_waiver">
-          For legal reasons, by signing up to a trip through the OTL website, you agree to the
+          For legal reasons, by signing up to a trip through the OTL website you agree to the
           liability waiver <Link to="info/liability">available here</Link>.
         </Collapse.Panel>
         <Collapse.Panel header={<b>Contact Info</b>} key="contact_info">
