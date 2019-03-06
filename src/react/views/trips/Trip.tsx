@@ -179,6 +179,7 @@ function TripInfo({ id, trip_data }) {
           }
           profile={profile}
           tripId={id}
+          disabled={trip_data.dates.start.toDate() < Date.now()}
         />
       )}
     </div>

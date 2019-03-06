@@ -9,6 +9,7 @@ export interface Props {
   isSignedUp: boolean
   profile: Profile
   tripId: string
+  disabled?: boolean
 }
 
 export default function SignUpButton(props: Props) {
@@ -39,7 +40,7 @@ export default function SignUpButton(props: Props) {
   }
 
   return props.isSignedUp ? (
-    <Button onClick={toggleSignUp} loading={isLoading} type={'danger'}>
+    <Button onClick={toggleSignUp} loading={isLoading} type={'danger'} disabled={props.disabled}>
       Withdraw
     </Button>
   ) : (
@@ -67,6 +68,7 @@ export default function SignUpButton(props: Props) {
         loading={isLoading}
         onClick={() => setisConfirmVisible(!isConfirmVisible)}
         type={'primary'}
+        disabled={props.disabled}
       >
         Sign up
       </Button>
