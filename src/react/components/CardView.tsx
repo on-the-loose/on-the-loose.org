@@ -65,6 +65,6 @@ const styles = {
   `,
 
   content: css`
-    padding: 1rem 2rem;
+    padding: 0rem 2rem;
   `
 }

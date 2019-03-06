@@ -44,23 +44,10 @@ function TripCreate(props: Props) {
 
   return (
     <CardView>
-      <Steps
-        current={0}
-        progressDot
-        css={css`
-          margin: 3rem auto;
-        `}
-      >
-        <Steps.Step key="planning1" title="Planning Form" />
-        <Steps.Step key="planning2" title="" />
-        <Steps.Step key="planning3" title="" />
-        <Steps.Step key="public" title="Public Info" />
-        <Steps.Step key="done" title="Done!" />
-      </Steps>
       <TripForm
         onSubmit={handleSubmit}
         onCancel={() => props.history.push(`/trips`)}
-        submitText="Create"
+        submitText="Submit Trip"
         loading={isLoading}
       />
     </CardView>

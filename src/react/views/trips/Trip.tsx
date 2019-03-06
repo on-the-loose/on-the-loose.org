@@ -74,7 +74,11 @@ function TripInfo({ id, trip_data }) {
   }
 
   return (
-    <div>
+    <div
+      css={css`
+        padding: 1rem 0rem;
+      `}
+    >
       <h2>
         {trip_data.title}{' '}
         {isLeader && (
