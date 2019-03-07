@@ -73,6 +73,8 @@ function TripInfo({ id, trip_data }) {
       .catch(() => console.log('failed'))
   }
 
+  const pastTrip = trip_data.dates.start.toDate() < Date.now()
+
   return (
     <div
       css={css`
@@ -83,7 +85,9 @@ function TripInfo({ id, trip_data }) {
         {trip_data.title}{' '}
         {isLeader && (
           <Link to={`${id}/edit`}>
-            <Button style={{ float: 'right' }}>Edit Trip</Button>
+            <Button style={{ float: 'right' }} disabled={pastTrip}>
+              Edit Trip
+            </Button>
           </Link>
         )}
       </h2>
@@ -183,7 +187,7 @@ function TripInfo({ id, trip_data }) {
           }
           profile={profile}
           tripId={id}
-          disabled={trip_data.dates.start.toDate() < Date.now()}
+          disabled={pastTrip}
         />
       )}
     </div>
