@@ -19,6 +19,7 @@ function TripCreate(props: Props) {
     form.validateFields((err, values) => {
       if (err) return
 
+      values.planning = _.omitBy(values.planning, _.isUndefined)
       const data = _.omitBy(values, _.isUndefined)
 
       data.dates = { start: data.dates[0].toDate(), end: data.dates[1].toDate() }
