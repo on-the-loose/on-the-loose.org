@@ -6,7 +6,6 @@ import 'firebase/firestore'
 
 admin.initializeApp()
 const db = admin.firestore()
-db.settings({ timestampsInSnapshots: true })
 
 firebase.initializeApp({
   apiKey: 'AIzaSyCbdmTfvPp334ZhII9t2vxDACLUDJ_pfm0',
