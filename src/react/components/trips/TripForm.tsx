@@ -39,7 +39,7 @@ function TripForm(props: Props) {
 
   const handleNextClick = () => {
     if (currentStep == 1) {
-      validateFields(['planning'], errors => {
+      validateFields(['planning_info'], errors => {
         setPage1HasError(errors != null)
       })
     }
