@@ -106,6 +106,14 @@ function TripInfo({ id, trip_data }) {
       </p>
 
       <ReactMarkdown source={trip_data.description} />
+
+      {trip_data.packing_list && (
+        <div>
+          <h4>Packing list:</h4>
+          <ReactMarkdown source={trip_data.packing_list} />
+        </div>
+      )}
+
       <h3>Participants</h3>
       <ol>
         <li>

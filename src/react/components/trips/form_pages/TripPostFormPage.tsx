@@ -103,6 +103,27 @@ export default function TripPostFormPage(props: Props) {
           </Form.Item>
         </Col>
       </Row>
+      <Row gutter={16}>
+        <Col span={24}>
+          <Form.Item label="Packing List">
+            {getFieldDecorator('packing_list', {
+              initialValue: props.initialData && props.initialData.packing_list,
+              rules: [
+                {
+                  required: false
+                }
+              ]
+            })(
+              <Input.TextArea
+                rows={4}
+                placeholder={
+                  'Optional: A list of gear your participants should bring. For example:\n- Sleeping bag\n- Head lamp\n- Rain jacket'
+                }
+              />
+            )}
+          </Form.Item>
+        </Col>
+      </Row>
     </div>
   )
 }
