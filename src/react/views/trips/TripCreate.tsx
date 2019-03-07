@@ -7,8 +7,6 @@ import _ from 'lodash'
 import firebase from '@/firebase'
 import useCurrentProfile from '../../hooks/useCurrentProfile'
 import CardView from '@/react/components/CardView'
-import { Steps } from 'antd'
-import css from '@emotion/css'
 
 export interface Props extends RouteComponentProps {}
 
