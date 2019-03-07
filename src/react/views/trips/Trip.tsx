@@ -114,7 +114,16 @@ function TripInfo({ id, trip_data }) {
         </div>
       )}
 
-      <h3>Participants</h3>
+      <h3>
+        Participants{' '}
+        <span
+          css={css`
+            color: gray;
+          `}
+        >
+          ({trip_data.signUps ? trip_data.signUps.length : 0}/{trip_data.max_participants})
+        </span>
+      </h3>
       <ol>
         <li>
           <b>Leader: </b> {trip_data.leader.name}
