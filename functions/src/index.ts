@@ -1,6 +1,7 @@
 import * as functions from 'firebase-functions'
 import * as admin from 'firebase-admin'
 import * as firebase from 'firebase/app'
+import * as nodemailer from 'nodemailer'
 import 'firebase/auth'
 import 'firebase/firestore'
 
@@ -14,6 +15,16 @@ firebase.initializeApp({
   projectId: 'on-the-loose',
   storageBucket: 'on-the-loose.appspot.com',
   messagingSenderId: '816227148735'
+})
+
+const gmailEmail = functions.config().gmail.email
+const gmailPassword = functions.config().gmail.password
+const mailTransport = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: gmailEmail,
+    pass: gmailPassword
+  }
 })
 
 export const checkAccountExists = functions.https.onCall((data, context) => {
@@ -48,3 +59,41 @@ export const createAccount = functions.https.onCall((data, context) => {
 export const verifyAccount = functions.auth.user().onCreate(user => {
   return db.doc(`users/${user.email}`).update({ verified: true })
 })
+
+export const onTripCreation = functions.firestore
+  .document('trips/{tripId}')
+  .onCreate((snap, context) =>
+    sendTripDataEmail(
+      context.params.tripId,
+      snap.data(),
+      'otlstaff@gmail.com',
+      `Trip created by ${snap.data().leader.name}: ${snap.data().title}`
+    )
+  )
+
+export const onTripEdit = functions.firestore
+  .document('trips/{tripId}')
+  .onUpdate((change, context) =>
+    sendTripDataEmail(
+      context.params.tripId,
+      change.after.data(),
+      'otlstaff@gmail.com',
+      `Trip edited by ${change.after.data().leader.name}: ${change.after.data().title}`
+    )
+  )
+
+async function sendTripDataEmail(id, data, toEmail, subject) {
+  const mailOptions = {
+    from: `On The Loose <noreply@on-the-loose.org>`,
+    to: toEmail,
+    subject,
+    text: `https://on-the-loose.org/trips/${id} \n\n Planning Information: \n ${JSON.stringify(
+      data.planning_info,
+      null,
+      2
+    )}`
+  }
+
+  await mailTransport.sendMail(mailOptions)
+  console.log('Trip creation email notification sent')
+}
