@@ -36,14 +36,33 @@ function TripCreate(props: Props) {
           props.history.replace(`/trips/${res.id}`)
         })
         .catch(() => console.log('failed'))
-
-      // TODO: add error indicator
     })
   }
 
   return (
     <CardView>
       <TripForm
+        firstPageContent={
+          <div>
+            <h2 style={{ textAlign: 'center' }}>Welcome to the trip creation process!</h2>
+            <span style={{ fontSize: '1.1rem' }}>
+              <br />
+              <p>
+                To create a trip you will fill out the planning form and then create a post to
+                advertise your trip.
+              </p>
+              <p>
+                Your trip will then be reviewed by the OEC and OTL leadership withing 2 business
+                days of the posting, and they will either approve it or reach out to you with
+                comments or concerns.
+              </p>
+              <p>
+                Once your trip is approved, it will be displayed publicly on the website and other
+                students will be able to sign up.
+              </p>
+            </span>
+          </div>
+        }
         onSubmit={handleSubmit}
         onCancel={() => props.history.push(`/trips`)}
         submitText="Submit Trip"

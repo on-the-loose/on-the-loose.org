@@ -7,6 +7,7 @@ import _ from 'lodash'
 import firebase from '@/firebase'
 import useCurrentProfile from '../../hooks/useCurrentProfile'
 import { useDocument } from 'react-firebase-hooks/firestore'
+import CardView from '@/react/components/CardView'
 
 export interface Props extends RouteComponentProps {
   id: string
@@ -23,6 +24,7 @@ function TripEdit(props: Props) {
     form.validateFields((err, values) => {
       if (err) return
 
+      values.planning = _.omitBy(values.planning, _.isUndefined)
       const data = _.omitBy(values, _.isUndefined)
 
       data.dates = { start: data.dates[0].toDate(), end: data.dates[1].toDate() }
@@ -45,13 +47,29 @@ function TripEdit(props: Props) {
   }
 
   return (
-    <TripForm
-      onSubmit={handleSubmit}
-      onCancel={() => props.history.push(`/trips/${props.id}`)}
-      submitText="Save"
-      loading={isLoading || loading}
-      initialTripData={value && value.data()}
-    />
+    <CardView>
+      <TripForm
+        firstPageContent={
+          <div>
+            <h2 style={{ textAlign: 'center' }}>Editing your trip.</h2>
+            <span style={{ fontSize: '1.1rem' }}>
+              <br />
+              <p>
+                Here you'll be able to edit your trip. Once you save your changes, if the trip
+                hasn't been approved yet a notification email will be sent to the OTL and OEC so
+                that they can review the changes. Otherwise an email will be sent to trip
+                participants notifying them of the changes.
+              </p>
+            </span>
+          </div>
+        }
+        onSubmit={handleSubmit}
+        onCancel={() => props.history.push(`/trips/${props.id}`)}
+        submitText="Save"
+        loading={isLoading || loading}
+        initialData={value && value.data()}
+      />
+    </CardView>
   )
 }
 

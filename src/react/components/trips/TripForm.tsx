@@ -26,7 +26,8 @@ export interface Props extends FormComponentProps {
   submitText: string
   onCancel: () => void
   loading: boolean
-  initialTripData?: any
+  initialData?: any
+  firstPageContent: JSX.Element
 }
 
 function TripForm(props: Props) {
@@ -73,9 +74,17 @@ function TripForm(props: Props) {
         <Steps.Step key="done" title="Done!" />
       </Steps>
 
-      <WelcomePage isDisplayed={currentStep == 0} />
-      <TripPlanFormPage isDisplayed={currentStep == 1} parentForm={props.form} />
-      <TripPostFormPage isDisplayed={currentStep == 2} parentForm={props.form} />
+      <WelcomePage isDisplayed={currentStep == 0} content={props.firstPageContent} />
+      <TripPlanFormPage
+        isDisplayed={currentStep == 1}
+        parentForm={props.form}
+        initialData={props.initialData}
+      />
+      <TripPostFormPage
+        isDisplayed={currentStep == 2}
+        parentForm={props.form}
+        initialData={props.initialData}
+      />
       <DonePage isDisplayed={currentStep == 3} />
 
       <div
@@ -119,7 +128,7 @@ function TripForm(props: Props) {
   )
 }
 
-function WelcomePage({ isDisplayed }) {
+function WelcomePage({ isDisplayed, content }) {
   return (
     <div
       css={css`
@@ -127,23 +136,7 @@ function WelcomePage({ isDisplayed }) {
         display: ${!isDisplayed && 'none'};
       `}
     >
-      <h2 style={{ textAlign: 'center' }}>Welcome to the trip creation process!</h2>
-      <span style={{ fontSize: '1.1rem' }}>
-        <br />
-        <p>
-          To create a trip you will fill out the planning form and then create a post to advertise
-          your trip.
-        </p>
-        <p>
-          Your trip will then be reviewed by the OEC and OTL leadership withing 2 business days of
-          the posting, and they will either approve it or reach out to you with comments or
-          concerns.
-        </p>
-        <p>
-          Once your trip is approved, it will be displayed publicly on the website and other
-          students will be able to sign up.
-        </p>
-      </span>
+      {content}
     </div>
   )
 }
