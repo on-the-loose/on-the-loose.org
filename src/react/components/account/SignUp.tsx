@@ -32,7 +32,7 @@ export default function SignUp(props: Props) {
           account: _.omitBy(values, _.isUndefined),
           url:
             process.env.NODE_ENV == 'production'
-              ? 'https://on-the-loose.firebaseapp.com/login'
+              ? 'https://on-the-loose.org/login'
               : 'http://localhost:3000/login'
         })
         .then(res => {
