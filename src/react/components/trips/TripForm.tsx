@@ -1,5 +1,17 @@
 import React, { useState } from 'react'
-import { Button, Col, DatePicker, Form, Input, Row, InputNumber, Steps, Select } from 'antd'
+import {
+  Button,
+  Col,
+  DatePicker,
+  Form,
+  Input,
+  Row,
+  InputNumber,
+  Steps,
+  Select,
+  Popover,
+  Icon
+} from 'antd'
 
 import { FormComponentProps } from 'antd/lib/form'
 import _ from 'lodash'
@@ -7,6 +19,7 @@ import _ from 'lodash'
 import css from '@emotion/css'
 import TripPostFormPage from './form_pages/TripPostFormPage'
 import TripPlanFormPage from './form_pages/TripPlanFormPage'
+import { bool } from 'prop-types'
 
 export interface Props extends FormComponentProps {
   onSubmit: (Event, WrappedFormUtils) => void
@@ -17,9 +30,27 @@ export interface Props extends FormComponentProps {
 }
 
 function TripForm(props: Props) {
-  const { getFieldDecorator, validateFields } = props.form
+  const { validateFields } = props.form
 
   const [currentStep, setCurrentStep] = useState(0)
+  const [page1HasError, setPage1HasError] = useState(false)
+  const [page2HasError, setPage2HasError] = useState(false)
+
+  const handleNextClick = () => {
+    if (currentStep == 1) {
+      validateFields(['planning'], errors => {
+        setPage1HasError(errors != null)
+      })
+    }
+
+    if (currentStep == 2) {
+      validateFields(errors => {
+        setPage2HasError(errors != null)
+      })
+    }
+
+    setCurrentStep(currentStep + 1)
+  }
 
   return (
     <Form layout="vertical" onSubmit={e => props.onSubmit(e, props.form)}>
@@ -37,8 +68,8 @@ function TripForm(props: Props) {
         `}
       >
         <Steps.Step key="started" title="Getting Started" />
-        <Steps.Step key="planning" title="Planning Info" />
-        <Steps.Step key="public" title="Public Post" />
+        <Steps.Step key="planning" title="Planning Info" status={page1HasError ? 'error' : null} />
+        <Steps.Step key="public" title="Public Post" status={page2HasError ? 'error' : null} />
         <Steps.Step key="done" title="Done!" />
       </Steps>
 
@@ -60,15 +91,28 @@ function TripForm(props: Props) {
           {currentStep > 0 ? 'Back' : 'Cancel'}
         </Button>
         {currentStep < 3 ? (
-          <Button type="primary" onClick={() => setCurrentStep(currentStep + 1)}>
-            {/* Validate fields on last Next button */}
+          <Button type="primary" onClick={handleNextClick}>
             {currentStep == 0 ? 'Get started' : 'Next'}
           </Button>
         ) : (
-          <Button type="primary" loading={props.loading} onClick={() => alert('wow')}>
-            {/* Disable submit button if validation fails, popup message that there are errors*/}
-            {props.submitText}
-          </Button>
+          <Popover
+            content={
+              <div>
+                <Icon type="close-circle" /> There are some errors or fields missing in your form.
+              </div>
+            }
+            placement="bottom"
+            visible={page1HasError || page2HasError}
+          >
+            <Button
+              disabled={page1HasError || page2HasError}
+              type="primary"
+              loading={props.loading}
+              htmlType="submit"
+            >
+              {props.submitText}
+            </Button>
+          </Popover>
         )}
       </div>
     </Form>
