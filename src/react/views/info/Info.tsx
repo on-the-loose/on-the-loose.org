@@ -27,7 +27,7 @@ export default function Info() {
           <Link to="info/leader">
             <img css={styles.linkIcon} src={leader_icon} alt="Leader Icon" />
           </Link>
-          <div>Leader info</div>
+          <div>Leader Guide</div>
         </div>
 
         <div css={styles.linkBox}>

@@ -13,8 +13,8 @@ import TripList from './views/trips/TripList'
 import firebase from '@/firebase'
 import Info from './views/info/Info'
 import css from '@emotion/css'
-import LeaderInfo from './views/info/LeaderInfo'
-import SkillsInfo from './views/info/SkillsInfo'
+import LeaderGuide from './views/info/LeaderGuide'
+import SkillTutorials from './views/info/SkillTutorials'
 import LiabilityWaiver from './views/info/LiabilityWaiver'
 
 export default function App({ user }: { user: firebase.User }) {
@@ -33,8 +33,8 @@ export default function App({ user }: { user: firebase.User }) {
         <div css={styles.content}>
           <Route path="/" exact component={Home} />
           <Route path="/info" exact component={Info} />
-          <Route path="/info/leader" exact component={LeaderInfo} />
-          <Route path="/info/skills" exact component={SkillsInfo} />
+          <Route path="/info/leader" exact component={LeaderGuide} />
+          <Route path="/info/skills" exact component={SkillTutorials} />
           <Route path="/info/liability" exact component={LiabilityWaiver} />
 
           <Route path="/trips" exact component={TripList} />
