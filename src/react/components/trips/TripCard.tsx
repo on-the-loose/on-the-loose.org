@@ -59,7 +59,7 @@ export default function TripCard({ id, trip_data }) {
 
 const styles = {
   wrapper: css`
-    max-width: 100%;
+    width: 100%;
     display: inline-flex;
     text-align: left;
     align-items: center;
