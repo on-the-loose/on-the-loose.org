@@ -1,5 +1,4 @@
 import { Button, Form, Icon, Input } from 'antd'
-
 import { FormComponentProps } from 'antd/lib/form'
 import React, { useState } from 'react'
 import firebase from '@/firebase'
@@ -12,7 +11,6 @@ export interface Props extends FormComponentProps {
 function LoginForm(props: Props) {
   const [isLoading, setIsLoading] = useState(false)
   const [isEmailSent, setIsEmailSent] = useState(false)
-  const [promptSignup, setPromptSignup] = useState(false)
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -48,8 +46,8 @@ function LoginForm(props: Props) {
               })
           } else {
             setIsLoading(false)
-            setPromptSignup(true)
             props.setEmail(values.email)
+            props.setIsSignUp(true)
           }
         })
     })
@@ -83,21 +81,12 @@ function LoginForm(props: Props) {
               prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
               placeholder="School Email"
               onChange={() => {
-                if (promptSignup) setPromptSignup(false)
                 if (isEmailSent) setIsEmailSent(false)
               }}
             />
           )}
         </Form.Item>
-
-        {promptSignup ? (
-          <p>
-            An account doesn't exist with this email address.{' '}
-            <a href="#" onClick={() => props.setIsSignUp(true)}>
-              Sign up.
-            </a>
-          </p>
-        ) : isEmailSent ? (
+        {isEmailSent ? (
           <p>A login link has been sent to your email</p>
         ) : (
           <Button type="primary" htmlType="submit" loading={isLoading}>
