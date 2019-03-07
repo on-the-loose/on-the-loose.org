@@ -66,6 +66,11 @@ function TripForm(props: Props) {
           height: 4rem;
           padding-top: 1.5rem;
           margin-bottom: 1rem;
+
+          @media (max-width: 500px) {
+            position: relative;
+            margin-bottom: 10rem;
+          }
         `}
       >
         <Steps.Step key="started" title="Getting Started" />
