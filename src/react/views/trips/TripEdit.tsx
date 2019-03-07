@@ -55,10 +55,9 @@ function TripEdit(props: Props) {
             <span style={{ fontSize: '1.1rem' }}>
               <br />
               <p>
-                Here you'll be able to edit your trip. Once you save your changes, if the trip
-                hasn't been approved yet a notification email will be sent to the OTL and OEC so
-                that they can review the changes. Otherwise an email will be sent to trip
-                participants notifying them of the changes.
+                Here you'll be able to edit your trip. Once you save your changes, a notification
+                email will be sent to the OTL, the OEC and the signed up trip participants so that
+                they are aware of the changes.
               </p>
             </span>
           </div>

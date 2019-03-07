@@ -52,13 +52,13 @@ function TripCreate(props: Props) {
                 advertise your trip.
               </p>
               <p>
-                Your trip will then be reviewed by the OEC and OTL leadership withing 2 business
-                days of the posting, and they will either approve it or reach out to you with
-                comments or concerns.
+                The planning form won't be shown to trip participants and it's purpose is to help
+                you plan the trip.
               </p>
               <p>
-                Once your trip is approved, it will be displayed publicly on the website and other
-                students will be able to sign up.
+                The OTL leadership and the OEC will receive an email notification with the
+                information in your planning form and trip posting, and they will be able to cancel
+                your trip if the information is not complete or if there are any safety concerns.
               </p>
             </span>
           </div>
