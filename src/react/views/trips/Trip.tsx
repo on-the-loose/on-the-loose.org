@@ -116,13 +116,16 @@ function TripInfo({ id, trip_data }) {
 
       <h3>
         Participants{' '}
-        <span
-          css={css`
-            color: gray;
-          `}
-        >
-          ({trip_data.signUps ? trip_data.signUps.length : 0}/{trip_data.max_participants})
-        </span>
+        <Popover content="Confirmed participants" placement="right">
+          <span
+            css={css`
+              color: gray;
+            `}
+          >
+            ({trip_data.confirmedParticipants ? trip_data.confirmedParticipants.length + 1 : 1}/
+            {trip_data.max_participants})
+          </span>
+        </Popover>
       </h3>
       <ol>
         <li>
