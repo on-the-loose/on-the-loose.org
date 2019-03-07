@@ -4,6 +4,7 @@ import { FormComponentProps } from 'antd/lib/form'
 import React, { useState } from 'react'
 import firebase from '@/firebase'
 import ProfileForm from './ProfileForm'
+import _ from 'lodash'
 
 // TODO: handle errors
 // TODO: add cancel button
@@ -28,7 +29,7 @@ export default function SignUp(props: Props) {
       firebase
         .functions()
         .httpsCallable('createAccount')({
-          account: values,
+          account: _.omitBy(values, _.isUndefined),
           url:
             process.env.NODE_ENV == 'production'
               ? 'https://on-the-loose.firebaseapp.com/login'

@@ -136,6 +136,13 @@ function ProfileForm(props: Props) {
         )}
       </Form.Item>
 
+      <Form.Item>
+        {getFieldDecorator('dietary_restrictions', {
+          initialValue: iv ? iv.dietary_restrictions : undefined,
+          rules: [{ required: false }]
+        })(<Input disabled={props.isDisabled} size="large" placeholder="Dietary Restrictions" />)}
+      </Form.Item>
+
       {props.submitButton}
     </Form>
   )

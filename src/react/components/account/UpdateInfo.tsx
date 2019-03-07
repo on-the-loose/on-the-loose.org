@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import firebase from '@/firebase'
 import ProfileForm from './ProfileForm'
 import useCurrentProfile from '@/react/hooks/useCurrentProfile'
+import _ from 'lodash'
 
 // TODO: handle errors
 // TODO: add cancel button
@@ -27,7 +28,7 @@ export default function UpdateInfo(props) {
       firebase
         .firestore()
         .doc(`users/${profile.email}`)
-        .update(values)
+        .update(_.omitBy(values, _.isUndefined))
         .then(res => {
           setIsLoading(false)
           setIsDisabled(false)

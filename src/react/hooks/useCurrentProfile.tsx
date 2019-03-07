@@ -10,6 +10,7 @@ export interface Profile {
   school: string
   tel: number
   verified: boolean
+  dietary_restrictions?: string
 }
 
 let cachedProfile: Profile = null
