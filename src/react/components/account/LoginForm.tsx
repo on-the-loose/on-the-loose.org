@@ -26,7 +26,7 @@ function LoginForm(props: Props) {
         // URL must be whitelisted in the Firebase Console.
         url:
           process.env.NODE_ENV == 'production'
-            ? 'https://on-the-loose.firebaseapp.com/login'
+            ? 'https://on-the-loose.org/login'
             : 'http://localhost:3000/login',
         // This must be true.
         handleCodeInApp: true
@@ -100,10 +100,10 @@ function LoginForm(props: Props) {
         ) : isEmailSent ? (
           <p>A login link has been sent to your email</p>
         ) : (
-              <Button type="primary" htmlType="submit" loading={isLoading}>
-                Log in
+          <Button type="primary" htmlType="submit" loading={isLoading}>
+            Log in
           </Button>
-            )}
+        )}
       </Form>
     </div>
   )
