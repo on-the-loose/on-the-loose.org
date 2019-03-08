@@ -54,7 +54,11 @@ export default function Trips(props) {
               <Button icon="plus">Create trip</Button>
             </Link>
           </div>
-          <TripCardsList trip_docs={trips} />
+          {trips && trips.length == 0 ? (
+            <h3> No upcoming trips </h3>
+          ) : (
+            <TripCardsList trip_docs={trips} />
+          )}
           <div
             css={css`
               ${styles.buttons};
@@ -65,7 +69,13 @@ export default function Trips(props) {
               {hidePastTrips ? 'Show Past Trips' : 'Hide Past Trips'}
             </Button>
           </div>
-          {!hidePastTrips && <TripCardsList trip_docs={pastTrips} />}
+          {}
+          {!hidePastTrips &&
+            (pastTrips && pastTrips.length == 0 ? (
+              <h3> No past trips </h3>
+            ) : (
+              <TripCardsList trip_docs={pastTrips} />
+            ))}
         </div>
       ) : (
         <h2 style={{ marginTop: '4rem' }}>Login to discover trips and sign up for them!</h2>
@@ -92,8 +102,6 @@ const TripCardsList = ({ trip_docs }) => {
 
   return (
     <div css={styles.cards}>
-      {trips.length == 0 && <h3> No upcoming trips </h3>}
-
       {signed_up_trips.length + leader_trips.length > 0 && (
         <Divider orientation="left">My Trips</Divider>
       )}
