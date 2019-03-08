@@ -90,7 +90,17 @@ export default function TripPostFormPage(props: Props) {
       </Row>
       <Row gutter={16}>
         <Col span={24}>
-          <Form.Item label="Description">
+          <Form.Item
+            label={
+              <span>
+                Description (supports{' '}
+                <a href="https://commonmark.org/help/" target="blank">
+                  markdown
+                </a>
+                )
+              </span>
+            }
+          >
             {getFieldDecorator('description', {
               initialValue: props.initialData && props.initialData.description,
               rules: [
@@ -105,7 +115,17 @@ export default function TripPostFormPage(props: Props) {
       </Row>
       <Row gutter={16}>
         <Col span={24}>
-          <Form.Item label="Packing List">
+          <Form.Item
+            label={
+              <span>
+                Packing List (supports{' '}
+                <a href="https://commonmark.org/help/" target="blank">
+                  markdown
+                </a>
+                )
+              </span>
+            }
+          >
             {getFieldDecorator('packing_list', {
               initialValue: props.initialData && props.initialData.packing_list,
               rules: [
