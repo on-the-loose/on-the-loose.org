@@ -58,7 +58,7 @@ function TripCreate(props: Props) {
               <p>
                 The OTL leadership and the OEC will receive an email notification with the
                 information in your planning form and trip posting. You will be contacted if we see
-                any are problems with the information provided.
+                any problems with the information provided.
               </p>
             </span>
           </div>
