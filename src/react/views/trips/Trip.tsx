@@ -82,7 +82,7 @@ function TripInfo({ id, trip_data }) {
       `}
     >
       <h2>
-        {trip_data.title}{' '}
+        {trip_data.title}
         {isLeader && (
           <Link to={`${id}/edit`}>
             <Button style={{ float: 'right' }} disabled={pastTrip}>
@@ -91,6 +91,8 @@ function TripInfo({ id, trip_data }) {
           </Link>
         )}
       </h2>
+
+      <h3>{trip_data.destination}</h3>
 
       <p>
         {duration == 0 ? (
