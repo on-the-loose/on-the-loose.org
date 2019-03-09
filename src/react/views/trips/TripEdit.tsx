@@ -18,8 +18,14 @@ export interface Props extends RouteComponentProps {
 function TripEdit(props: Props) {
   const [isLoading, setIsLoading] = useState(false)
   const profile = useCurrentProfile()
+
   const { error, loading, value } = useDocument(firebase.firestore().doc(`trips/${props.id}`))
+  const tripData = value && value.data()
+
   if (value && !value.exists) props.history.replace('/trips')
+  if (tripData && tripData.leader.email != profile.email) {
+    props.history.replace(`/trips/${props.id}`)
+  }
 
   const handleSubmit = (e: Event, form: WrappedFormUtils) => {
     e.preventDefault()
@@ -94,7 +100,7 @@ function TripEdit(props: Props) {
         onCancel={() => props.history.push(`/trips/${props.id}`)}
         submitText="Save"
         loading={isLoading || loading}
-        initialData={value && value.data()}
+        initialData={tripData}
       />
     </CardView>
   )
