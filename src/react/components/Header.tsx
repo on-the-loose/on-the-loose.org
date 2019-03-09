@@ -53,7 +53,7 @@ const styles = {
     position: fixed;
     width: 100%;
     z-index: 10;
-    background-color: rgb(247, 242, 237, 0.95);
+    background-color: rgb(247, 242, 237);
 
     @media (max-width: 700px) {
       padding: 2rem 1rem 1.5rem 1rem;
