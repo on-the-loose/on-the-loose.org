@@ -34,6 +34,12 @@ export default function Home() {
       >
         <Gallery photos={photos} />
       </div>
+      <div css={styles.clubDescription} style={{ fontSize: '0.95rem' }}>
+        Web design and development by <a href="https://simpfish.me">Simon Posada Fishman</a>. Please
+        reach out with any feedback or comments at{' '}
+        <a href="mailto:otlstaff@gmail.com">otlstaff@gmail.com</a> or directly to Simon. This is
+        still a work in progress and we apprecitate your feedback :)
+      </div>
     </div>
   )
 }
