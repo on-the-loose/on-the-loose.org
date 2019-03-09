@@ -28,36 +28,36 @@ const mailTransport = nodemailer.createTransport({
 })
 
 export const checkAccountExists = functions.https.onCall((data, context) => {
-  // TODO: switch from 'verified' to admin.auth().getUserByEmail(email)
-  return db
-    .doc(`users/${data.email}`)
-    .get()
-    .then(value => value.exists && value.data().verified)
-    .catch(console.log)
+  return admin
+    .auth()
+    .getUserByEmail(data.email)
+    .then(_ => true)
+    .catch(_ => false)
 })
 
 export const createAccount = functions.https.onCall((data, context) => {
   data.account.bday = new Date(data.account.bday)
-  data.account.verified = false
 
   return db
     .doc(`users/${data.account.email}`)
     .get()
     .then(value => {
-      if (!(value.exists && value.data().verified))
-        return Promise.all([
-          db.doc(`users/${data.account.email}`).set(data.account),
-          firebase.auth().sendSignInLinkToEmail(data.account.email, {
+      if (value.exists) throw new Error('Account already exists')
+      console.log(`Creating account for: ${data.account.email}`)
+      return Promise.all([
+        db
+          .doc(`users/${data.account.email}`)
+          .set(data.account)
+          .then(() => console.log(`Successfully created account for: ${data.account.email}`)),
+        firebase
+          .auth()
+          .sendSignInLinkToEmail(data.account.email, {
             url: data.url,
             handleCodeInApp: true
           })
-        ])
-      else throw new Error('Account already exists')
+          .then(() => console.log(`Successfully sent first sign in link to: ${data.account.email}`))
+      ])
     })
-})
-
-export const verifyAccount = functions.auth.user().onCreate(user => {
-  return db.doc(`users/${user.email}`).update({ verified: true })
 })
 
 export const onTripCreation = functions.firestore
