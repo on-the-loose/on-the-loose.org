@@ -9425,6 +9425,11 @@ react-firebase-hooks@^0.4.0:
   resolved "https://registry.yarnpkg.com/react-firebase-hooks/-/react-firebase-hooks-0.4.0.tgz#7c12a7080dd9cbb68fed31a4f03f8cc4e623c34e"
   integrity sha512-+gOFUX80nAMaPf58B5Kjc5fxah5y1VIPMYKrliyq5xYj9/vsgknIkKPUyVv58+Ko3AbWMqR6Jqu+7HnwoMtK9w==
 
+react-ga@^2.5.7:
+  version "2.5.7"
+  resolved "https://registry.yarnpkg.com/react-ga/-/react-ga-2.5.7.tgz#1c80a289004bf84f84c26d46f3a6a6513081bf2e"
+  integrity sha512-UmATFaZpEQDO96KFjB5FRLcT6hFcwaxOmAJZnjrSiFN/msTqylq9G+z5Z8TYzN/dbamDTiWf92m6MnXXJkAivQ==
+
 react-is@^16.7.0, react-is@^16.8.1:
   version "16.8.4"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.4.tgz#90f336a68c3a29a096a3d648ab80e87ec61482a2"

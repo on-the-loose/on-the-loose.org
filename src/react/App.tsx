@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  RouteComponentProps,
+  withRouter
+} from 'react-router-dom'
 
 import Header from './components/Header'
 import Home from './views/Home'
@@ -16,6 +22,7 @@ import css from '@emotion/css'
 import LeaderGuide from './views/info/LeaderGuide'
 import SkillTutorials from './views/info/SkillTutorials'
 import LiabilityWaiver from './views/info/LiabilityWaiver'
+import ReactGA from 'react-ga'
 
 export default function App({ user }: { user: firebase.User }) {
   const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -25,9 +32,15 @@ export default function App({ user }: { user: firebase.User }) {
     />
   )
 
+  const RouteListener = withRouter((props: RouteComponentProps) => {
+    useEffect(props.history.listen(location => ReactGA.pageview(location.pathname)), [])
+    return <div />
+  })
+
   return (
     <Router>
       <div css={styles.layout}>
+        <RouteListener />
         <BackgroundImage />
         <Header user={user} />
         <div css={styles.content}>

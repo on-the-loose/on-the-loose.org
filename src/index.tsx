@@ -3,6 +3,9 @@ import React from 'react'
 import { Global, css } from '@emotion/core'
 import { render } from 'react-dom'
 import firebase from '@/firebase'
+import ReactGA from 'react-ga'
+
+ReactGA.initialize('UA-135898682-1')
 
 const renderApp = (MainComponent, user) => {
   render(
