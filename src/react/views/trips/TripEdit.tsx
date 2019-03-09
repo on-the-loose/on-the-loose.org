@@ -8,6 +8,8 @@ import firebase from '@/firebase'
 import useCurrentProfile from '../../hooks/useCurrentProfile'
 import { useDocument } from 'react-firebase-hooks/firestore'
 import CardView from '@/react/components/CardView'
+import { Button, Popover } from 'antd'
+import css from '@emotion/css'
 
 export interface Props extends RouteComponentProps {
   id: string
@@ -46,6 +48,16 @@ function TripEdit(props: Props) {
     })
   }
 
+  const handleDelete = () => {
+    firebase
+      .firestore()
+      .doc(`trips/${props.id}`)
+      .delete()
+      .then(() => {
+        props.history.replace(`/trips`)
+      })
+  }
+
   return (
     <CardView>
       <TripForm
@@ -59,6 +71,22 @@ function TripEdit(props: Props) {
                 email will be sent to the OTL, the OEC and the signed up trip participants so that
                 they are aware of the changes.
               </p>
+              <div
+                css={css`
+                  text-align: center;
+                `}
+              >
+                <Popover
+                  trigger="click"
+                  content={
+                    <Button type={'danger'} onClick={handleDelete}>
+                      Confirm
+                    </Button>
+                  }
+                >
+                  <Button type="danger">Delete Trip</Button>
+                </Popover>
+              </div>
             </span>
           </div>
         }
