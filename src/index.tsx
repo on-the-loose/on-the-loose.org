@@ -4,8 +4,14 @@ import { Global, css } from '@emotion/core'
 import { render } from 'react-dom'
 import firebase from '@/firebase'
 import ReactGA from 'react-ga'
+import * as Sentry from '@sentry/browser'
 
 ReactGA.initialize('UA-135898682-1')
+
+Sentry.init({
+  dsn: 'https://8fe2ccffd0b144d9b076ccb889f6bc36@sentry.io/1412813',
+  environment: process.env.NODE_ENV
+})
 
 const renderApp = (MainComponent, user) => {
   render(

@@ -6,7 +6,6 @@ import {
   RouteComponentProps,
   withRouter
 } from 'react-router-dom'
-
 import Header from './components/Header'
 import Home from './views/Home'
 import BackgroundImage from './components/BackgroundImage'
@@ -23,6 +22,7 @@ import LeaderGuide from './views/info/LeaderGuide'
 import SkillTutorials from './views/info/SkillTutorials'
 import LiabilityWaiver from './views/info/LiabilityWaiver'
 import ReactGA from 'react-ga'
+import ErrorBoundary from './ErrorBoundary'
 
 export default function App({ user }: { user: firebase.User }) {
   const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -38,36 +38,38 @@ export default function App({ user }: { user: firebase.User }) {
   })
 
   return (
-    <Router>
-      <div css={styles.layout}>
-        <RouteListener />
-        <BackgroundImage />
-        <Header user={user} />
-        <div css={styles.content}>
-          <Route path="/" exact component={Home} />
-          <Route path="/info" exact component={Info} />
-          <Route path="/info/leader" exact component={LeaderGuide} />
-          <Route path="/info/skills" exact component={SkillTutorials} />
-          <Route path="/info/liability" exact component={LiabilityWaiver} />
+    <ErrorBoundary>
+      <Router>
+        <div css={styles.layout}>
+          <RouteListener />
+          <BackgroundImage />
+          <Header user={user} />
+          <div css={styles.content}>
+            <Route path="/" exact component={Home} />
+            <Route path="/info" exact component={Info} />
+            <Route path="/info/leader" exact component={LeaderGuide} />
+            <Route path="/info/skills" exact component={SkillTutorials} />
+            <Route path="/info/liability" exact component={LiabilityWaiver} />
 
-          <Route path="/trips" exact component={TripList} />
-          <PrivateRoute
-            path="/trips/:id"
-            exact
-            component={({ match }) => <Trip id={match.params.id} />}
-          />
-          <PrivateRoute
-            path="/trips/:id/edit"
-            exact
-            component={({ match }) => <TripEdit id={match.params.id} />}
-          />
-          <PrivateRoute path="/create" exact component={TripCreate} />
+            <Route path="/trips" exact component={TripList} />
+            <PrivateRoute
+              path="/trips/:id"
+              exact
+              component={({ match }) => <Trip id={match.params.id} />}
+            />
+            <PrivateRoute
+              path="/trips/:id/edit"
+              exact
+              component={({ match }) => <TripEdit id={match.params.id} />}
+            />
+            <PrivateRoute path="/create" exact component={TripCreate} />
 
-          <PrivateRoute path="/profile" component={Profile} />
-          <Route path="/login" component={Login} />
+            <PrivateRoute path="/profile" component={Profile} />
+            <Route path="/login" component={Login} />
+          </div>
         </div>
-      </div>
-    </Router>
+      </Router>
+    </ErrorBoundary>
   )
 }
 
