@@ -35,33 +35,28 @@ const styles = {
   container: css`
     position: absolute;
 
-    top: 7rem;
-    bottom: 2rem;
+    top: 6rem;
     left: 10rem;
     right: 10rem;
 
     @media (max-width: 950px) {
-      top: 6rem;
-      bottom: 2rem;
       left: 5rem;
       right: 5rem;
     }
 
     @media (max-width: 750px) {
-      top: 6rem;
-      bottom: 2rem;
       left: 1rem;
       right: 1rem;
     }
 
     margin: auto;
+    margin-bottom: 2rem;
 
     background-color: white;
     border-radius: 0.5rem;
 
     max-width: 50rem;
-    max-height: 100%;
-    overflow: scroll;
+    min-height: 80%;
   `,
 
   content: css`

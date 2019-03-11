@@ -94,7 +94,7 @@ const styles = {
   `,
 
   content: css`
-    padding: 8rem 4rem 4rem 4rem;
+    padding: 3rem;
 
     @media (max-width: 700px) {
       padding: 2rem 1rem 4rem 1rem;
