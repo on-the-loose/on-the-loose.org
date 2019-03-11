@@ -94,8 +94,8 @@ async function sendTripDataEmail(id, data, toEmails, subject) {
     from: `On The Loose <noreply@on-the-loose.org>`,
     to: email,
     subject,
-    text: `https://on-the-loose.org/trips/${id} \n\n Planning Information: \n ${JSON.stringify(
-      data.planning_info,
+    text: `https://on-the-loose.org/trips/${id} \n\n Trip Information: \n\n ${JSON.stringify(
+      data,
       null,
       2
     )}`
