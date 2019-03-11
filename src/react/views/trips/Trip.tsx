@@ -131,7 +131,7 @@ function TripInfo({ id, trip_data }) {
       </h3>
       <ol>
         <li>
-          <b>Leader: </b> {trip_data.leader.name}
+          <b>Leader: </b> {trip_data.leader.name} - {trip_data.leader.email}
         </li>
         {trip_data.signUps &&
           trip_data.signUps.map(user => {
@@ -139,7 +139,12 @@ function TripInfo({ id, trip_data }) {
               trip_data.confirmedParticipants &&
               trip_data.confirmedParticipants.includes(user.email)
             return (
-              <li key={user.email}>
+              <li
+                key={user.email}
+                css={css`
+                  font-weight: ${isConfirmed ? 400 : 100};
+                `}
+              >
                 {user.name} {isConfirmed && <i> - Confirmed</i>}
                 {isLeader && (
                   <a onClick={() => setIsConfirmed(user.email, !isConfirmed)}>
