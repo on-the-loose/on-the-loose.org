@@ -6,6 +6,8 @@ import React from 'react'
 import moment from 'moment'
 import { WrappedFormUtils } from 'antd/lib/form/Form'
 
+export const EMAIL_REGEX = /.+(@pomona\.edu|@mymail.pomona\.edu|@cmc\.edu|@hmc\.edu|@g\.hmc\.edu|@scrippscollege\.edu|@pitzer\.edu|@students\.pitzer\.edu|@cgu\.edu)/
+
 export interface Props extends FormComponentProps {
   onSubmit: (e: React.FormEvent<any>, form: WrappedFormUtils) => void
   isDisabled: boolean
@@ -30,7 +32,7 @@ function ProfileForm(props: Props) {
               message: ' '
             },
             {
-              pattern: /.+(@pomona\.edu|@mymail.pomona\.edu|@cmc\.edu|@hmc\.edu|@g\.hmc\.edu|@scrippscollege\.edu|@pitzer\.edu|@students\.pitzer\.edu)/,
+              pattern: EMAIL_REGEX,
               message: 'You must use a Claremont Colleges email address.'
             }
           ]

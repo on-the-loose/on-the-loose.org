@@ -2,6 +2,7 @@ import { Button, Form, Icon, Input } from 'antd'
 import { FormComponentProps } from 'antd/lib/form'
 import React, { useState } from 'react'
 import firebase from '@/firebase'
+import { EMAIL_REGEX } from './ProfileForm'
 
 export interface Props extends FormComponentProps {
   setIsSignUp: React.Dispatch<React.SetStateAction<boolean>>
@@ -71,7 +72,7 @@ function LoginForm(props: Props) {
                 message: ' '
               },
               {
-                pattern: /.+(@pomona\.edu|@mymail.pomona\.edu|@cmc\.edu|@hmc\.edu|@g\.hmc\.edu|@scrippscollege\.edu|@pitzer\.edu|@students\.pitzer\.edu)/,
+                pattern: EMAIL_REGEX,
                 message: 'You must use a Claremont Colleges email address.'
               }
             ]
