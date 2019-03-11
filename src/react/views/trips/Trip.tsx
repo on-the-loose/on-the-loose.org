@@ -91,9 +91,7 @@ function TripInfo({ id, trip_data }) {
           </Link>
         )}
       </h2>
-
       <h3>{trip_data.destination}</h3>
-
       <p>
         {duration == 0 ? (
           'Day trip: '
@@ -106,16 +104,16 @@ function TripInfo({ id, trip_data }) {
           {start.format('ddd, MMM Do, h:mma')} - {end.format('ddd, MMM Do, h:mma')}{' '}
         </i>
       </p>
-
+      <p>
+        <b>Leader: </b> {trip_data.leader.name} - {trip_data.leader.email}
+      </p>
       <ReactMarkdown source={trip_data.description} />
-
       {trip_data.packing_list && (
         <div>
           <h4>Packing list:</h4>
           <ReactMarkdown source={trip_data.packing_list} />
         </div>
       )}
-
       <h3>
         Participants{' '}
         <Popover content="Confirmed participants" placement="right">
@@ -129,40 +127,52 @@ function TripInfo({ id, trip_data }) {
           </span>
         </Popover>
       </h3>
-      <ol>
-        <li>
-          <b>Leader: </b> {trip_data.leader.name} - {trip_data.leader.email}
-        </li>
-        {trip_data.signUps &&
-          trip_data.signUps.map(user => {
-            const isConfirmed =
-              trip_data.confirmedParticipants &&
-              trip_data.confirmedParticipants.includes(user.email)
-            return (
-              <li
-                key={user.email}
-                css={css`
-                  font-weight: ${isConfirmed ? 400 : 100};
-                `}
-              >
-                {user.name} {isConfirmed && <i> - Confirmed</i>}
-                {isLeader && (
-                  <a onClick={() => setIsConfirmed(user.email, !isConfirmed)}>
-                    {' '}
-                    {!isConfirmed ? (
-                      'Confirm'
-                    ) : (
-                      <Icon type="close" style={{ verticalAlign: 'middle', lineHeight: '1rem' }} />
+
+      <table css={styles.table}>
+        <tbody>
+          <tr>
+            <td>1. {trip_data.leader.name}</td>
+            <td css={styles.cell}>
+              <i> Confirmed</i>
+            </td>
+          </tr>
+          {trip_data.signUps &&
+            trip_data.signUps.map((user, index) => {
+              const isConfirmed =
+                trip_data.confirmedParticipants &&
+                trip_data.confirmedParticipants.includes(user.email)
+              return (
+                <tr
+                  key={user.email}
+                  css={css`
+                    font-weight: ${isConfirmed ? 400 : 100};
+                  `}
+                >
+                  <td>
+                    {index + 2}. {user.name}
+                  </td>
+                  <td css={styles.cell}>
+                    {isConfirmed && <i> Confirmed </i>}
+                    {isLeader && (
+                      <a onClick={() => setIsConfirmed(user.email, !isConfirmed)}>
+                        {!isConfirmed ? (
+                          'Confirm'
+                        ) : (
+                          <Icon
+                            type="close"
+                            style={{ verticalAlign: 'middle', lineHeight: '1rem' }}
+                          />
+                        )}
+                      </a>
                     )}
-                  </a>
-                )}
-              </li>
-            )
-          })}
-      </ol>
+                  </td>
+                </tr>
+              )
+            })}
+        </tbody>
+      </table>
 
       {isLeader && <Button onClick={() => setShowEmailModal(true)}> Email Participants </Button>}
-
       <Modal
         title="Emails"
         visible={showEmailModal}
@@ -206,7 +216,6 @@ function TripInfo({ id, trip_data }) {
           />
         </p>
       </Modal>
-
       {!isLeader && (
         <SignUpButton
           isSignedUp={
@@ -226,6 +235,13 @@ const styles = {
     margin: auto;
     display: block;
     margin-top: 40%;
+  `,
+  table: css`
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+  `,
+  cell: css`
+    padding-left: 1rem;
   `
 }
 
