@@ -35,14 +35,21 @@ export const checkAccountExists = functions.https.onCall((data, context) => {
     .catch(_ => false)
 })
 
-export const createAccount = functions.https.onCall((data, context) => {
+export const createAccount = functions.https.onCall(async (data, context) => {
   data.account.bday = new Date(data.account.bday)
+
+  let accountExists = false
+  await admin
+    .auth()
+    .getUserByEmail(data.email)
+    .then(_ => (accountExists = true))
+    .catch(_ => (accountExists = false))
 
   return db
     .doc(`users/${data.account.email}`)
     .get()
     .then(value => {
-      if (value.exists) throw new Error('Account already exists')
+      if (value.exists && accountExists) throw new Error('Account already exists')
       console.log(`Creating account for: ${data.account.email}`)
       return Promise.all([
         db
