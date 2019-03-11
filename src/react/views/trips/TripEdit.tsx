@@ -43,7 +43,7 @@ function TripEdit(props: Props) {
       firebase
         .firestore()
         .doc(`trips/${props.id}`)
-        .set(data)
+        .update(data)
         .then(() => {
           setIsLoading(false)
           props.history.replace(`/trips/${props.id}`)
