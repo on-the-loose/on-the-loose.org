@@ -73,7 +73,7 @@ export const onTripCreation = functions.firestore
     sendTripDataEmail(
       context.params.tripId,
       snap.data(),
-      'otlstaff@gmail.com',
+      ['otlstaff@gmail.com', 'oec@pomona.edu'],
       `Trip created by ${snap.data().leader.name}: ${snap.data().title}`
     )
   )
@@ -84,23 +84,23 @@ export const onTripEdit = functions.firestore
     sendTripDataEmail(
       context.params.tripId,
       change.after.data(),
-      'otlstaff@gmail.com',
+      ['otlstaff@gmail.com', 'oec@pomona.edu'],
       `Trip edited by ${change.after.data().leader.name}: ${change.after.data().title}`
     )
   )
 
-async function sendTripDataEmail(id, data, toEmail, subject) {
-  const mailOptions = {
+async function sendTripDataEmail(id, data, toEmails, subject) {
+  const mailOptions = toEmails.map(email => ({
     from: `On The Loose <noreply@on-the-loose.org>`,
-    to: toEmail,
+    to: email,
     subject,
     text: `https://on-the-loose.org/trips/${id} \n\n Planning Information: \n ${JSON.stringify(
       data.planning_info,
       null,
       2
     )}`
-  }
+  }))
 
-  await mailTransport.sendMail(mailOptions)
+  await Promise.all(mailOptions.map(options => mailTransport.sendMail(options)))
   console.log('Trip creation email notification sent')
 }
