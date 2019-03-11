@@ -78,16 +78,17 @@ export const onTripCreation = functions.firestore
     )
   )
 
-export const onTripEdit = functions.firestore
-  .document('trips/{tripId}')
-  .onUpdate((change, context) =>
-    sendTripDataEmail(
-      context.params.tripId,
-      change.after.data(),
-      ['otlstaff@gmail.com', 'oec@pomona.edu'],
-      `Trip edited by ${change.after.data().leader.name}: ${change.after.data().title}`
-    )
-  )
+// TODO: only send this if planning info is updated
+// export const onTripEdit = functions.firestore
+//   .document('trips/{tripId}')
+//   .onUpdate((change, context) =>
+//     sendTripDataEmail(
+//       context.params.tripId,
+//       change.after.data(),
+//       ['otlstaff@gmail.com', 'oec@pomona.edu'],
+//       `Trip edited by ${change.after.data().leader.name}: ${change.after.data().title}`
+//     )
+//   )
 
 async function sendTripDataEmail(id, data, toEmails, subject) {
   const mailOptions = toEmails.map(email => ({
