@@ -1,49 +1,24 @@
 import { Icon, Button, Switch, Divider, Spin } from 'antd'
 
-import React, { useState, useEffect } from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 import TripCard from '../../components/trips/TripCard'
 import firebase from '@/firebase'
 import { Link } from 'react-router-dom'
 import useCurrentProfile from '../../hooks/useCurrentProfile'
 import css from '@emotion/css'
 
-// TODO pre-fetch trips
+export interface Props {
+  trips: firebase.firestore.QueryDocumentSnapshot[]
+  pastTrips: firebase.firestore.QueryDocumentSnapshot[]
+  hidePastTrips: boolean
+  setHidePastTrips: Dispatch<SetStateAction<boolean>>
+}
+
 // TODO fix top button spacing on mobile
 // TODO add limit to trips fetched
 
-const db = firebase.firestore()
-
-export default function Trips(props) {
-  const [hidePastTrips, setHidePastTrips] = useState(true)
-  const [trips, setTrips] = useState<firebase.firestore.QueryDocumentSnapshot[]>(null)
-  const [pastTrips, setPastTrips] = useState<firebase.firestore.QueryDocumentSnapshot[]>(null)
-
+export default function Trips({ trips, pastTrips, hidePastTrips, setHidePastTrips }: Props) {
   const user = firebase.auth().currentUser
-
-  useEffect(() => {
-    if (!user) return
-
-    let trips = db
-      .collection('trips')
-      .where('dates.start', '>', firebase.firestore.Timestamp.now())
-      .orderBy('dates.start', 'asc')
-
-    const unsubscribe = trips.onSnapshot(qs => setTrips(qs.docs))
-
-    if (hidePastTrips) return () => unsubscribe()
-
-    let past_trips = db
-      .collection('trips')
-      .where('dates.start', '<', firebase.firestore.Timestamp.now())
-      .orderBy('dates.start', 'asc')
-
-    const unsubscribe_past = past_trips.onSnapshot(qs => setPastTrips(qs.docs))
-
-    return () => {
-      unsubscribe()
-      unsubscribe_past()
-    }
-  }, [hidePastTrips])
 
   return (
     <div style={{ textAlign: 'center' }}>
@@ -85,9 +60,9 @@ export default function Trips(props) {
 }
 
 const TripCardsList = ({ trip_docs }) => {
-  if (trip_docs == null) return <Spin size="large" delay={500} />
-
   const profile = useCurrentProfile()
+
+  if (trip_docs == null || profile == null) return <Spin size="large" delay={500} />
 
   const trips = trip_docs.map(doc => [doc.id, doc.data()])
   const isSignedUp = trips.map(

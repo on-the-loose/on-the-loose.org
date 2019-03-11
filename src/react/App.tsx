@@ -23,6 +23,7 @@ import SkillTutorials from './views/info/SkillTutorials'
 import LiabilityWaiver from './views/info/LiabilityWaiver'
 import ReactGA from 'react-ga'
 import ErrorBoundary from './ErrorBoundary'
+import useTrips from './hooks/useTrips'
 
 export default function App({ user }: { user: firebase.User }) {
   const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -36,6 +37,9 @@ export default function App({ user }: { user: firebase.User }) {
     useEffect(props.history.listen(location => ReactGA.pageview(location.pathname)), [])
     return <div />
   })
+
+  const [hidePastTrips, setHidePastTrips] = useState(true)
+  const [trips, pastTrips] = useTrips(user, hidePastTrips)
 
   return (
     <ErrorBoundary>
@@ -51,7 +55,18 @@ export default function App({ user }: { user: firebase.User }) {
             <Route path="/info/skills" exact component={SkillTutorials} />
             <Route path="/info/liability" exact component={LiabilityWaiver} />
 
-            <Route path="/trips" exact component={TripList} />
+            <Route
+              path="/trips"
+              exact
+              component={() => (
+                <TripList
+                  trips={trips}
+                  pastTrips={pastTrips}
+                  hidePastTrips={hidePastTrips}
+                  setHidePastTrips={setHidePastTrips}
+                />
+              )}
+            />
             <PrivateRoute
               path="/trips/:id"
               exact
