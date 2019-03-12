@@ -6,7 +6,7 @@ import React from 'react'
 import moment from 'moment'
 import { WrappedFormUtils } from 'antd/lib/form/Form'
 
-export const EMAIL_REGEX = /.+(@pomona\.edu|@mymail.pomona\.edu|@cmc\.edu|@hmc\.edu|@g\.hmc\.edu|@scrippscollege\.edu|@pitzer\.edu|@students\.pitzer\.edu|@cgu\.edu)/
+export const EMAIL_REGEX = /.+(@pomona\.edu|@mymail.pomona\.edu|@cmc\.edu|@hmc\.edu|@g\.hmc\.edu|@scrippscollege\.edu|@pitzer\.edu|@students\.pitzer\.edu|@cgu\.edu|@kgi\.edu)/
 
 export interface Props extends FormComponentProps {
   onSubmit: (e: React.FormEvent<any>, form: WrappedFormUtils) => void
@@ -112,6 +112,8 @@ function ProfileForm(props: Props) {
             <Select.Option value="cmc">Claremont Mckenna</Select.Option>
             <Select.Option value="scr">Scripps</Select.Option>
             <Select.Option value="pit">Pitzer</Select.Option>
+            <Select.Option value="cgu">CGU</Select.Option>
+            <Select.Option value="kgi">KGI</Select.Option>
           </Select>
         )}
       </Form.Item>
