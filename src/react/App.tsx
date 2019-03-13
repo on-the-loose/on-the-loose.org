@@ -11,10 +11,7 @@ import Home from './views/Home'
 import BackgroundImage from './components/BackgroundImage'
 import Login from './views/account/Login'
 import TripCreate from './views/trips/TripCreate'
-import TripEdit from './views/trips/TripEdit'
 import Profile from './views/account/Profile'
-import Trip from './views/trips/Trip'
-import TripList from './views/trips/TripList'
 import firebase from '@/firebase'
 import Info from './views/info/Info'
 import css from '@emotion/css'
@@ -23,7 +20,7 @@ import SkillTutorials from './views/info/SkillTutorials'
 import LiabilityWaiver from './views/info/LiabilityWaiver'
 import ReactGA from 'react-ga'
 import ErrorBoundary from './ErrorBoundary'
-import useTrips from './hooks/useTrips'
+import TripsRouter from './views/trips/TripsRouter'
 
 export default function App({ user }: { user: firebase.User }) {
   const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -38,9 +35,6 @@ export default function App({ user }: { user: firebase.User }) {
     return <div />
   })
 
-  const [hidePastTrips, setHidePastTrips] = useState(true)
-  const [trips, pastTrips] = useTrips(user, hidePastTrips)
-
   return (
     <ErrorBoundary>
       <Router>
@@ -50,33 +44,14 @@ export default function App({ user }: { user: firebase.User }) {
           <Header user={user} />
           <div css={styles.content}>
             <Route path="/" exact component={Home} />
+
             <Route path="/info" exact component={Info} />
             <Route path="/info/leader" exact component={LeaderGuide} />
             <Route path="/info/skills" exact component={SkillTutorials} />
             <Route path="/info/liability" exact component={LiabilityWaiver} />
 
-            <Route
-              path="/trips"
-              exact
-              component={() => (
-                <TripList
-                  trips={trips}
-                  pastTrips={pastTrips}
-                  hidePastTrips={hidePastTrips}
-                  setHidePastTrips={setHidePastTrips}
-                />
-              )}
-            />
-            <PrivateRoute
-              path="/trips/:id"
-              exact
-              component={({ match }) => <Trip id={match.params.id} />}
-            />
-            <PrivateRoute
-              path="/trips/:id/edit"
-              exact
-              component={({ match }) => <TripEdit id={match.params.id} />}
-            />
+            <TripsRouter user={user} />
+
             <PrivateRoute path="/create" exact component={TripCreate} />
 
             <PrivateRoute path="/profile" component={Profile} />
