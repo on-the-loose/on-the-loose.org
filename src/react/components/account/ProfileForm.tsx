@@ -6,6 +6,7 @@ import React from 'react'
 import moment from 'moment'
 import { WrappedFormUtils } from 'antd/lib/form/Form'
 
+// If you change this regex make sure to also change the one in the back-end (functions/src/index)
 export const EMAIL_REGEX = /.+(@pomona\.edu|@mymail.pomona\.edu|@cmc\.edu|@hmc\.edu|@g\.hmc\.edu|@scrippscollege\.edu|@pitzer\.edu|@students\.pitzer\.edu|@cgu\.edu|@kgi\.edu)/
 
 export interface Props extends FormComponentProps {

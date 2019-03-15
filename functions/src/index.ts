@@ -5,6 +5,9 @@ import * as nodemailer from 'nodemailer'
 import 'firebase/auth'
 import 'firebase/firestore'
 
+// If you change this regex make sure to also change the one in the front-end (ProfileForm.tsx)
+export const EMAIL_REGEX = /.+(@pomona\.edu|@mymail.pomona\.edu|@cmc\.edu|@hmc\.edu|@g\.hmc\.edu|@scrippscollege\.edu|@pitzer\.edu|@students\.pitzer\.edu|@cgu\.edu|@kgi\.edu)/
+
 admin.initializeApp()
 const db = admin.firestore()
 
@@ -30,39 +33,44 @@ const mailTransport = nodemailer.createTransport({
 export const checkAccountExists = functions.https.onCall((data, context) => {
   return admin
     .auth()
-    .getUserByEmail(data.email)
+    .getUserByEmail(data.email.toLowerCase())
     .then(_ => true)
     .catch(_ => false)
 })
 
 export const createAccount = functions.https.onCall(async (data, context) => {
   data.account.bday = new Date(data.account.bday)
+  const email = data.account.email.toLowerCase()
+
+  if (!EMAIL_REGEX.test(email)) {
+    throw new Error('Attempted to create account with non-5C email: ' + email)
+  }
 
   let accountExists = false
   await admin
     .auth()
-    .getUserByEmail(data.email)
+    .getUserByEmail(email)
     .then(_ => (accountExists = true))
     .catch(_ => (accountExists = false))
 
   return db
-    .doc(`users/${data.account.email}`)
+    .doc(`users/${email}`)
     .get()
     .then(value => {
       if (value.exists && accountExists) throw new Error('Account already exists')
-      console.log(`Creating account for: ${data.account.email}`)
+      console.log(`Creating account for: ${email}`)
       return Promise.all([
         db
-          .doc(`users/${data.account.email}`)
+          .doc(`users/${email}`)
           .set(data.account)
-          .then(() => console.log(`Successfully created account for: ${data.account.email}`)),
+          .then(() => console.log(`Successfully created account for: ${email}`)),
         firebase
           .auth()
-          .sendSignInLinkToEmail(data.account.email, {
+          .sendSignInLinkToEmail(email, {
             url: data.url,
             handleCodeInApp: true
           })
-          .then(() => console.log(`Successfully sent first sign in link to: ${data.account.email}`))
+          .then(() => console.log(`Successfully sent first sign in link to: ${email}`))
       ])
     })
 })
