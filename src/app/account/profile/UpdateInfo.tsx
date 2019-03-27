@@ -41,9 +41,6 @@ export default () => {
   return (
     <div>
       <ProfileForm
-        onSubmit={handleSubmit}
-        isDisabled={isDisabled}
-        initialValues={profile}
         submitButton={
           <Button
             type="primary"
@@ -54,6 +51,9 @@ export default () => {
             Update Information
           </Button>
         }
+        onSubmit={handleSubmit}
+        isDisabled={isDisabled}
+        initialValues={profile}
       />
     </div>
   )

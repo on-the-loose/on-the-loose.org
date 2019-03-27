@@ -6,8 +6,9 @@ import React from 'react'
 import moment from 'moment'
 import { WrappedFormUtils } from 'antd/lib/form/Form'
 
-// If you change this regex make sure to also change the one in the back-end (functions/src/index)
+// If you change either of these regex expressions, make sure to also change the one in the back-end too (functions/src/index)
 export const EMAIL_REGEX = /.+(@pomona\.edu|@mymail.pomona\.edu|@cmc\.edu|@hmc\.edu|@g\.hmc\.edu|@scrippscollege\.edu|@pitzer\.edu|@students\.pitzer\.edu|@cgu\.edu|@kgi\.edu)/
+export const NAME_REGEX = /^[A-Z][a-z]+( [A-Z][a-z]+)+/
 
 export interface Props extends FormComponentProps {
   onSubmit: (e: React.FormEvent<any>, form: WrappedFormUtils) => void
@@ -17,13 +18,36 @@ export interface Props extends FormComponentProps {
 }
 
 const ProfileForm: React.FC<Props> = (props: Props) => {
+// function validateName(number) {
+//   if (number === 11) {
+//     return {
+//       validateStatus: 'success',
+//       errorMsg: null
+//     }
+//   }
+//   return {
+//     validateStatus: 'error',
+//     errorMsg: 'The prime between 8 and 12 is 11!'
+//   }
+// }
   const { getFieldDecorator } = props.form
 
   const iv = props.initialValues
 
+  const formItemLayout = {
+    labelCol: {
+      xs: { span: 24 },
+      sm: { span: 8 }
+    },
+    wrapperCol: {
+      xs: { span: 24 },
+      sm: { span: 16 }
+    }
+  }
+
   return (
-    <Form onSubmit={e => props.onSubmit(e, props.form)} className="login-form">
-      <Form.Item>
+    <Form {...formItemLayout} onSubmit={e => props.onSubmit(e, props.form)} className="login-form">
+      <Form.Item label="E-mail">
         {getFieldDecorator('email', {
           initialValue: iv ? iv.email : undefined,
           rules: [
@@ -46,15 +70,25 @@ const ProfileForm: React.FC<Props> = (props: Props) => {
           />
         )}
       </Form.Item>
-
-      <Form.Item>
+      <Form.Item label="Name" validateStatus="success">
         {getFieldDecorator('name', {
           initialValue: iv ? iv.name : undefined,
           rules: [
+<<<<<<< HEAD:src/app/account/profile/ProfileForm.tsx
             { required: true, message: 'Please enter your date of birth' },
             {
               pattern: /(([A-Z])\w+ )(([A-Z])\w+ *)+/,
               message: 'Please use your full name, correctly capitalized.'
+=======
+            { required: true, message: 'Please enter your name' },
+            {
+              type: 'name',
+              message: ' '
+            },
+            {
+              pattern: NAME_REGEX,
+              message: 'First and last name, with capitalization'
+>>>>>>> simplify profile page & name regex validation:src/react/components/account/ProfileForm.tsx
             }
           ]
         })(
@@ -66,8 +100,7 @@ const ProfileForm: React.FC<Props> = (props: Props) => {
           />
         )}
       </Form.Item>
-
-      <Form.Item>
+      <Form.Item label="Birthday">
         {getFieldDecorator('bday', {
           initialValue: iv
             ? iv.bday &&
@@ -92,8 +125,7 @@ const ProfileForm: React.FC<Props> = (props: Props) => {
           />
         )}
       </Form.Item>
-
-      <Form.Item>
+      <Form.Item label="Phone Number">
         {getFieldDecorator('tel', {
           initialValue: iv ? iv.tel : undefined,
           rules: [{ required: true, message: 'Please enter your phone number' }]
@@ -107,8 +139,7 @@ const ProfileForm: React.FC<Props> = (props: Props) => {
           />
         )}
       </Form.Item>
-
-      <Form.Item>
+      <Form.Item label="School">
         {getFieldDecorator('school', {
           initialValue: iv ? iv.school : undefined,
           rules: [{ required: true, message: 'Please enter your school' }]
@@ -124,8 +155,7 @@ const ProfileForm: React.FC<Props> = (props: Props) => {
           </Select>
         )}
       </Form.Item>
-
-      <Form.Item>
+      <Form.Item label="Grad Year">
         {getFieldDecorator('gradYear', {
           initialValue: iv ? iv.gradYear : undefined,
           rules: [{ required: true, message: 'Please enter your graduation year' }]
@@ -146,8 +176,7 @@ const ProfileForm: React.FC<Props> = (props: Props) => {
           </Select>
         )}
       </Form.Item>
-
-      <Form.Item>
+      <Form.Item label="Dietary Needs">
         {getFieldDecorator('dietary_restrictions', {
           initialValue: iv ? iv.dietary_restrictions : undefined,
           rules: [{ required: false }]
