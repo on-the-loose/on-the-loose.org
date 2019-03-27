@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom'
 import css from '@emotion/css'
 import SignUpButton from '@/react/components/trips/SignUpButton'
 import CardView from '@/react/components/CardView'
+import UserInfoPopover from '@/react/components/trips/UserInfoPopover'
 
 export interface Props extends RouteComponentProps {
   id: string
@@ -115,7 +116,7 @@ function TripInfo({ id, trip_data }) {
         </div>
       )}
       <h3>
-        Participants{' '}
+        Participants
         <Popover content="Confirmed participants" placement="right">
           <span
             css={css`
@@ -131,7 +132,7 @@ function TripInfo({ id, trip_data }) {
       <table css={styles.table}>
         <tbody>
           <tr>
-            <td>1. {trip_data.leader.name}</td>
+            <td>1. Leader: {trip_data.leader.name}</td>
             <td css={styles.cell}>
               <i> Confirmed</i>
             </td>
@@ -148,9 +149,11 @@ function TripInfo({ id, trip_data }) {
                     font-weight: ${isConfirmed ? 400 : 100};
                   `}
                 >
-                  <td>
-                    {index + 2}. {user.name}
-                  </td>
+                  <UserInfoPopover email={user.email}>
+                    <td>
+                      {index + 2}. {user.name}
+                    </td>
+                  </UserInfoPopover>
                   <td css={styles.cell}>
                     {isConfirmed && <i> Confirmed </i>}
                     {isLeader && (

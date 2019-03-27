@@ -4,6 +4,8 @@ import UpdateInfoButton from '../../components/account/UpdateInfoButton'
 
 import useCurrentProfile from '../../hooks/useCurrentProfile'
 import css from '@emotion/css'
+import ProfileForm from '@/react/components/account/ProfileForm'
+import UpdateInfo from '@/react/components/account/UpdateInfo'
 
 export default function Profile() {
   const profile = useCurrentProfile()
@@ -12,6 +14,7 @@ export default function Profile() {
     <div
       css={css`
         text-align: center;
+        margin: 0 30% 0 30%;
       `}
     >
       {!profile ? (
@@ -20,9 +23,9 @@ export default function Profile() {
           <h2>Enter your profile information to get started</h2>
         </div>
       ) : (
-        <h1>{profile.name}</h1>
+        <h1>Your Profile</h1>
       )}
-      <UpdateInfoButton />
+      <UpdateInfo />
     </div>
   )
 }

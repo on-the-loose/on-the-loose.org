@@ -20,8 +20,8 @@ export default function Home() {
           also provide extensive subsidies for our adventures.
         </p>
         <p>
-          We welcome students of all ability levels. We host talks, classes and training to hone our
-          skills. Every week On the Loose is sure to have something to excite you, on campus and
+          HI We welcome students of all ability levels. We host talks, classes and training to hone
+          our skills. Every week On the Loose is sure to have something to excite you, on campus and
           off. Whatever your level of experience, we hope to see you soon on trail, in the surf, on
           the rocks, or in a big comfy couch at one of our Shindigs! Happy trails!
         </p>

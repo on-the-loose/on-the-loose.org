@@ -41,9 +41,6 @@ export default function UpdateInfo(props) {
   return (
     <div>
       <ProfileForm
-        onSubmit={handleSubmit}
-        isDisabled={isDisabled}
-        initialValues={profile}
         submitButton={
           <Button
             type="primary"
@@ -54,6 +51,9 @@ export default function UpdateInfo(props) {
             Update Information
           </Button>
         }
+        onSubmit={handleSubmit}
+        isDisabled={isDisabled}
+        initialValues={profile}
       />
     </div>
   )
