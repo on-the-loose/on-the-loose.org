@@ -50,7 +50,13 @@ function ProfileForm(props: Props) {
       <Form.Item>
         {getFieldDecorator('name', {
           initialValue: iv ? iv.name : undefined,
-          rules: [{ required: true, message: 'Please enter your date of birth' }]
+          rules: [
+            { required: true, message: 'Please enter your date of birth' },
+            {
+              pattern: /(([A-Z])\w+ )(([A-Z])\w+ *)+/,
+              message: 'Please use your full name, correctly capitalized.'
+            }
+          ]
         })(
           <Input
             disabled={props.isDisabled}
