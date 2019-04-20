@@ -22,42 +22,45 @@ export default ({ isLeader, tripData, onToggleConfirm }) => {
       <table css={styles.table}>
         <tbody>
           <tr>
-            <td>1. {tripData.leader.name}</td>
-            <td css={styles.cell}>
-              <i> Confirmed</i>
+            <td>
+              1. <b>Leader:</b> {tripData.leader.name}
             </td>
           </tr>
+
           {tripData.signUps &&
             tripData.signUps.map((user, index) => {
               const isConfirmed =
                 tripData.confirmedParticipants &&
                 tripData.confirmedParticipants.includes(user.email)
+
               return (
-                <tr
-                  key={user.email}
-                  css={css`
-                    font-weight: ${isConfirmed ? 400 : 100};
-                  `}
-                >
-                  <td>
-                    {index + 2}. {user.name}
-                  </td>
-                  <td css={styles.cell}>
-                    {isConfirmed && <i> Confirmed </i>}
-                    {isLeader && (
-                      <a onClick={() => onToggleConfirm(user, isConfirmed)}>
-                        {!isConfirmed ? (
-                          'Confirm'
-                        ) : (
-                          <Icon
-                            type="close"
-                            style={{ verticalAlign: 'middle', lineHeight: '1rem' }}
-                          />
-                        )}
-                      </a>
-                    )}
-                  </td>
-                </tr>
+                <Popover content={user.email} key={user.email} placement="right">
+                  <tr
+                    css={css`
+                      font-weight: ${isConfirmed ? 400 : 100};
+                    `}
+                  >
+                    <td>
+                      {index + 2}. {user.name}
+                    </td>
+
+                    <td css={styles.cell}>
+                      {isConfirmed && <i> Confirmed </i>}
+                      {isLeader && (
+                        <a onClick={() => onToggleConfirm(user, isConfirmed)}>
+                          {!isConfirmed ? (
+                            'Confirm'
+                          ) : (
+                            <Icon
+                              type="close"
+                              style={{ verticalAlign: 'middle', lineHeight: '1rem' }}
+                            />
+                          )}
+                        </a>
+                      )}
+                    </td>
+                  </tr>
+                </Popover>
               )
             })}
         </tbody>
