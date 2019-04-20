@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import firebase from '@/firebase'
-import { Icon, Button, Modal, Input, Popover, Spin } from 'antd'
+import { Button, Modal, Input, Spin } from 'antd'
 import { withRouter } from 'react-router'
 import { RouteComponentProps } from 'react-router'
 import ReactMarkdown from 'react-markdown'
@@ -11,6 +11,7 @@ import css from '@emotion/css'
 import SignUpButton from '@/react/components/trips/SignUpButton'
 import CardView from '@/react/components/CardView'
 import useTrip from '@/react/hooks/useTrip'
+import ParticipantList from '@/react/components/trips/ParticipantList'
 
 export interface Props extends RouteComponentProps {
   id: string
@@ -107,63 +108,12 @@ function TripInfo({ id, trip_data }) {
           <ReactMarkdown source={trip_data.packing_list} />
         </div>
       )}
-      <h3>
-        Participants{' '}
-        <Popover content="Confirmed participants" placement="right">
-          <span
-            css={css`
-              color: gray;
-            `}
-          >
-            ({trip_data.confirmedParticipants ? trip_data.confirmedParticipants.length + 1 : 1}/
-            {trip_data.max_participants})
-          </span>
-        </Popover>
-      </h3>
 
-      <table css={styles.table}>
-        <tbody>
-          <tr>
-            <td>1. {trip_data.leader.name}</td>
-            <td css={styles.cell}>
-              <i> Confirmed</i>
-            </td>
-          </tr>
-          {trip_data.signUps &&
-            trip_data.signUps.map((user, index) => {
-              const isConfirmed =
-                trip_data.confirmedParticipants &&
-                trip_data.confirmedParticipants.includes(user.email)
-              return (
-                <tr
-                  key={user.email}
-                  css={css`
-                    font-weight: ${isConfirmed ? 400 : 100};
-                  `}
-                >
-                  <td>
-                    {index + 2}. {user.name}
-                  </td>
-                  <td css={styles.cell}>
-                    {isConfirmed && <i> Confirmed </i>}
-                    {isLeader && (
-                      <a onClick={() => setIsConfirmed(user.email, !isConfirmed)}>
-                        {!isConfirmed ? (
-                          'Confirm'
-                        ) : (
-                          <Icon
-                            type="close"
-                            style={{ verticalAlign: 'middle', lineHeight: '1rem' }}
-                          />
-                        )}
-                      </a>
-                    )}
-                  </td>
-                </tr>
-              )
-            })}
-        </tbody>
-      </table>
+      <ParticipantList
+        isLeader={isLeader}
+        tripData={trip_data}
+        onToggleConfirm={(user, isConfirmed) => setIsConfirmed(user.email, !isConfirmed)}
+      />
 
       {isLeader && <Button onClick={() => setShowEmailModal(true)}> Email Participants </Button>}
       <Modal
@@ -228,13 +178,6 @@ const styles = {
     margin: auto;
     display: block;
     margin-top: 40%;
-  `,
-  table: css`
-    margin-left: 1rem;
-    margin-bottom: 1rem;
-  `,
-  cell: css`
-    padding-left: 1rem;
   `
 }
 
