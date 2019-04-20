@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { useDocument } from 'react-firebase-hooks/firestore'
 import firebase from '@/firebase'
 import { Icon, Button, Modal, Input, Popover, Spin } from 'antd'
 import { withRouter } from 'react-router'
@@ -11,20 +10,14 @@ import { Link } from 'react-router-dom'
 import css from '@emotion/css'
 import SignUpButton from '@/react/components/trips/SignUpButton'
 import CardView from '@/react/components/CardView'
+import useTrip from '@/react/hooks/useTrip'
 
 export interface Props extends RouteComponentProps {
   id: string
 }
 
 function Trip(props: Props) {
-  const [tripDoc, setTripDoc] = useState(null)
-
-  useEffect(() => {
-    return firebase
-      .firestore()
-      .doc(`trips/${props.id}`)
-      .onSnapshot(doc => setTripDoc(doc))
-  }, [])
+  const tripDoc = useTrip(props.id)
 
   if (tripDoc && !tripDoc.exists) props.history.replace('/trips')
 
