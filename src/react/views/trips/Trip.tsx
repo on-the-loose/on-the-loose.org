@@ -22,14 +22,14 @@ function Trip(props: Props) {
 
   if (tripDoc && !tripDoc.exists) props.history.replace('/trips')
 
-  const trip_data = tripDoc && tripDoc.exists && tripDoc.data()
+  const tripData = tripDoc && tripDoc.exists && tripDoc.data()
 
   return (
-    <CardView headerImage={trip_data && trip_data.image}>
-      {!trip_data ? (
+    <CardView headerImage={tripData && tripData.image}>
+      {!tripData ? (
         <Spin css={styles.spinner} size="large" delay={500} />
       ) : (
-        <TripInfo id={props.id} trip_data={trip_data} />
+        <TripInfo id={props.id} tripData={tripData} />
       )}
       <Button
         shape="circle"
@@ -42,18 +42,18 @@ function Trip(props: Props) {
   )
 }
 
-function TripInfo({ id, trip_data }) {
+function TripInfo({ id, tripData }) {
   const db = firebase.firestore()
 
-  const start = moment(trip_data.dates.start.toDate())
-  const end = moment(trip_data.dates.end.toDate())
+  const start = moment(tripData.dates.start.toDate())
+  const end = moment(tripData.dates.end.toDate())
   const duration = end.diff(start, 'days')
 
   const [showEmailModal, setShowEmailModal] = useState(false)
 
   const profile = useCurrentProfile()
 
-  const isLeader = trip_data.leader.email == profile.email
+  const isLeader = tripData.leader.email == profile.email
 
   const setIsConfirmed = (email, isConfirmed) => {
     const operation = !isConfirmed
@@ -67,7 +67,7 @@ function TripInfo({ id, trip_data }) {
       .catch(() => console.log('failed'))
   }
 
-  const pastTrip = trip_data.dates.start.toDate() < Date.now()
+  const pastTrip = tripData.dates.start.toDate() < Date.now()
 
   return (
     <div
@@ -76,7 +76,7 @@ function TripInfo({ id, trip_data }) {
       `}
     >
       <h2>
-        {trip_data.title}
+        {tripData.title}
         {isLeader && (
           <Link to={`${id}/edit`}>
             <Button style={{ float: 'right' }} disabled={pastTrip}>
@@ -85,7 +85,7 @@ function TripInfo({ id, trip_data }) {
           </Link>
         )}
       </h2>
-      <h3>{trip_data.destination}</h3>
+      <h3>{tripData.destination}</h3>
       <p>
         {duration == 0 ? (
           'Day trip: '
@@ -99,19 +99,19 @@ function TripInfo({ id, trip_data }) {
         </i>
       </p>
       <p>
-        <b>Leader: </b> {trip_data.leader.name} - {trip_data.leader.email}
+        <b>Leader: </b> {tripData.leader.name} - {tripData.leader.email}
       </p>
-      <ReactMarkdown source={trip_data.description} />
-      {trip_data.packing_list && (
+      <ReactMarkdown source={tripData.description} />
+      {tripData.packing_list && (
         <div>
           <h4>Packing list:</h4>
-          <ReactMarkdown source={trip_data.packing_list} />
+          <ReactMarkdown source={tripData.packing_list} />
         </div>
       )}
 
       <ParticipantList
         isLeader={isLeader}
-        tripData={trip_data}
+        tripData={tripData}
         onToggleConfirm={(user, isConfirmed) => setIsConfirmed(user.email, !isConfirmed)}
       />
 
@@ -128,7 +128,7 @@ function TripInfo({ id, trip_data }) {
         <p>
           <Input.TextArea
             rows={4}
-            value={trip_data.confirmedParticipants && trip_data.confirmedParticipants.join('\n')}
+            value={tripData.confirmedParticipants && tripData.confirmedParticipants.join('\n')}
           />
         </p>
 
@@ -137,14 +137,12 @@ function TripInfo({ id, trip_data }) {
           <Input.TextArea
             rows={4}
             value={
-              trip_data.signUps &&
-              trip_data.signUps
+              tripData.signUps &&
+              tripData.signUps
                 .map(x => x.email)
                 .filter(
                   x =>
-                    !(
-                      trip_data.confirmedParticipants && trip_data.confirmedParticipants.includes(x)
-                    )
+                    !(tripData.confirmedParticipants && tripData.confirmedParticipants.includes(x))
                 )
                 .join('\n')
             }
@@ -155,14 +153,14 @@ function TripInfo({ id, trip_data }) {
         <p>
           <Input.TextArea
             rows={4}
-            value={trip_data.signUps && trip_data.signUps.map(x => x.email).join('\n')}
+            value={tripData.signUps && tripData.signUps.map(x => x.email).join('\n')}
           />
         </p>
       </Modal>
       {!isLeader && (
         <SignUpButton
           isSignedUp={
-            trip_data.signUps && trip_data.signUps.map(e => e.email).includes(profile.email)
+            tripData.signUps && tripData.signUps.map(e => e.email).includes(profile.email)
           }
           profile={profile}
           tripId={id}
