@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import firebase from '@/firebase'
+import firebase from 'src/firebase'
 
 export default function useTrips(user, hidePastTrips) {
   const db = firebase.firestore()

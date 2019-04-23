@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom'
 import LoginButton from './account/LoginButton'
 import { Menu } from 'antd'
 import React from 'react'
-import firebase from '@/firebase'
-import logo from '@/assets/otl_logo_circle_lq.png'
+import firebase from 'src/firebase'
+import logo from 'src/assets/otl_logo_circle_lq.png'
 import css from '@emotion/css'
 
 export interface Props extends RouteComponentProps {

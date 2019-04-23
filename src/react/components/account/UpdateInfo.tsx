@@ -1,9 +1,9 @@
 import { Button } from 'antd'
 
 import React, { useState } from 'react'
-import firebase from '@/firebase'
+import firebase from 'src/firebase'
 import ProfileForm from './ProfileForm'
-import useCurrentProfile from '@/react/hooks/useCurrentProfile'
+import useCurrentProfile from 'src/react/hooks/useCurrentProfile'
 import _ from 'lodash'
 
 // TODO: handle errors

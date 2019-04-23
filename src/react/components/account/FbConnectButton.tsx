@@ -1,7 +1,7 @@
 import { Button } from 'antd'
 import React from 'react'
-import facebook_f from '@/assets/facebook-f.svg'
-import firebase from '@/firebase'
+import facebook_f from 'src/assets/facebook-f.svg'
+import firebase from 'src/firebase'
 import css from '@emotion/css'
 
 export default class FbConnectButton extends React.Component {

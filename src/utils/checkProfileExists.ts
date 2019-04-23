@@ -1,4 +1,4 @@
-import firebase from '@/firebase'
+import firebase from 'src/firebase'
 
 export default function checkProfileExists(uid) {
   return new Promise((resolve, reject) => {

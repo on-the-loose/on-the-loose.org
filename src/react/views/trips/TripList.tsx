@@ -2,7 +2,7 @@ import { Icon, Button, Switch, Divider, Spin } from 'antd'
 
 import React, { Dispatch, SetStateAction } from 'react'
 import TripCard from '../../components/trips/TripCard'
-import firebase from '@/firebase'
+import firebase from 'src/firebase'
 import { Link } from 'react-router-dom'
 import useCurrentProfile from '../../hooks/useCurrentProfile'
 import css from '@emotion/css'

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import firebase from '@/firebase'
+import firebase from 'src/firebase'
 
 export default id => {
   const [tripDoc, setTripDoc] = useState(null)

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Row, Col, Form, Input, DatePicker, InputNumber } from 'antd'
-import imageValidator from '@/utils/imageValidator'
+import imageValidator from 'src/utils/imageValidator'
 import moment from 'moment'
 import { FormProps } from 'antd/lib/form'
 

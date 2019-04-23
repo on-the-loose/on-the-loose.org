@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { Popover, Button } from 'antd'
 import css from '@emotion/css'
 import { Link } from 'react-router-dom'
-import firebase from '@/firebase'
-import { Profile } from '@/react/hooks/useCurrentProfile'
+import firebase from 'src/firebase'
+import { Profile } from 'src/react/hooks/useCurrentProfile'
 
 export interface Props {
   isSignedUp: boolean

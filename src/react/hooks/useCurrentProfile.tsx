@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDocument } from 'react-firebase-hooks/firestore'
-import firebase from '@/firebase'
+import firebase from 'src/firebase'
 
 export interface Profile {
   bday: firebase.firestore.Timestamp

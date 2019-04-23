@@ -1,7 +1,7 @@
 import { Form, Icon, Input, Select } from 'antd'
 
 import { FormComponentProps } from 'antd/lib/form'
-import { Profile } from '@/react/hooks/useCurrentProfile'
+import { Profile } from 'src/react/hooks/useCurrentProfile'
 import React from 'react'
 import moment from 'moment'
 import { WrappedFormUtils } from 'antd/lib/form/Form'

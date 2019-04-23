@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { RouteComponentProps } from 'react-router'
-import firebase from '@/firebase'
+import firebase from 'src/firebase'
 import { withRouter } from 'react-router-dom'
 import { Spin } from 'antd'
 

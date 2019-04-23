@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom'
-import useTrips from '@/react/hooks/useTrips'
+import useTrips from 'src/react/hooks/useTrips'
 import Trip from './Trip'
 import TripEdit from './TripEdit'
 import TripList from './TripList'

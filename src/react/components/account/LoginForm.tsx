@@ -1,7 +1,7 @@
 import { Button, Form, Icon, Input } from 'antd'
 import { FormComponentProps } from 'antd/lib/form'
 import React, { useState } from 'react'
-import firebase from '@/firebase'
+import firebase from 'src/firebase'
 import { EMAIL_REGEX } from './ProfileForm'
 
 export interface Props extends FormComponentProps {

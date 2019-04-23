@@ -2,7 +2,7 @@ import { Button } from 'antd'
 
 import { FormComponentProps } from 'antd/lib/form'
 import React, { useState } from 'react'
-import firebase from '@/firebase'
+import firebase from 'src/firebase'
 import ProfileForm from './ProfileForm'
 import _ from 'lodash'
 

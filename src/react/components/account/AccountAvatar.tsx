@@ -2,8 +2,8 @@ import { Avatar, Button, Popover } from 'antd'
 
 import { Link } from 'react-router-dom'
 import React, { useState } from 'react'
-import firebase from '@/firebase'
-import useCurrentProfile from '@/react/hooks/useCurrentProfile'
+import firebase from 'src/firebase'
+import useCurrentProfile from 'src/react/hooks/useCurrentProfile'
 
 export default function AccountAvatar(props) {
   const [showPopover, setShowPopover] = useState(false)

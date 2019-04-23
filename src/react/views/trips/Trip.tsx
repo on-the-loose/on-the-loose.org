@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import firebase from '@/firebase'
+import firebase from 'src/firebase'
 import { Button, Modal, Input, Spin } from 'antd'
 import { withRouter } from 'react-router'
 import { RouteComponentProps } from 'react-router'
@@ -8,10 +8,10 @@ import moment from 'moment'
 import useCurrentProfile from '../../hooks/useCurrentProfile'
 import { Link } from 'react-router-dom'
 import css from '@emotion/css'
-import SignUpButton from '@/react/components/trips/SignUpButton'
-import CardView from '@/react/components/CardView'
-import useTrip from '@/react/hooks/useTrip'
-import ParticipantList from '@/react/components/trips/ParticipantList'
+import SignUpButton from 'src/react/components/trips/SignUpButton'
+import CardView from 'src/react/components/CardView'
+import useTrip from 'src/react/hooks/useTrip'
+import ParticipantList from 'src/react/components/trips/ParticipantList'
 
 export interface Props extends RouteComponentProps {
   id: string
