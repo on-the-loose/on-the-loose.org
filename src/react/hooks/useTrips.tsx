@@ -22,7 +22,7 @@ export default function useTrips(user, hidePastTrips) {
     let past_trips = db
       .collection('trips')
       .where('dates.start', '<', firebase.firestore.Timestamp.now())
-      .orderBy('dates.start', 'asc')
+      .orderBy('dates.start', 'desc')
 
     const unsubscribe_past = past_trips.onSnapshot(qs => setPastTrips(qs.docs))
 
