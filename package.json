@@ -77,6 +77,6 @@
   },
   "scripts": {
     "start": "parcel public/index.html",
-    "build": "parcel build public/index.html --no-source-maps"
+    "build": "rm -rf dist; parcel build public/index.html --no-source-maps"
   }
 }
