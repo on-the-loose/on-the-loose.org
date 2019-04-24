@@ -3,7 +3,7 @@ import firebase from 'src/firebase'
 import { Button, Modal, Input, Spin } from 'antd'
 import { withRouter } from 'react-router'
 import { RouteComponentProps } from 'react-router'
-import ReactMarkdown from 'react-markdown'
+import safeHtml from 'safe-html'
 import moment from 'moment'
 import useCurrentProfile from 'src/utils/hooks/useCurrentProfile'
 import { Link } from 'react-router-dom'
@@ -101,20 +101,18 @@ const TripInfo = ({ id, tripData }) => {
       <p>
         <b>Leader: </b> {tripData.leader.name} - {tripData.leader.email}
       </p>
-      <ReactMarkdown source={tripData.description} />
+      <div dangerouslySetInnerHTML={{ __html: safeHtml(tripData.description) }} />
       {tripData.packing_list && (
         <div>
           <h4>Packing list:</h4>
-          <ReactMarkdown source={tripData.packing_list} />
+          <div dangerouslySetInnerHTML={{ __html: safeHtml(tripData.packing_list) }} />
         </div>
       )}
-
       <TripParticipants
         isLeader={isLeader}
         tripData={tripData}
         onToggleConfirm={(user, isConfirmed) => setIsConfirmed(user.email, !isConfirmed)}
       />
-
       {isLeader && <Button onClick={() => setShowEmailModal(true)}> Email Participants </Button>}
       <Modal
         title="Emails"

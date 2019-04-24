@@ -21,11 +21,13 @@ export default ({ isLeader, tripData, onToggleConfirm }) => {
 
       <table css={styles.table}>
         <tbody>
-          <tr>
-            <td>
-              1. <b>Leader:</b> {tripData.leader.name}
-            </td>
-          </tr>
+          <Popover content={tripData.leader.email} key={tripData.leader.email} placement="right">
+            <tr>
+              <td>
+                1. <b>Leader:</b> {tripData.leader.name}
+              </td>
+            </tr>
+          </Popover>
 
           {tripData.signUps &&
             tripData.signUps.map((user, index) => {

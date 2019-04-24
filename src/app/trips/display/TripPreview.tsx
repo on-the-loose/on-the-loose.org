@@ -4,6 +4,7 @@ import { css } from '@emotion/core'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 import useCurrentProfile from 'src/utils/hooks/useCurrentProfile'
+import safeHtml from 'safe-html'
 
 export default ({ id, trip_data }) => {
   const profile = useCurrentProfile()
@@ -47,7 +48,7 @@ export default ({ id, trip_data }) => {
             >
               {trip_data.destination + ' '}
             </span>
-            - {trip_data.description}
+            - <span dangerouslySetInnerHTML={{ __html: safeHtml(trip_data.description) }} />
           </div>
         </Card>
         {/* TODO Add loading state for image */}

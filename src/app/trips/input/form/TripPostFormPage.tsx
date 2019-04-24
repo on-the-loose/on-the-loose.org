@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Row, Col, Form, Input, DatePicker, InputNumber } from 'antd'
 import imageValidator from 'src/utils/imageValidator'
 import moment from 'moment'
 import { FormProps } from 'antd/lib/form'
+import ReactQuill from 'react-quill'
+import 'react-quill/dist/quill.snow.css'
 
 export interface Props {
   initialData?: any
@@ -12,6 +14,7 @@ export interface Props {
 
 export default (props: Props) => {
   const { getFieldDecorator } = props.parentForm
+  const [descriptionText, setDescriptionText] = useState('')
 
   const dates = props.initialData && [
     moment(props.initialData.dates.start.toDate()),
@@ -90,55 +93,51 @@ export default (props: Props) => {
       </Row>
       <Row gutter={16}>
         <Col span={24}>
-          <Form.Item
-            label={
-              <span>
-                Description (supports{' '}
-                <a href="https://commonmark.org/help/" target="blank">
-                  markdown
-                </a>
-                )
-              </span>
-            }
-          >
+          <Form.Item label={<span>Description</span>}>
             {getFieldDecorator('description', {
               initialValue: props.initialData && props.initialData.description,
+              getValueProps: value => ({ value: value == null ? '' : value }),
+              valuePropName: 'value',
               rules: [
                 {
                   required: true,
                   message: 'Enter a description for your trip'
                 }
               ]
-            })(<Input.TextArea rows={4} placeholder="Details about your trip" />)}
+            })(
+              <ReactQuill
+                modules={{
+                  toolbar: [
+                    ['bold', 'italic', 'underline'],
+                    [{ list: 'ordered' }, { list: 'bullet' }],
+                    ['link']
+                  ]
+                }}
+              />
+            )}
           </Form.Item>
         </Col>
       </Row>
       <Row gutter={16}>
         <Col span={24}>
-          <Form.Item
-            label={
-              <span>
-                Packing List (supports{' '}
-                <a href="https://commonmark.org/help/" target="blank">
-                  markdown
-                </a>
-                )
-              </span>
-            }
-          >
+          <Form.Item label={<span>Packing List</span>}>
             {getFieldDecorator('packing_list', {
               initialValue: props.initialData && props.initialData.packing_list,
+              getValueProps: value => ({ value: value == null ? '' : value }),
               rules: [
                 {
                   required: false
                 }
               ]
             })(
-              <Input.TextArea
-                rows={4}
-                placeholder={
-                  'Optional: A list of gear your participants should bring. For example:\n- Sleeping bag\n- Head lamp\n- Rain jacket'
-                }
+              <ReactQuill
+                modules={{
+                  toolbar: [
+                    ['bold', 'italic', 'underline'],
+                    [{ list: 'ordered' }, { list: 'bullet' }],
+                    ['link']
+                  ]
+                }}
               />
             )}
           </Form.Item>
