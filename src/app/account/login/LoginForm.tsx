@@ -2,14 +2,14 @@ import { Button, Form, Icon, Input } from 'antd'
 import { FormComponentProps } from 'antd/lib/form'
 import React, { useState } from 'react'
 import firebase from 'src/firebase'
-import { EMAIL_REGEX } from './ProfileForm'
+import { EMAIL_REGEX } from '../profile/ProfileForm'
 
 export interface Props extends FormComponentProps {
   setIsSignUp: React.Dispatch<React.SetStateAction<boolean>>
   setEmail: (string) => void
 }
 
-function LoginForm(props: Props) {
+const LoginForm: React.FC<Props> = (props: Props) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isEmailSent, setIsEmailSent] = useState(false)
 
@@ -26,7 +26,7 @@ function LoginForm(props: Props) {
         url:
           process.env.NODE_ENV == 'production'
             ? 'https://on-the-loose.org/login'
-            : 'http://localhost:3000/login',
+            : 'http://localhost:1234/login',
         // This must be true.
         handleCodeInApp: true
       }
@@ -99,4 +99,4 @@ function LoginForm(props: Props) {
   )
 }
 
-export default Form.create()(LoginForm)
+export default Form.create<Props>()(LoginForm)

@@ -2,7 +2,7 @@ import { Button, Modal } from 'antd'
 
 import LoginForm from './LoginForm'
 import React, { useState } from 'react'
-import SignUp from './SignUp'
+import SignUp from '../SignUp'
 
 export interface State {
   visible: boolean

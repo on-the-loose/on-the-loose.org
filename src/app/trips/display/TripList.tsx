@@ -1,10 +1,10 @@
 import { Icon, Button, Switch, Divider, Spin } from 'antd'
 
 import React, { Dispatch, SetStateAction } from 'react'
-import TripCard from '../../components/trips/TripCard'
+import TripPreview from 'src/app/trips/display/TripPreview'
 import firebase from 'src/firebase'
 import { Link } from 'react-router-dom'
-import useCurrentProfile from '../../hooks/useCurrentProfile'
+import useCurrentProfile from 'src/utils/hooks/useCurrentProfile'
 import css from '@emotion/css'
 
 export interface Props {
@@ -32,7 +32,7 @@ export default function Trips({ trips, pastTrips, hidePastTrips, setHidePastTrip
           {trips && trips.length == 0 ? (
             <h3> No upcoming trips </h3>
           ) : (
-            <TripCardsList trip_docs={trips} />
+            <TripPreviewsList trip_docs={trips} />
           )}
           <div
             css={css`
@@ -49,7 +49,7 @@ export default function Trips({ trips, pastTrips, hidePastTrips, setHidePastTrip
             (pastTrips && pastTrips.length == 0 ? (
               <h3> No past trips </h3>
             ) : (
-              <TripCardsList trip_docs={pastTrips} />
+              <TripPreviewsList trip_docs={pastTrips} />
             ))}
         </div>
       ) : (
@@ -59,7 +59,7 @@ export default function Trips({ trips, pastTrips, hidePastTrips, setHidePastTrip
   )
 }
 
-const TripCardsList = ({ trip_docs }) => {
+const TripPreviewsList = ({ trip_docs }) => {
   const profile = useCurrentProfile()
 
   if (trip_docs == null || profile == null) return <Spin size="large" delay={500} />
@@ -83,12 +83,12 @@ const TripCardsList = ({ trip_docs }) => {
 
       {leader_trips.map(([id, trip_data]) => (
         <div key={id} style={{ marginBottom: '1rem' }}>
-          <TripCard trip_data={trip_data} id={id} />
+          <TripPreview trip_data={trip_data} id={id} />
         </div>
       ))}
       {signed_up_trips.map(([id, trip_data]) => (
         <div key={id} style={{ marginBottom: '1rem' }}>
-          <TripCard trip_data={trip_data} id={id} />
+          <TripPreview trip_data={trip_data} id={id} />
         </div>
       ))}
 
@@ -98,7 +98,7 @@ const TripCardsList = ({ trip_docs }) => {
 
       {other_trips.map(([id, trip_data]) => (
         <div key={id} style={{ marginBottom: '1rem' }}>
-          <TripCard trip_data={trip_data} id={id} />
+          <TripPreview trip_data={trip_data} id={id} />
         </div>
       ))}
     </div>

@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 
-import TripForm from '../../components/trips/TripForm'
+import TripForm from './form/TripForm'
 import { WrappedFormUtils } from 'antd/lib/form/Form'
 import _ from 'lodash'
 import firebase from 'src/firebase'
-import useCurrentProfile from '../../hooks/useCurrentProfile'
-import CardView from 'src/react/components/CardView'
+import useCurrentProfile from 'src/utils/hooks/useCurrentProfile'
+import CardView from 'src/app/_common/CardView'
 
 export interface Props extends RouteComponentProps {}
 

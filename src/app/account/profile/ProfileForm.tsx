@@ -1,7 +1,7 @@
 import { Form, Icon, Input, Select } from 'antd'
 
 import { FormComponentProps } from 'antd/lib/form'
-import { Profile } from 'src/react/hooks/useCurrentProfile'
+import { Profile } from 'src/utils/hooks/useCurrentProfile'
 import React from 'react'
 import moment from 'moment'
 import { WrappedFormUtils } from 'antd/lib/form/Form'
@@ -16,7 +16,7 @@ export interface Props extends FormComponentProps {
   initialValues?: Profile
 }
 
-function ProfileForm(props: Props) {
+const ProfileForm: React.FC<Props> = (props: Props) => {
   const { getFieldDecorator } = props.form
 
   const iv = props.initialValues
@@ -159,4 +159,4 @@ function ProfileForm(props: Props) {
   )
 }
 
-export default Form.create()(ProfileForm)
+export default Form.create<Props>()(ProfileForm)

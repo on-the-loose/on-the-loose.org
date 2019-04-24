@@ -5,13 +5,13 @@ import { withRouter } from 'react-router'
 import { RouteComponentProps } from 'react-router'
 import ReactMarkdown from 'react-markdown'
 import moment from 'moment'
-import useCurrentProfile from '../../hooks/useCurrentProfile'
+import useCurrentProfile from 'src/utils/hooks/useCurrentProfile'
 import { Link } from 'react-router-dom'
 import css from '@emotion/css'
-import SignUpButton from 'src/react/components/trips/SignUpButton'
-import CardView from 'src/react/components/CardView'
-import useTrip from 'src/react/hooks/useTrip'
-import ParticipantList from 'src/react/components/trips/ParticipantList'
+import TripSignUpButton from 'src/app/trips/display/TripSignUpButton'
+import CardView from 'src/app/_common/CardView'
+import useTrip from 'src/utils/hooks/useTrip'
+import TripParticipants from 'src/app/trips/display/TripParticipants'
 
 export interface Props extends RouteComponentProps {
   id: string
@@ -109,7 +109,7 @@ function TripInfo({ id, tripData }) {
         </div>
       )}
 
-      <ParticipantList
+      <TripParticipants
         isLeader={isLeader}
         tripData={tripData}
         onToggleConfirm={(user, isConfirmed) => setIsConfirmed(user.email, !isConfirmed)}
@@ -158,7 +158,7 @@ function TripInfo({ id, tripData }) {
         </p>
       </Modal>
       {!isLeader && (
-        <SignUpButton
+        <TripSignUpButton
           isSignedUp={
             tripData.signUps && tripData.signUps.map(e => e.email).includes(profile.email)
           }

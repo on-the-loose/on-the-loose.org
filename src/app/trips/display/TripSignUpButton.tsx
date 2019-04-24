@@ -3,7 +3,7 @@ import { Popover, Button } from 'antd'
 import css from '@emotion/css'
 import { Link } from 'react-router-dom'
 import firebase from 'src/firebase'
-import { Profile } from 'src/react/hooks/useCurrentProfile'
+import { Profile } from 'src/utils/hooks/useCurrentProfile'
 
 export interface Props {
   isSignedUp: boolean

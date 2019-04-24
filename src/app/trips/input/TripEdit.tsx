@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 
-import TripForm from '../../components/trips/TripForm'
+import TripForm from 'src/app/trips/input/form/TripForm'
 import { WrappedFormUtils } from 'antd/lib/form/Form'
 import _ from 'lodash'
 import firebase from 'src/firebase'
-import useCurrentProfile from '../../hooks/useCurrentProfile'
+import useCurrentProfile from 'src/utils/hooks/useCurrentProfile'
 import { useDocument } from 'react-firebase-hooks/firestore'
-import CardView from 'src/react/components/CardView'
+import CardView from 'src/app/_common/CardView'
 import { Button, Popover } from 'antd'
 import css from '@emotion/css'
 

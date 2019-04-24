@@ -1,25 +1,10 @@
 import React, { useState } from 'react'
-import {
-  Button,
-  Col,
-  DatePicker,
-  Form,
-  Input,
-  Row,
-  InputNumber,
-  Steps,
-  Select,
-  Popover,
-  Icon
-} from 'antd'
-
+import { Button, Form, Steps, Popover, Icon } from 'antd'
 import { FormComponentProps } from 'antd/lib/form'
 import _ from 'lodash'
-
 import css from '@emotion/css'
-import TripPostFormPage from './form_pages/TripPostFormPage'
-import TripPlanFormPage from './form_pages/TripPlanFormPage'
-import { bool } from 'prop-types'
+import TripPostFormPage from './TripPostFormPage'
+import TripPlanFormPage from './TripPlanFormPage'
 
 export interface Props extends FormComponentProps {
   onSubmit: (Event, WrappedFormUtils) => void
@@ -30,7 +15,7 @@ export interface Props extends FormComponentProps {
   firstPageContent: JSX.Element
 }
 
-function TripForm(props: Props) {
+const TripForm: React.FC<Props> = (props: Props) => {
   const { validateFields } = props.form
 
   const [currentStep, setCurrentStep] = useState(0)
@@ -173,4 +158,4 @@ const styles = {
   `
 }
 
-export default Form.create()(TripForm)
+export default Form.create<Props>()(TripForm)

@@ -3,7 +3,7 @@ import React from 'react'
 import { css } from '@emotion/core'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
-import useCurrentProfile from 'src/react/hooks/useCurrentProfile'
+import useCurrentProfile from 'src/utils/hooks/useCurrentProfile'
 
 export default function TripCard({ id, trip_data }) {
   const profile = useCurrentProfile()

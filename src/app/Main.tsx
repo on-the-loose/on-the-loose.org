@@ -6,21 +6,21 @@ import {
   RouteComponentProps,
   withRouter
 } from 'react-router-dom'
-import Header from './components/Header'
-import Home from './views/Home'
-import BackgroundImage from './components/BackgroundImage'
-import Login from './views/account/Login'
-import TripCreate from './views/trips/TripCreate'
-import Profile from './views/account/Profile'
+import Header from './_common/Header'
+import Home from './Home'
+import BackgroundImage from './_common/BackgroundImage'
+import Login from './account/login/Login'
+import TripCreate from './trips/input/TripCreate'
+import Profile from './account/profile/Profile'
 import firebase from 'src/firebase'
-import Info from './views/info/Info'
+import Info from './info/Info'
 import css from '@emotion/css'
-import LeaderGuide from './views/info/LeaderGuide'
-import SkillTutorials from './views/info/SkillTutorials'
-import LiabilityWaiver from './views/info/LiabilityWaiver'
+import LeaderGuide from './info/LeaderGuide'
+import SkillTutorials from './info/SkillTutorials'
+import LiabilityWaiver from './info/LiabilityWaiver'
 import ReactGA from 'react-ga'
-import ErrorBoundary from './ErrorBoundary'
-import TripsRouter from './views/trips/TripsRouter'
+import ErrorBoundary from './_common/ErrorBoundary'
+import TripsRouter from './trips/TripsRouter'
 
 export default function App({ user }: { user: firebase.User }) {
   const PrivateRoute = ({ component: Component, ...rest }) => (

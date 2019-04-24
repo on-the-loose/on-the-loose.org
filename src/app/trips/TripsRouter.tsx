@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom'
-import useTrips from 'src/react/hooks/useTrips'
-import Trip from './Trip'
-import TripEdit from './TripEdit'
-import TripList from './TripList'
+import useTrips from 'src/utils/hooks/useTrips'
+import Trip from './display/Trip'
+import TripEdit from './input/TripEdit'
+import TripList from './display/TripList'
 
 export default function TripsRouter({ user }: { user: firebase.User }) {
   const PrivateRoute = ({ component: Component, ...rest }) => (

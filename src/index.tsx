@@ -1,4 +1,4 @@
-import App from './react/App'
+import App from './app/Main'
 import React from 'react'
 import { Global, css } from '@emotion/core'
 import { render } from 'react-dom'
@@ -40,8 +40,8 @@ firebase.auth().onAuthStateChanged(u => {
 //@ts-ignore
 if (module.hot) {
   //@ts-ignore
-  module.hot.accept('./react/App', () => {
-    renderApp(require('./react/App').default, user)
+  module.hot.accept('./app/Main', () => {
+    renderApp(require('./app/Main').default, user)
   })
 }
 

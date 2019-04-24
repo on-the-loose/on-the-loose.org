@@ -3,7 +3,7 @@ import { Button } from 'antd'
 import { FormComponentProps } from 'antd/lib/form'
 import React, { useState } from 'react'
 import firebase from 'src/firebase'
-import ProfileForm from './ProfileForm'
+import ProfileForm from './profile/ProfileForm'
 import _ from 'lodash'
 
 // TODO: handle errors

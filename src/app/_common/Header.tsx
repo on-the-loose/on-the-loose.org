@@ -1,8 +1,8 @@
 import { RouteComponentProps, withRouter } from 'react-router'
 
-import AccountAvatar from './account/AccountAvatar'
+import UserAvatar from '../account/UserAvatar'
 import { Link } from 'react-router-dom'
-import LoginButton from './account/LoginButton'
+import LoginButton from '../account/login/LoginButton'
 import { Menu } from 'antd'
 import React from 'react'
 import firebase from 'src/firebase'
@@ -33,7 +33,7 @@ function Header(props: Props) {
         </Menu.Item>
       </Menu>
 
-      {props.user ? <AccountAvatar /> : <LoginButton>LOGIN</LoginButton>}
+      {props.user ? <UserAvatar /> : <LoginButton>LOGIN</LoginButton>}
     </div>
   )
 }
