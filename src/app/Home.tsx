@@ -35,10 +35,9 @@ export default () => {
         <Gallery photos={photos} />
       </div>
       <div css={styles.clubDescription} style={{ fontSize: '0.95rem' }}>
-        Web design and development by <a href="https://simpfish.me">Simon Posada Fishman</a>. Please
-        reach out with any feedback or comments at{' '}
-        <a href="mailto:otlstaff@gmail.com">otlstaff@gmail.com</a> or directly to Simon. This is
-        still a work in progress and we apprecitate your feedback :)
+        Designed and developed with ❤ by the OTL staff. We appreciate all feedback, suggestions or
+        comments. Reach out to us at <a href="mailto:otlstaff@gmail.com">otlstaff@gmail.com</a> or
+        directly to our lead developer <a href="https://simpfish.me">Simon</a>.
       </div>
     </div>
   )
