@@ -48,6 +48,8 @@ And you're ready to go! Point your browser to http://localhost:1234 to see the w
 
 We recommend that you use [VSCode](https://code.visualstudio.com/) as an editor because of its top notch autocomplete and linting for TypeScript. Additionally, the use of [prettier](https://prettier.io/) to automatically format the code is also highly encouraged to keep the code nice and clean.
 
+<!-- TODO: add deployment instructions -->
+
 ## Example component
 
 The general structure of a component in this codebase looks like this:
