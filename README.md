@@ -44,7 +44,7 @@ Then follow these steps to start developing:
 3. Run `yarn; cd functions; npm i; cd ..` to install all the necessary dependencies.
 4. Run `yarn start` to start the development server.
 
-And you're ready to go! Point your browser to http://localhost:3000 to see the website. The page will automatically reload when you make changes in the code.
+And you're ready to go! Point your browser to http://localhost:1234 to see the website. The page will automatically reload when you make changes in the code.
 
 We recommend that you use [VSCode](https://code.visualstudio.com/) as an editor because of its top notch autocomplete and linting for TypeScript. Additionally, the use of [prettier](https://prettier.io/) to automatically format the code is also highly encouraged to keep the code nice and clean.
 
