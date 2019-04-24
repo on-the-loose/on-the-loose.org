@@ -9,7 +9,7 @@ import _ from 'lodash'
 // TODO: handle errors
 // TODO: add cancel button
 
-export default function UpdateInfo(props) {
+export default () => {
   const [isLoading, setIsLoading] = useState(false)
   const [isDisabled, setIsDisabled] = useState(false)
 

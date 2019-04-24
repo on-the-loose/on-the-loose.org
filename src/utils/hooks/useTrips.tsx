@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import firebase from 'src/firebase'
 
-export default function useTrips(user, hidePastTrips) {
+export default (user, hidePastTrips) => {
   const db = firebase.firestore()
 
   const [trips, setTrips] = useState<firebase.firestore.QueryDocumentSnapshot[]>(null)

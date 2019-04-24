@@ -17,7 +17,8 @@ export interface Props {
 // TODO fix top button spacing on mobile
 // TODO add limit to trips fetched
 
-export default function Trips({ trips, pastTrips, hidePastTrips, setHidePastTrips }: Props) {
+export default (props: Props) => {
+  const { trips, pastTrips, hidePastTrips, setHidePastTrips } = props
   const user = firebase.auth().currentUser
 
   return (

@@ -1,12 +1,11 @@
 import React, { PropsWithChildren } from 'react'
 import css from '@emotion/css'
-import { Button } from 'antd'
 
 export interface Props {
   headerImage?: string
 }
 
-export default function CardView(props: PropsWithChildren<Props>) {
+export default (props: PropsWithChildren<Props>) => {
   return (
     <div css={styles.container}>
       {props.headerImage && (

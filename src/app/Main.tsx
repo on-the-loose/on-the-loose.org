@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import {
   BrowserRouter as Router,
   Redirect,
@@ -21,13 +21,13 @@ import LiabilityWaiver from './info/LiabilityWaiver'
 import ReactGA from 'react-ga'
 import ErrorBoundary from './_common/ErrorBoundary'
 import TripsRouter from './trips/TripsRouter'
+import { Global } from '@emotion/core'
 
-export default function App({ user }: { user: firebase.User }) {
+export default () => {
+  const user = firebase.auth().currentUser
+
   const PrivateRoute = ({ component: Component, ...rest }) => (
-    <Route
-      {...rest}
-      render={props => (user != null ? <Component {...props} /> : <Redirect to="/" />)}
-    />
+    <Route {...rest} render={p => (user != null ? <Component {...p} /> : <Redirect to="/" />)} />
   )
 
   const RouteListener = withRouter((props: RouteComponentProps) => {
@@ -37,11 +37,18 @@ export default function App({ user }: { user: firebase.User }) {
 
   return (
     <ErrorBoundary>
+      <Global
+        styles={css`
+          body {
+            background-color: rgb(247, 242, 237);
+          }
+        `}
+      />
       <Router>
         <div css={styles.layout}>
           <RouteListener />
           <BackgroundImage />
-          <Header user={user} />
+          <Header />
           <div css={styles.content}>
             <Route path="/" exact component={Home} />
 
@@ -50,7 +57,7 @@ export default function App({ user }: { user: firebase.User }) {
             <Route path="/info/skills" exact component={SkillTutorials} />
             <Route path="/info/liability" exact component={LiabilityWaiver} />
 
-            <TripsRouter user={user} />
+            <TripsRouter />
 
             <PrivateRoute path="/create" exact component={TripCreate} />
 

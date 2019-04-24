@@ -4,7 +4,7 @@ import firebase from 'src/firebase'
 import { withRouter } from 'react-router-dom'
 import { Spin } from 'antd'
 
-function Login(props: RouteComponentProps) {
+export default withRouter((props: RouteComponentProps) => {
   const [hasLoginError, setHasLoginError] = useState<boolean>(false)
 
   useEffect(() => {
@@ -60,6 +60,4 @@ function Login(props: RouteComponentProps) {
       )}
     </div>
   )
-}
-
-export default withRouter(Login)
+})

@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import firebase from 'src/firebase'
 import useCurrentProfile from 'src/utils/hooks/useCurrentProfile'
 
-export default function AccountAvatar(props) {
+export default () => {
   const [showPopover, setShowPopover] = useState(false)
 
   const handleSignOut = () => {

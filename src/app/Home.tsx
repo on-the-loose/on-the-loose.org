@@ -3,7 +3,7 @@ import css from '@emotion/css'
 import Gallery from 'react-photo-gallery'
 import _ from 'lodash'
 
-export default function Home() {
+export default () => {
   return (
     <div>
       <div css={styles.clubTitle}>On The Loose</div>

@@ -5,7 +5,7 @@ import UpdateInfoButton from 'src/app/account/profile/UpdateInfoButton'
 import useCurrentProfile from 'src/utils/hooks/useCurrentProfile'
 import css from '@emotion/css'
 
-export default function Profile() {
+export default () => {
   const profile = useCurrentProfile()
 
   return (

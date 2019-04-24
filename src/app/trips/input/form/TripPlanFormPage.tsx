@@ -8,7 +8,7 @@ export interface Props {
   isDisplayed: boolean
 }
 
-export default function TripPlanFormPage(props: Props) {
+export default (props: Props) => {
   const { getFieldDecorator } = props.parentForm
 
   return (

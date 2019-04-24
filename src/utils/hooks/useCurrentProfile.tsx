@@ -16,7 +16,7 @@ export interface Profile {
 let cachedProfile: Profile = null
 let cachedUser = null
 
-export default function useCurrentProfile() {
+export default () => {
   let user = firebase.auth().currentUser
 
   const [profile, updateProfile] = useState(cachedProfile)

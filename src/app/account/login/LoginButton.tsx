@@ -4,14 +4,9 @@ import LoginForm from './LoginForm'
 import React, { useState } from 'react'
 import SignUp from '../SignUp'
 
-export interface State {
-  visible: boolean
-  loading: boolean
-}
-
 let email = ''
 
-export default function LoginButton(props) {
+export default () => {
   const [isSignUp, setIsSignUp] = useState(false)
   const [showModal, setShowModal] = useState(false)
 

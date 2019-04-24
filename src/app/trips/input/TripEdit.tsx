@@ -15,10 +15,11 @@ export interface Props extends RouteComponentProps {
   id: string
 }
 
-function TripEdit(props: Props) {
+export default withRouter((props: Props) => {
   const [isLoading, setIsLoading] = useState(false)
   const profile = useCurrentProfile()
 
+  // TODO: use custom useTrip hook instead of useDocument
   const { error, loading, value } = useDocument(firebase.firestore().doc(`trips/${props.id}`))
   const tripData = value && value.data()
 
@@ -104,6 +105,4 @@ function TripEdit(props: Props) {
       />
     </CardView>
   )
-}
-
-export default withRouter(TripEdit)
+})

@@ -12,7 +12,7 @@ export interface Props {
   disabled?: boolean
 }
 
-export default function SignUpButton(props: Props) {
+export default (props: Props) => {
   const db = firebase.firestore()
 
   const [isLoading, setIsLoading] = useState(false)

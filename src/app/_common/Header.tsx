@@ -9,11 +9,9 @@ import firebase from 'src/firebase'
 import logo from 'src/assets/otl_logo_circle_lq.png'
 import css from '@emotion/css'
 
-export interface Props extends RouteComponentProps {
-  user: firebase.User
-}
+function Header(props: RouteComponentProps) {
+  const user = firebase.auth().currentUser
 
-function Header(props: Props) {
   const current_page = props.location.pathname.split('/')[1]
   return (
     <div css={styles.header}>
@@ -33,7 +31,7 @@ function Header(props: Props) {
         </Menu.Item>
       </Menu>
 
-      {props.user ? <UserAvatar /> : <LoginButton>LOGIN</LoginButton>}
+      {user ? <UserAvatar /> : <LoginButton>LOGIN</LoginButton>}
     </div>
   )
 }

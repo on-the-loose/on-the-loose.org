@@ -4,8 +4,11 @@ import useTrips from 'src/utils/hooks/useTrips'
 import Trip from './display/Trip'
 import TripEdit from './input/TripEdit'
 import TripList from './display/TripList'
+import firebase from 'src/firebase'
 
-export default function TripsRouter({ user }: { user: firebase.User }) {
+export default () => {
+  const user = firebase.auth().currentUser
+
   const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
       {...rest}

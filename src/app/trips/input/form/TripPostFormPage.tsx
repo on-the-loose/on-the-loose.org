@@ -10,7 +10,7 @@ export interface Props {
   isDisplayed: boolean
 }
 
-export default function TripPostFormPage(props: Props) {
+export default (props: Props) => {
   const { getFieldDecorator } = props.parentForm
 
   const dates = props.initialData && [

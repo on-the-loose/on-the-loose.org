@@ -17,7 +17,7 @@ export interface Props extends RouteComponentProps {
   id: string
 }
 
-function Trip(props: Props) {
+export default withRouter((props: Props) => {
   const tripDoc = useTrip(props.id)
 
   if (tripDoc && !tripDoc.exists) props.history.replace('/trips')
@@ -40,9 +40,9 @@ function Trip(props: Props) {
       />
     </CardView>
   )
-}
+})
 
-function TripInfo({ id, tripData }) {
+const TripInfo = ({ id, tripData }) => {
   const db = firebase.firestore()
 
   const start = moment(tripData.dates.start.toDate())
@@ -178,5 +178,3 @@ const styles = {
     margin-top: 40%;
   `
 }
-
-export default withRouter(Trip)

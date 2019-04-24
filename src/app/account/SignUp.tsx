@@ -13,7 +13,7 @@ export interface Props {
   email: string
 }
 
-export default function SignUp(props: Props) {
+export default (props: Props) => {
   const [isLoading, setIsLoading] = useState(false)
   const [isEmailSent, setIsEmailSent] = useState(false)
   const [isDisabled, setIsDisabled] = useState(false)

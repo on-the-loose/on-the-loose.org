@@ -3,7 +3,7 @@ import { Collapse } from 'antd'
 import ReactMarkdown from 'react-markdown'
 import css from '@emotion/css'
 
-export default function LeaderGuide(props) {
+export default () => {
   return (
     <div
       css={css`

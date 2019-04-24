@@ -8,7 +8,7 @@ export interface State {
   loading: boolean
 }
 
-export default function UpdateInfoButton(props) {
+export default () => {
   const [showModal, setShowModal] = useState(false)
 
   return (

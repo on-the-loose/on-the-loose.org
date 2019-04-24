@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import moment from 'moment'
 import useCurrentProfile from 'src/utils/hooks/useCurrentProfile'
 
-export default function TripCard({ id, trip_data }) {
+export default ({ id, trip_data }) => {
   const profile = useCurrentProfile()
   const isSignedUp =
     trip_data.signUps && trip_data.signUps.map(e => e.email).includes(profile.email)

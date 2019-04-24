@@ -2,7 +2,7 @@ import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import css from '@emotion/css'
 
-export default function LiabilityWaiver(props) {
+export default () => {
   const waiver = `_All trip participants, confirmed and not confirmed, have electronically signed the Release and Waiver of Liability:_
 
   ## RELEASE AND WAIVER OF LIABILITY, ASSUMPTION OF RISK AND INDEMNITY AGREEMENT 

@@ -7,7 +7,7 @@ import camping_icon from 'src/assets/noun_camping.svg'
 
 import { Link } from 'react-router-dom'
 
-export default function Info() {
+export default () => {
   return (
     <div
       css={css`

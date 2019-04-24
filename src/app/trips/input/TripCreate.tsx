@@ -8,9 +8,7 @@ import firebase from 'src/firebase'
 import useCurrentProfile from 'src/utils/hooks/useCurrentProfile'
 import CardView from 'src/app/_common/CardView'
 
-export interface Props extends RouteComponentProps {}
-
-function TripCreate(props: Props) {
+export default withRouter((props: RouteComponentProps) => {
   const [isLoading, setIsLoading] = useState(false)
   const profile = useCurrentProfile()
 
@@ -70,6 +68,4 @@ function TripCreate(props: Props) {
       />
     </CardView>
   )
-}
-
-export default withRouter(TripCreate)
+})
