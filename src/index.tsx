@@ -13,27 +13,13 @@ Sentry.init({
   environment: process.env.NODE_ENV
 })
 
-const renderApp = (MainComponent, user) => {
-  render(
-    <div>
-      <Global
-        styles={css`
-          body {
-            background-color: rgb(247, 242, 237);
-          }
-        `}
-      />
-      <MainComponent user={user} />
-    </div>,
-    document.getElementById('react-app')
-  )
+const renderApp = MainComponent => {
+  render(<MainComponent />, document.getElementById('react-app'))
 }
 
 // make sure auth is initialized before initial render
-let user = firebase.auth().currentUser
 firebase.auth().onAuthStateChanged(u => {
-  user = u
-  renderApp(App, user)
+  renderApp(App)
 })
 
 // hot reloading
@@ -41,8 +27,6 @@ firebase.auth().onAuthStateChanged(u => {
 if (module.hot) {
   //@ts-ignore
   module.hot.accept('./app/Main', () => {
-    renderApp(require('./app/Main').default, user)
+    renderApp(require('./app/Main').default)
   })
 }
-
-// TODO: register service worker
