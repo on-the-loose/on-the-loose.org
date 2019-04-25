@@ -15,6 +15,7 @@ export default withRouter((props: RouteComponentProps) => {
   const handleSubmit = (e: Event, form: WrappedFormUtils) => {
     e.preventDefault()
     form.validateFields((err, values) => {
+      return console.log(values)
       if (err) return
 
       values.planning_info = _.omitBy(values.planning_info, _.isUndefined)

@@ -14,7 +14,6 @@ export interface Props {
 
 export default (props: Props) => {
   const { getFieldDecorator } = props.parentForm
-  const [descriptionText, setDescriptionText] = useState('')
 
   const dates = props.initialData && [
     moment(props.initialData.dates.start.toDate()),
@@ -93,17 +92,9 @@ export default (props: Props) => {
       </Row>
       <Row gutter={16}>
         <Col span={24}>
-          <Form.Item label={<span>Description</span>}>
+          <Form.Item required label={<span>Description</span>}>
             {getFieldDecorator('description', {
-              initialValue: props.initialData && props.initialData.description,
-              getValueProps: value => ({ value: value == null ? '' : value }),
-              valuePropName: 'value',
-              rules: [
-                {
-                  required: true,
-                  message: 'Enter a description for your trip'
-                }
-              ]
+              initialValue: props.initialData ? props.initialData.description : ''
             })(
               <ReactQuill
                 modules={{
@@ -122,13 +113,7 @@ export default (props: Props) => {
         <Col span={24}>
           <Form.Item label={<span>Packing List</span>}>
             {getFieldDecorator('packing_list', {
-              initialValue: props.initialData && props.initialData.packing_list,
-              getValueProps: value => ({ value: value == null ? '' : value }),
-              rules: [
-                {
-                  required: false
-                }
-              ]
+              initialValue: props.initialData ? props.initialData.description : ''
             })(
               <ReactQuill
                 modules={{
