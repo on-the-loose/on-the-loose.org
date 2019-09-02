@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom'
 import useTrips from 'src/utils/hooks/useTrips'
 import Trip from './display/Trip'
-import TripEdit from './input/TripEdit'
+import TripEdit from './creation/TripEdit'
 import TripList from './display/TripList'
 import firebase from 'src/firebase'
 

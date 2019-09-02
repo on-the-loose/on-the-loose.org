@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 
-import TripForm from 'src/app/trips/input/form/TripForm'
+import TripForm from 'src/app/trips/creation/form/TripForm'
 import { WrappedFormUtils } from 'antd/lib/form/Form'
 import _ from 'lodash'
 import firebase from 'src/firebase'
@@ -20,7 +20,7 @@ export default withRouter((props: Props) => {
   const profile = useCurrentProfile()
 
   // TODO: use custom useTrip hook instead of useDocument
-  const { error, loading, value } = useDocument(firebase.firestore().doc(`trips/${props.id}`))
+  const [value, loading, error] = useDocument(firebase.firestore().doc(`trips/${props.id}`))
   const tripData = value && value.data()
 
   if (value && !value.exists) props.history.replace('/trips')
