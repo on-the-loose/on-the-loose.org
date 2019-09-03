@@ -15,15 +15,17 @@ export default () => {
         </p>
         <p>
           We make it easy for students to backpack, climb, car-camp, surf, bike, and enjoy the
-          outdoors in any fashion. To these ends, we offer a wide-ranging assortment of gear to all
-          students for free in partnership with the Pomona College Outdoors Education Center. We
-          also provide extensive subsidies for our adventures.
+          outdoors in any fashion. To these ends we provide extensive subsidies to fund these
+          adventures. In addition, there is a wide-ranging assortment of gear available to all
+          students for free from Pomona College’s Outdoor Education Center.
         </p>
         <p>
-          We welcome students of all ability levels. We host talks, classes and training to hone our
-          skills. Every week On the Loose is sure to have something to excite you, on campus and
-          off. Whatever your level of experience, we hope to see you soon on trail, in the surf, on
-          the rocks, or in a big comfy couch at one of our Shindigs! Happy trails!
+          We welcome students of all ability levels. We host shindigs and OTL leader training events
+          to help you be an outdoor leader. And if you are looking for more training, the Outdoor
+          Education Center has PE classes and workshops to help you hone your outdoor leader skills.
+          Every week On the Loose is sure to have something to excite you, on campus and off.
+          Whatever your level of experience, we hope to see you soon on a trail, in the surf, on the
+          rocks, or in a big comfy couch at one of our Shindigs! Happy trails!
         </p>
       </div>
       <div

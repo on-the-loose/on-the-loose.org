@@ -54,13 +54,13 @@ export default (props: Props) => {
           </Select>
         )}
       </Form.Item>
-      <Form.Item label="If Yes, who is (are) the leader or participant with Wilderness First Aid training?">
+      <Form.Item label="If Yes, which leaders have Wilderness First Aid certification or above?">
         {getFieldDecorator('planning_info.wfa_wfr', {
           initialValue: props.initialData && props.initialData.planning_info.wfa_wfr,
           rules: [{ required: false }]
         })(<Input />)}
       </Form.Item>
-      <Form.Item label="If No, who is (are) the leader or participant with CPR/FirstAid from American Red Cross, American Heart Association, or equivalent?">
+      <Form.Item label="If this is not a backcountry trip, which leaders have a current CPR/FirstAid cert from American Red Cross, American Heart Association, or equivalent?">
         {getFieldDecorator('planning_info.first_aid', {
           initialValue: props.initialData && props.initialData.planning_info.first_aid,
           rules: [{ required: false }]
@@ -78,7 +78,7 @@ export default (props: Props) => {
           rules: [{ required: true, message: 'This field is required.' }]
         })(<Input />)}
       </Form.Item>
-      <Form.Item label="Approximately how much is your trip going to request reimbursement through OTL? (Reimbursements include gas ($0.15/mile to 300 miles), campsites, permits, park entrance fees) ">
+      <Form.Item label="Approximately how much is your trip going to request reimbursement through OTL? (Reimbursements include gas ($0.15/mile up to 300 miles), campsites, permits, park entrance fees) ">
         {getFieldDecorator('planning_info.reimbursement', {
           initialValue: props.initialData && props.initialData.planning_info.reimbursement,
           rules: [{ required: true, message: 'This field is required.' }]
@@ -90,14 +90,7 @@ export default (props: Props) => {
           rules: [{ required: true, message: 'This field is required.' }]
         })(<Input />)}
       </Form.Item>
-
       <p>If hiking, please complete the following questions:</p>
-      <Form.Item label="Are you bringing a SPOT device GPS locator?">
-        {getFieldDecorator('planning_info.spot_gps', {
-          initialValue: props.initialData && props.initialData.planning_info.spot_gps,
-          rules: [{ required: false }]
-        })(<Input />)}
-      </Form.Item>
       <Form.Item label="How many total miles are you planning_info to complete during your hike?">
         {getFieldDecorator('planning_info.miles', {
           initialValue: props.initialData && props.initialData.planning_info.miles,

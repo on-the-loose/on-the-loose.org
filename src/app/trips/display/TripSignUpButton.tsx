@@ -52,9 +52,9 @@ export default (props: Props) => {
           `}
         >
           <p>
-            By signing up to this trip I agree to the OTL{' '}
+            By signing up to this trip I agree to the terms and conditions of{' '}
             <Link to="/info/liability" target="_blank">
-              liability waiver
+              this release and waiver of liability.
             </Link>
             .
           </p>

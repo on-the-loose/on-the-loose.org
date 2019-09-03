@@ -23,6 +23,16 @@ export default () => {
       </p>
 
       <Collapse accordion>
+        <Collapse.Panel
+          header={
+            <b>
+              <i>How to become a leader</i>
+            </b>
+          }
+          key="leader"
+        >
+          <ReactMarkdown source={becomingALeaderInfo} />
+        </Collapse.Panel>
         <Collapse.Panel header={<b>How to organize a trip</b>} key="pre-trip">
           <ReactMarkdown source={preTripInfo} />
         </Collapse.Panel>
@@ -37,9 +47,17 @@ export default () => {
   )
 }
 
-const preTripInfo = `- Where do ya want to go? Google is your friend
-  - Some planning links: [trails.com](https://www.trails.com/trailfinder/browsebymap/?statecode=CS), [alltrails.com](https://alltrails.com/us/california), [hikespeak.com](http://www.hikespeak.com/), [everytrail.com](http://www.everytrail.com/best/hiking-california), [localhikes.com](http://www.localhikes.com/MSA/MSA_4472.asp), [modernhiker.com](http://www.modernhiker.com/)
-- What kind of trip do you want to lead?
+const becomingALeaderInfo = `How to become a leader:
+
+Obtain a medical training and certification appropriate for the type of trips you want to lead:
+  - Front Country trips (less than 2 hours from advanced medical care) that don’t involve any high risk activities, need a leader with a first aid certification or higher.
+  - Backcountry trips (more than 2 hours from advanced medical care) need a leader with a Wilderness First Aid (WFA) or Wilderness First Responder (WFR) certification.
+  - Attend one of OTL’s Leader Trainings, and then lead a trip. OTL Leaders are the backbone of the club and are in charge of all OTL trips. They pick where to go, what to do, and make trips happen.`
+
+const preTripInfo = `- Where do ya want to go? 
+  - First, take a look at all the info collected from past OTL trips using this link: [bit.ly/OECmaps]Bit.ly/OECmaps You will find things like ranger station contact info, nearest hospitals, trailheads, etc.
+  - Some planning links (also Google!): [trails.com](https://www.trails.com/trailfinder/browsebymap/?statecode=CS), [alltrails.com](https://alltrails.com/us/california), [hikespeak.com](http://www.hikespeak.com/), [everytrail.com](http://www.everytrail.com/best/hiking-california), [localhikes.com](http://www.localhikes.com/MSA/MSA_4472.asp), [modernhiker.com](http://www.modernhiker.com/)
+- What kind of trip do you want to lead and have the appropriate training to lead?
   - Day trip
     - Day hike: e.g. Ice House Canyon, Claremont Wilderness Park, Rancho Santa Ana Botanic Gardens
     - Beach day: e.g. Crystal Cove State Park, Leo Carrillo State Park (both great for beach camping too)
@@ -93,7 +111,7 @@ const onTripInfo = `- Leaders should be at meeting place on time!
   - Make sure everyone has full water bottles before you leave
   - Establish driving directions with all drivers, make sure everyone knows where you&#39;re meeting up (especially if you won&#39;t have cell service)
 - Set the tone immediately for group: be friendly and confident, chat with people, learn names
-  - Establish that everyone is equally on the trip, you&#39;re all working together to make this trip happen- you&#39;re not the camp counselor, everyone is responsible for cooking, cleaning, setting up and packing up camp, timing, etc
+  - Establish that everyone is equally on the trip, everyone is working working together to make this trip happen- you&#39;re not the camp counselor, everyone is responsible for cooking, cleaning, setting up and packing up camp, timing, etc. And if participants have questions about how to do any of this, they should ask a leader!
   - WOOHOO lets go!!! You rock
 - Make sure you&#39;re remaining aware of inherent risk in activities, avoid SUMMIT FEVER by setting clear boundaries, turnaround times, etc
 - Talk to everyone, check in on how people are doing, don&#39;t be cliquey with your co-leaders
@@ -103,6 +121,7 @@ const onTripInfo = `- Leaders should be at meeting place on time!
 - SAVE YOUR RECEIPTS!`
 
 const postTripInfo = `- Make sure people know how to return gear to OEC, how to get reimbursed (bring your receipts into the OEC during business hours Mon-Fri and fill out forms)
+- Fill out the near miss/ incident report form
 - Grab a meal on campus with your group! (awwww \&lt;3)
 - Clean group gear before you return it to the OEC
 - Take a shower ya filthy animal

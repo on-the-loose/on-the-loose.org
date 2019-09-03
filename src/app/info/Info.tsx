@@ -46,25 +46,6 @@ export default () => {
           more info. Our club’s name is based on the book On the Loose by Renny and Terry Russell,
           <a href="https://www.goodreads.com/book/show/1142380.On_the_Loose"> check it out.</a>
         </Collapse.Panel>
-        <Collapse.Panel header={<b>Trip Leaders</b>} key="trip_leaders">
-          <p>
-            OTL Leaders are the backbone of the club and are in charge of all OTL trips. They pick
-            where to go, what to do, and make trips happen. To become a leader you just gotta attend
-            one of OTL’s Leader Trainings, and then lead a trip.
-          </p>
-        </Collapse.Panel>
-        <Collapse.Panel header={<b>First Aid Certifications</b>} key="safety">
-          <p>
-            Front Country trips (less than 3 hours from advanced medical care) that don’t involve
-            any high risk activities, need a leader or participant with a first aid certification or
-            higher.
-          </p>
-          <p>
-            Backcountry trips (more than 3 hours from advanced medical care) need a leader or
-            participant with a Wilderness First Aid (WFA) or Wilderness First Responder (WFR)
-            certication.
-          </p>
-        </Collapse.Panel>
         <Collapse.Panel header={<b>OTL Staff</b>} key="staff">
           Hello! We are a small team of 5C students that volunteer our time to run OTL. If you have
           any questions or suggestions for us to improve the club, we’d love to hear them. You can
@@ -79,14 +60,17 @@ export default () => {
           leaders and the OEC as the educators, and risk management oversight. Besides running OA
           for Pomona College, the OEC teaches courses on outdoor leadership, offers Wilderness First
           Aid/Responder trainings, hosts workshops, rent gear, books, and guidebooks for free
-          (!!!!!), leads beginner trips, and MUCH MUCH MORE! Give them a visit to learn about all
-          the amazing stuff going on. The OEC is located on the first floor of Dialynas hall at
-          Pomona, just east of Frary.
+          (!!!!!), and MUCH MUCH MORE! Give them a visit to learn about all the amazing stuff going
+          on. The OEC is located on the first floor of Dialynas hall at Pomona, just east of Frary.
         </Collapse.Panel>
-        <Collapse.Panel header={<b>Gear We Lend</b>} key="gear">
-          OTL and the OEC (Pomona) have a partnership that allows OTL members and any 5C students to
-          check out gear at no cost. Pitzer: POA gear closet. Scripps: OWL gear closet. Harvey Mudd:
-          Delta H.
+        <Collapse.Panel header={<b>Gear Available for Free Rental</b>} key="gear">
+          OTL and the OEC have a partnership that allows OTL members and any 5C students to check
+          out gear at no cost.{' '}
+          <a href="https://www.pomona.edu/administration/outdoor-education-center/connect-nature/equipment-and-gear-checkout">
+            Here you can find a list of available gear
+          </a>
+          . Some of the other schools have additional gear rental programs Pitzer: POA gear closet.
+          Scripps: OWL gear closet. Harvey Mudd: Delta H.
         </Collapse.Panel>
         <Collapse.Panel header={<b>Places we go</b>} key="places">
           On the Loose sends trips all over Southern California and Southwestern States, from
@@ -124,8 +108,11 @@ export default () => {
         </Collapse.Panel>
         <Collapse.Panel header={<b>Contact Info</b>} key="contact_info">
           Contact OTL Staff via email at
-          <a href="mailto:otl.staff@gmail.com"> otl.staff@gmail.com</a>. Or stop by the OEC from 1pm
-          to 8pm to catch OEC Staff on shift.
+          <a href="mailto:otl.staff@gmail.com"> otl.staff@gmail.com</a>, or stop by the OEC during
+          regular business hours and see if one of us is there!
+          <p>
+            OEC Hours of operation: <b>M-Th 1pm-8pm, F 10am-1pm</b>
+          </p>
         </Collapse.Panel>
       </Collapse>
     </div>
