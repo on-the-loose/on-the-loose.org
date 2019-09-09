@@ -39,7 +39,7 @@ const TripForm: React.FC<Props> = (props: Props) => {
   }
 
   return (
-    <Form layout="vertical" onSubmit={e => props.onSubmit(e, props.form)}>
+    <div>
       <Steps
         current={currentStep}
         size="small"
@@ -65,56 +65,55 @@ const TripForm: React.FC<Props> = (props: Props) => {
       </Steps>
 
       <WelcomePage isDisplayed={currentStep == 0} content={props.firstPageContent} />
-      <TripPlanFormPage
-        isDisplayed={currentStep == 1}
-        parentForm={props.form}
-        initialData={props.initialData}
-      />
-      <TripPostFormPage
-        isDisplayed={currentStep == 2}
-        parentForm={props.form}
-        initialData={props.initialData}
-      />
-      <DonePage isDisplayed={currentStep == 3} />
+      <TripPlanFormPage isDisplayed={currentStep == 1} initialData={props.initialData} />
 
-      <div
-        css={styles.buttons}
-        style={{ textAlign: currentStep == 3 || currentStep == 0 ? 'center' : 'right' }}
-      >
-        <Button
-          css={css`
-            margin-right: 1rem;
-          `}
-          onClick={currentStep > 0 ? () => setCurrentStep(currentStep - 1) : props.onCancel}
+      <Form layout="vertical" onSubmit={e => props.onSubmit(e, props.form)}>
+        <TripPostFormPage
+          isDisplayed={currentStep == 2}
+          parentForm={props.form}
+          initialData={props.initialData}
+        />
+        <DonePage isDisplayed={currentStep == 3} />
+
+        <div
+          css={styles.buttons}
+          style={{ textAlign: currentStep == 3 || currentStep == 0 ? 'center' : 'right' }}
         >
-          {currentStep > 0 ? 'Back' : 'Cancel'}
-        </Button>
-        {currentStep < 3 ? (
-          <Button type="primary" onClick={handleNextClick}>
-            {currentStep == 0 ? 'Get started' : 'Next'}
-          </Button>
-        ) : (
-          <Popover
-            content={
-              <div>
-                <Icon type="close-circle" /> There are some errors or fields missing in your form.
-              </div>
-            }
-            placement="bottom"
-            visible={page1HasError || page2HasError}
+          <Button
+            css={css`
+              margin-right: 1rem;
+            `}
+            onClick={currentStep > 0 ? () => setCurrentStep(currentStep - 1) : props.onCancel}
           >
-            <Button
-              disabled={page1HasError || page2HasError}
-              type="primary"
-              loading={props.loading}
-              htmlType="submit"
-            >
-              {props.submitText}
+            {currentStep > 0 ? 'Back' : 'Cancel'}
+          </Button>
+          {currentStep < 3 ? (
+            <Button type="primary" onClick={handleNextClick}>
+              {currentStep == 0 ? 'Get started' : 'Next'}
             </Button>
-          </Popover>
-        )}
-      </div>
-    </Form>
+          ) : (
+            <Popover
+              content={
+                <div>
+                  <Icon type="close-circle" /> There are some errors or fields missing in your form.
+                </div>
+              }
+              placement="bottom"
+              visible={page1HasError || page2HasError}
+            >
+              <Button
+                disabled={page1HasError || page2HasError}
+                type="primary"
+                loading={props.loading}
+                htmlType="submit"
+              >
+                {props.submitText}
+              </Button>
+            </Popover>
+          )}
+        </div>
+      </Form>
+    </div>
   )
 }
 
