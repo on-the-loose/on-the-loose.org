@@ -5,6 +5,7 @@ import Trip from './display/Trip'
 import TripEdit from './creation/TripEdit'
 import TripList from './display/TripList'
 import firebase from 'src/firebase'
+import useIsLeader from 'src/utils/hooks/useIsLeader'
 
 export default () => {
   const user = firebase.auth().currentUser
@@ -18,6 +19,7 @@ export default () => {
 
   const [hidePastTrips, setHidePastTrips] = useState(true)
   const [trips, pastTrips] = useTrips(user, hidePastTrips)
+  const isLeader = useIsLeader(user)
 
   return (
     <div>
@@ -26,6 +28,7 @@ export default () => {
         exact
         component={() => (
           <TripList
+            isLeader={isLeader}
             trips={trips}
             pastTrips={pastTrips}
             hidePastTrips={hidePastTrips}

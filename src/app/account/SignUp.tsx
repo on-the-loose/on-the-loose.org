@@ -31,9 +31,9 @@ export default (props: Props) => {
         .httpsCallable('createAccount')({
           account: _.omitBy(values, _.isUndefined),
           url:
-            process.env.NODE_ENV == 'production'
-              ? 'https://on-the-loose.org/login'
-              : 'http://localhost:3000/login'
+            process.env.NODE_ENV == 'development'
+              ? 'http://localhost:1234/login'
+              : 'https://on-the-loose.org/login'
         })
         .then(res => {
           setIsLoading(false)

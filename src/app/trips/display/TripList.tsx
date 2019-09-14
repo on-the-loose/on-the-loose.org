@@ -1,17 +1,19 @@
 import { Icon, Button, Switch, Divider, Spin } from 'antd'
 
-import React, { Dispatch, SetStateAction } from 'react'
+import React, { Dispatch, SetStateAction, useState, useEffect } from 'react'
 import TripPreview from 'src/app/trips/display/TripPreview'
 import firebase from 'src/firebase'
 import { Link } from 'react-router-dom'
 import useCurrentProfile from 'src/utils/hooks/useCurrentProfile'
 import css from '@emotion/css'
+import useIsLeader from 'src/utils/hooks/useIsLeader'
 
 export interface Props {
   trips: firebase.firestore.QueryDocumentSnapshot[]
   pastTrips: firebase.firestore.QueryDocumentSnapshot[]
   hidePastTrips: boolean
   setHidePastTrips: Dispatch<SetStateAction<boolean>>
+  isLeader: boolean
 }
 
 // TODO fix top button spacing on mobile
@@ -25,11 +27,14 @@ export default (props: Props) => {
     <div style={{ textAlign: 'center' }}>
       {user ? (
         <div>
-          <div css={styles.buttons}>
-            <Link to="/create">
-              <Button icon="plus">Create trip</Button>
-            </Link>
-          </div>
+          {props.isLeader && (
+            <div css={styles.buttons}>
+              <Link to="/create">
+                <Button icon="plus">Create trip</Button>
+              </Link>
+            </div>
+          )}
+
           {trips && trips.length == 0 ? (
             <h3> No upcoming trips </h3>
           ) : (

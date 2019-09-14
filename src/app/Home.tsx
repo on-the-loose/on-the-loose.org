@@ -38,8 +38,7 @@ export default () => {
       </div>
       <div css={styles.clubDescription} style={{ fontSize: '0.95rem' }}>
         Designed and developed with ❤ by the OTL staff. We appreciate all feedback, suggestions or
-        comments. Reach out to us at <a href="mailto:otlstaff@gmail.com">otlstaff@gmail.com</a> or
-        directly to our lead developer <a href="https://simpfish.me">Simon</a>.
+        comments. Reach out to us at <a href="mailto:otlstaff@gmail.com">otlstaff@gmail.com</a>.
       </div>
     </div>
   )

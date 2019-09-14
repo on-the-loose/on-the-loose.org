@@ -41,11 +41,17 @@ const mailTransport = nodemailer.createTransport({
 })
 
 export const checkAccountExists = functions.https.onCall((data, context) => {
+  const accountDataCheck = db
+    .collection('users')
+    .doc(data.email.toLowerCase())
+    .get()
+    .then(doc => doc.exists)
+
   return admin
     .auth()
     .getUserByEmail(data.email.toLowerCase())
-    .then(_ => true)
-    .catch(_ => false)
+    .then(_ => accountDataCheck)
+    .catch(_ => accountDataCheck)
 })
 
 export const createAccount = functions.https.onCall(async (data, context) => {
