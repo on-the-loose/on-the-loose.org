@@ -121,7 +121,7 @@ const onTripInfo = `- Leaders should be at meeting place on time!
 - SAVE YOUR RECEIPTS!`
 
 const postTripInfo = `- Make sure people know how to return gear to OEC, how to get reimbursed (bring your receipts into the OEC during business hours Mon-Fri and fill out forms)
-- Fill out the near miss/ incident report form
+- Fill out the [near miss/incident report form](https://pomona.formstack.com/forms/outdoor_incident_report_form)
 - Grab a meal on campus with your group! (awwww \&lt;3)
 - Clean group gear before you return it to the OEC
 - Take a shower ya filthy animal

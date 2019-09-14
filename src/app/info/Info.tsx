@@ -88,18 +88,18 @@ export default () => {
           </p>
           <p>
             <i>Pomona:</i> The Outdoor Education Center has a 7 passenger vehicle available to
-            borrow. ASPC has 2 vehicles available to borrow. <i>Scripps: </i> (SCR only) Borrow a
-            Scripps Vehicle. Go to{' '}
+            borrow. ASPC has 2 vehicles available to borrow.{' '}
+            <a href="https://pomona.formstack.com/forms/oec_vehicle_request_form">
+              Pomona vehicle request form
+            </a>
+          </p>
+          <p>
+            <i>Scripps: </i> To borrow a Scripps Vehicle. Go to{' '}
             <a href="https://emsweb.claremont.edu/Scripps/BrowseEvents.aspx">SARLO office</a>.
-            <i> Pitzer:</i> Borrow Scripps Vans
           </p>
           <p>
             Zipcar: Contact OTL Staff if you are in a pinch, we may be willing to reimburse a
             zipcar. Please get permission before making a reservation.
-          </p>
-          <p>
-            How to become an approved driver: Fill Out an approved driver form at OEC/ASPC/SARLO/
-            etc depending on campus
           </p>
         </Collapse.Panel>
         <Collapse.Panel header={<b>Liability Waiver</b>} key="liability_waiver">
