@@ -5,12 +5,16 @@ export default user => {
   const [isLeader, setIsLeader] = useState(false)
 
   useEffect(() => {
-    firebase
-      .firestore()
-      .collection('leaders')
-      .doc(user.email)
-      .get()
-      .then(doc => setIsLeader(doc.exists))
+    if (user == null) {
+      setIsLeader(false)
+    } else {
+      firebase
+        .firestore()
+        .collection('leaders')
+        .doc(user.email)
+        .get()
+        .then(doc => setIsLeader(doc.exists))
+    }
   }, [user])
 
   return isLeader
