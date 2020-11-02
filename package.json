@@ -24,7 +24,8 @@
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "react-youtube": "^7.9.0",
-    "safe-html": "^1.0.0"
+    "safe-html": "^1.0.0",
+    "use-places-autocomplete": "^1.5.9"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",

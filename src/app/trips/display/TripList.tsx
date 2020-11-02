@@ -27,7 +27,7 @@ export default (props: Props) => {
     <div style={{ textAlign: 'center' }}>
       {user ? (
         <div>
-          {props.isLeader && (
+          {true && (
             <div css={styles.buttons}>
               <Link to="/create">
                 <Button icon="plus">Create trip</Button>
