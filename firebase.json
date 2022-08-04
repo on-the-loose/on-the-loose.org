@@ -1,11 +1,7 @@
 {
   "hosting": {
     "public": "website/dist",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
         "source": "**",
@@ -23,7 +19,10 @@
   "emulators": {
     "hosting": {
       "host": "localhost",
-      "port": "4000"
+      "port": "5050"
+    },
+    "firestore": {
+      "port": "8080"
     }
   }
 }
