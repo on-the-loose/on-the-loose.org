@@ -1,6 +1,6 @@
-import React from 'react'
-import css from '@emotion/css'
-import { Popover, Icon } from 'antd'
+import Icon from '@ant-design/icons'
+import { css } from '@emotion/react'
+import { Popover } from 'antd'
 
 export default ({ isLeader, tripData, onToggleConfirm }) => {
   return (
@@ -78,5 +78,5 @@ const styles = {
   `,
   cell: css`
     padding-left: 1rem;
-  `
+  `,
 }

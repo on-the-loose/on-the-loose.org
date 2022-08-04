@@ -1,15 +1,14 @@
 import React, { useState } from 'react'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
-
 import TripForm from 'src/app/trips/creation/form/TripForm'
-import { WrappedFormUtils } from 'antd/lib/form/Form'
 import _ from 'lodash'
-import firebase from 'src/firebase'
 import useCurrentProfile from 'src/utils/hooks/useCurrentProfile'
 import { useDocument } from 'react-firebase-hooks/firestore'
 import CardView from 'src/app/_common/CardView'
 import { Button, Popover } from 'antd'
-import css from '@emotion/css'
+import { css } from '@emotion/react'
+import { db } from 'src/firebase'
+import { deleteDoc, doc, updateDoc } from 'firebase/firestore'
 
 export interface Props extends RouteComponentProps {
   id: string
@@ -20,7 +19,7 @@ export default withRouter((props: Props) => {
   const profile = useCurrentProfile()
 
   // TODO: use custom useTrip hook instead of useDocument
-  const [value, loading, error] = useDocument(firebase.firestore().doc(`trips/${props.id}`))
+  const [value, loading, error] = useDocument(doc(db, 'trips', props.id))
   const tripData = value && value.data()
 
   if (value && !value.exists) props.history.replace('/trips')
@@ -28,41 +27,29 @@ export default withRouter((props: Props) => {
     props.history.replace(`/trips/${props.id}`)
   }
 
-  const handleSubmit = (e: Event, form: WrappedFormUtils) => {
-    e.preventDefault()
-    form.validateFields((err, values) => {
-      if (err) return
+  const handleFinish = (values) => {
+    values.planning_info = _.omitBy(values.planning_info, _.isUndefined)
+    const data = _.omitBy(values, _.isUndefined)
 
-      values.planning_info = _.omitBy(values.planning_info, _.isUndefined)
-      const data = _.omitBy(values, _.isUndefined)
+    data.dates = { start: data.dates[0].toDate(), end: data.dates[1].toDate() }
+    data.leader = { name: profile.name, email: profile.email }
 
-      data.dates = { start: data.dates[0].toDate(), end: data.dates[1].toDate() }
-      data.leader = { name: profile.name, email: profile.email }
+    setIsLoading(true)
 
-      setIsLoading(true)
+    updateDoc(doc(db, 'trips', props.id), data)
+      .then(() => {
+        setIsLoading(false)
+        props.history.replace(`/trips/${props.id}`)
+      })
+      .catch(() => console.log('failed'))
 
-      firebase
-        .firestore()
-        .doc(`trips/${props.id}`)
-        .update(data)
-        .then(() => {
-          setIsLoading(false)
-          props.history.replace(`/trips/${props.id}`)
-        })
-        .catch(() => console.log('failed'))
-
-      // TODO: add error indicator
-    })
+    // TODO: add error indicator
   }
 
   const handleDelete = () => {
-    firebase
-      .firestore()
-      .doc(`trips/${props.id}`)
-      .delete()
-      .then(() => {
-        props.history.replace(`/trips`)
-      })
+    deleteDoc(doc(db, 'trips', props.id)).then(() => {
+      props.history.replace(`/trips`)
+    })
   }
 
   return (
@@ -86,18 +73,20 @@ export default withRouter((props: Props) => {
                 <Popover
                   trigger="click"
                   content={
-                    <Button type={'danger'} onClick={handleDelete}>
+                    <Button type={'primary'} danger onClick={handleDelete}>
                       Confirm
                     </Button>
                   }
                 >
-                  <Button type="danger">Delete Trip</Button>
+                  <Button type={'primary'} danger>
+                    Delete Trip
+                  </Button>
                 </Popover>
               </div>
             </span>
           </div>
         }
-        onSubmit={handleSubmit}
+        onFinish={handleFinish}
         onCancel={() => props.history.push(`/trips/${props.id}`)}
         submitText="Save"
         loading={isLoading || loading}

@@ -1,15 +1,14 @@
 import { Card } from 'antd'
-import React from 'react'
-import { css } from '@emotion/core'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 import useCurrentProfile from 'src/utils/hooks/useCurrentProfile'
 import safeHtml from 'safe-html'
+import { css } from '@emotion/react'
 
 export default ({ id, trip_data }) => {
   const profile = useCurrentProfile()
   const isSignedUp =
-    trip_data.signUps && trip_data.signUps.map(e => e.email).includes(profile.email)
+    trip_data.signUps && trip_data.signUps.map((e) => e.email).includes(profile.email)
 
   const isLeader = trip_data.leader.email == profile.email
 
@@ -29,7 +28,7 @@ export default ({ id, trip_data }) => {
           bodyStyle={{
             padding: '0.6rem 1.5rem',
             height: '6.5rem',
-            overflow: 'hidden'
+            overflow: 'hidden',
           }}
           extra={moment(trip_data.dates.start.toDate()).format('ddd, MMM Do')}
           // TODO display year for past trips
@@ -102,5 +101,5 @@ const styles = {
     color: gray;
     font-size: 0.8rem;
     font-weight: lighter;
-  `
+  `,
 }

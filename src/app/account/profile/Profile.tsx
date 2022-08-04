@@ -3,7 +3,7 @@ import React from 'react'
 import UpdateInfoButton from 'src/app/account/profile/UpdateInfoButton'
 
 import useCurrentProfile from 'src/utils/hooks/useCurrentProfile'
-import css from '@emotion/css'
+import { css } from '@emotion/react'
 
 export default () => {
   const profile = useCurrentProfile()

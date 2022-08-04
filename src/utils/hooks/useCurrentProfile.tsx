@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import { useDocument } from 'react-firebase-hooks/firestore'
-import firebase from 'src/firebase'
+import { doc, onSnapshot, Timestamp } from 'firebase/firestore'
+import { useState } from 'react'
+import { auth, db } from 'src/firebase'
 
 export interface Profile {
-  bday: firebase.firestore.Timestamp
+  bday: Timestamp
   email: string
   gradYear: number
   name: string
@@ -17,21 +17,19 @@ let cachedProfile: Profile = null
 let cachedUser = null
 
 export default () => {
-  let user = firebase.auth().currentUser
+  let user = auth.currentUser
 
   const [profile, updateProfile] = useState(cachedProfile)
 
+  // TODO: maybe wrap this in a useEffect?
   if (cachedProfile == null || cachedUser != user) {
     cachedUser = user
 
-    firebase
-      .firestore()
-      .collection('users')
-      .doc(user.email)
-      .onSnapshot(doc => {
-        cachedProfile = doc.data() as Profile
-        updateProfile(cachedProfile)
-      })
+    const userDoc = doc(db, 'users', user.email)
+    onSnapshot(userDoc, (doc) => {
+      cachedProfile = doc.data() as Profile
+      updateProfile(cachedProfile)
+    })
   }
 
   return profile

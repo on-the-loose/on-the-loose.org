@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import firebase from 'src/firebase'
+import { useState } from 'react'
 import { Button, Modal, Input, Spin } from 'antd'
 import { withRouter } from 'react-router'
 import { RouteComponentProps } from 'react-router'
@@ -7,11 +6,13 @@ import safeHtml from 'safe-html'
 import moment from 'moment'
 import useCurrentProfile from 'src/utils/hooks/useCurrentProfile'
 import { Link } from 'react-router-dom'
-import css from '@emotion/css'
+import { css } from '@emotion/react'
 import TripSignUpButton from 'src/app/trips/display/TripSignUpButton'
 import CardView from 'src/app/_common/CardView'
 import useTrip from 'src/utils/hooks/useTrip'
 import TripParticipants from 'src/app/trips/display/TripParticipants'
+import { db } from 'src/firebase'
+import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore'
 
 export interface Props extends RouteComponentProps {
   id: string
@@ -43,8 +44,6 @@ export default withRouter((props: Props) => {
 })
 
 const TripInfo = ({ id, tripData }) => {
-  const db = firebase.firestore()
-
   const start = moment(tripData.dates.start.toDate())
   const end = moment(tripData.dates.end.toDate())
   const duration = end.diff(start, 'days')
@@ -56,15 +55,11 @@ const TripInfo = ({ id, tripData }) => {
   const isLeader = tripData.leader.email == profile.email
 
   const setIsConfirmed = (email, isConfirmed) => {
-    const operation = !isConfirmed
-      ? firebase.firestore.FieldValue.arrayRemove
-      : firebase.firestore.FieldValue.arrayUnion
+    const operation = !isConfirmed ? arrayRemove : arrayUnion
 
-    db.doc(`trips/${id}`)
-      .update({
-        confirmedParticipants: operation(email)
-      })
-      .catch(() => console.log('failed'))
+    updateDoc(doc(db, `trips/${id}`), {
+      confirmedParticipants: operation(email),
+    }).catch(() => console.log('failed'))
   }
 
   const pastTrip = tripData.dates.start.toDate() < Date.now()
@@ -137,9 +132,9 @@ const TripInfo = ({ id, tripData }) => {
             value={
               tripData.signUps &&
               tripData.signUps
-                .map(x => x.email)
+                .map((x) => x.email)
                 .filter(
-                  x =>
+                  (x) =>
                     !(tripData.confirmedParticipants && tripData.confirmedParticipants.includes(x))
                 )
                 .join('\n')
@@ -151,14 +146,14 @@ const TripInfo = ({ id, tripData }) => {
         <p>
           <Input.TextArea
             rows={4}
-            value={tripData.signUps && tripData.signUps.map(x => x.email).join('\n')}
+            value={tripData.signUps && tripData.signUps.map((x) => x.email).join('\n')}
           />
         </p>
       </Modal>
       {!isLeader && (
         <TripSignUpButton
           isSignedUp={
-            tripData.signUps && tripData.signUps.map(e => e.email).includes(profile.email)
+            tripData.signUps && tripData.signUps.map((e) => e.email).includes(profile.email)
           }
           profile={profile}
           tripId={id}
@@ -174,5 +169,5 @@ const styles = {
     margin: auto;
     display: block;
     margin-top: 40%;
-  `
+  `,
 }

@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import { Button, Form, Steps, Popover, Icon } from 'antd'
-import { FormComponentProps } from 'antd/lib/form'
+import { Button, Form, Steps, Popover } from 'antd'
 import _ from 'lodash'
-import css from '@emotion/css'
+import { css } from '@emotion/react'
 import TripPostFormPage from './TripPostFormPage'
 import TripPlanFormPage from './TripPlanFormPage'
+import Icon from '@ant-design/icons'
 
-export interface Props extends FormComponentProps {
-  onSubmit: (Event, WrappedFormUtils) => void
+export interface Props {
+  onFinish: (values: any) => void
   submitText: string
   onCancel: () => void
   loading: boolean
@@ -16,7 +16,7 @@ export interface Props extends FormComponentProps {
 }
 
 const TripForm: React.FC<Props> = (props: Props) => {
-  const { validateFields } = props.form
+  const [form] = Form.useForm()
 
   const [currentStep, setCurrentStep] = useState(0)
   const [page1HasError, setPage1HasError] = useState(false)
@@ -24,13 +24,13 @@ const TripForm: React.FC<Props> = (props: Props) => {
 
   const handleNextClick = () => {
     if (currentStep == 1) {
-      validateFields(['planning_info'], errors => {
+      form.validateFields(['planning_info']).then((errors) => {
         setPage1HasError(errors != null)
       })
     }
 
     if (currentStep == 2) {
-      validateFields(errors => {
+      form.validateFields().then((errors) => {
         setPage2HasError(errors != null)
       })
     }
@@ -67,12 +67,8 @@ const TripForm: React.FC<Props> = (props: Props) => {
       <WelcomePage isDisplayed={currentStep == 0} content={props.firstPageContent} />
       <TripPlanFormPage isDisplayed={currentStep == 1} initialData={props.initialData} />
 
-      <Form layout="vertical" onSubmit={e => props.onSubmit(e, props.form)}>
-        <TripPostFormPage
-          isDisplayed={currentStep == 2}
-          parentForm={props.form}
-          initialData={props.initialData}
-        />
+      <Form layout="vertical" onFinish={props.onFinish} form={form}>
+        <TripPostFormPage isDisplayed={currentStep == 2} initialData={props.initialData} />
         <DonePage isDisplayed={currentStep == 3} />
 
         <div
@@ -154,7 +150,7 @@ const styles = {
     background: #fff;
     border-radius: 0 0 4px 4px;
     margin-top: 2rem;
-  `
+  `,
 }
 
-export default Form.create<Props>()(TripForm)
+export default TripForm

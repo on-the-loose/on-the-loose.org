@@ -1,6 +1,5 @@
-import React from 'react'
 import { Collapse } from 'antd'
-import css from '@emotion/css'
+import { css } from '@emotion/react'
 
 import leader_icon from 'src/assets/noun_leader.svg'
 import camping_icon from 'src/assets/noun_camping.svg'
@@ -143,5 +142,5 @@ const styles = {
     @media (max-width: 700px) {
       margin: 0 1rem;
     }
-  `
+  `,
 }

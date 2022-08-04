@@ -1,40 +1,31 @@
 import React, { useState } from 'react'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
-
 import TripForm from './form/TripForm'
-import { WrappedFormUtils } from 'antd/lib/form/Form'
 import _ from 'lodash'
-import firebase from 'src/firebase'
 import useCurrentProfile from 'src/utils/hooks/useCurrentProfile'
 import CardView from 'src/app/_common/CardView'
+import { addDoc, collection, doc } from 'firebase/firestore'
+import { db } from 'src/firebase'
 
 export default withRouter((props: RouteComponentProps) => {
   const [isLoading, setIsLoading] = useState(false)
   const profile = useCurrentProfile()
 
-  const handleSubmit = (e: Event, form: WrappedFormUtils) => {
-    e.preventDefault()
-    form.validateFields((err, values) => {
-      if (err) return
+  const handleFinish = (values) => {
+    values.planning_info = _.omitBy(values.planning_info, _.isUndefined)
+    const data = _.omitBy(values, _.isUndefined)
 
-      values.planning_info = _.omitBy(values.planning_info, _.isUndefined)
-      const data = _.omitBy(values, _.isUndefined)
+    data.dates = { start: data.dates[0].toDate(), end: data.dates[1].toDate() }
+    data.leader = { name: profile.name, email: profile.email }
 
-      data.dates = { start: data.dates[0].toDate(), end: data.dates[1].toDate() }
-      data.leader = { name: profile.name, email: profile.email }
+    setIsLoading(true)
 
-      setIsLoading(true)
-
-      firebase
-        .firestore()
-        .collection('trips')
-        .add(data)
-        .then(res => {
-          setIsLoading(false)
-          props.history.replace(`/trips/${res.id}`)
-        })
-        .catch(() => console.log('failed'))
-    })
+    addDoc(collection(db, 'trips'), data)
+      .then((res) => {
+        setIsLoading(false)
+        props.history.replace(`/trips/${res.id}`)
+      })
+      .catch(() => console.log('failed'))
   }
 
   return (
@@ -61,7 +52,7 @@ export default withRouter((props: RouteComponentProps) => {
             </span>
           </div>
         }
-        onSubmit={handleSubmit}
+        onFinish={handleFinish}
         onCancel={() => props.history.push(`/trips`)}
         submitText="Submit Trip"
         loading={isLoading}

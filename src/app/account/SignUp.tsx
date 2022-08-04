@@ -1,10 +1,9 @@
 import { Button } from 'antd'
-
-import { FormComponentProps } from 'antd/lib/form'
-import React, { useState } from 'react'
-import firebase from 'src/firebase'
+import { useState } from 'react'
 import ProfileForm from './profile/ProfileForm'
 import _ from 'lodash'
+import { functions } from 'src/firebase'
+import { httpsCallable } from 'firebase/functions'
 
 // TODO: handle errors
 // TODO: add cancel button
@@ -18,30 +17,25 @@ export default (props: Props) => {
   const [isEmailSent, setIsEmailSent] = useState(false)
   const [isDisabled, setIsDisabled] = useState(false)
 
-  const handleSubmit = (e, form) => {
-    e.preventDefault()
-    form.validateFields((err, values) => {
-      if (err) return
+  const handleFormFinish = (values) => {
+    setIsLoading(true)
+    setIsDisabled(true)
 
-      setIsLoading(true)
-      setIsDisabled(true)
-
-      firebase
-        .functions()
-        .httpsCallable('createAccount')({
-          account: _.omitBy(values, _.isUndefined),
-          url:
-            process.env.NODE_ENV == 'development'
-              ? 'http://localhost:1234/login'
-              : 'https://on-the-loose.org/login'
-        })
-        .then(res => {
-          setIsLoading(false)
-          setIsEmailSent(true)
-        })
-
-      window.localStorage.setItem('emailForSignIn', values.email)
+    httpsCallable(
+      functions,
+      'createAccount'
+    )({
+      account: _.omitBy(values, _.isUndefined),
+      url:
+        process.env.NODE_ENV == 'development'
+          ? 'http://localhost:1234/login'
+          : 'https://on-the-loose.org/login',
+    }).then((res) => {
+      setIsLoading(false)
+      setIsEmailSent(true)
     })
+
+    window.localStorage.setItem('emailForSignIn', values.email)
   }
 
   return (
@@ -50,7 +44,7 @@ export default (props: Props) => {
         Welcome to OTL! Let's set up your profile.
       </p>
       <ProfileForm
-        onSubmit={handleSubmit}
+        onFinish={handleFormFinish}
         isDisabled={isDisabled}
         initialValues={{
           bday: undefined,
@@ -59,7 +53,7 @@ export default (props: Props) => {
           name: undefined,
           school: undefined,
           tel: undefined,
-          verified: undefined
+          verified: undefined,
         }}
         submitButton={
           isEmailSent ? (

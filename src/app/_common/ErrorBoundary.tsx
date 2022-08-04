@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import { Component } from 'react'
 import * as Sentry from '@sentry/browser'
 import { Alert } from 'antd'
-import css from '@emotion/css'
+import { css } from '@emotion/react'
 
 export default class ErrorBoundary extends Component<any, { error: any }> {
   constructor(props) {
@@ -11,8 +11,8 @@ export default class ErrorBoundary extends Component<any, { error: any }> {
 
   componentDidCatch(error, errorInfo) {
     this.setState({ error })
-    Sentry.withScope(scope => {
-      Object.keys(errorInfo).forEach(key => {
+    Sentry.withScope((scope) => {
+      Object.keys(errorInfo).forEach((key) => {
         scope.setExtra(key, errorInfo[key])
       })
       Sentry.captureException(error)

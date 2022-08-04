@@ -1,14 +1,12 @@
+import { onSnapshot, doc } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
-import firebase from 'src/firebase'
+import { db } from 'src/firebase'
 
-export default id => {
+export default (id: string) => {
   const [tripDoc, setTripDoc] = useState(null)
 
   useEffect(() => {
-    return firebase
-      .firestore()
-      .doc(`trips/${id}`)
-      .onSnapshot(doc => setTripDoc(doc))
+    return onSnapshot(doc(db, `trips/${id}`), (doc) => setTripDoc(doc))
   }, [])
 
   return tripDoc

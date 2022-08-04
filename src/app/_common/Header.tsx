@@ -1,16 +1,14 @@
 import { RouteComponentProps, withRouter } from 'react-router'
-
 import UserAvatar from '../account/UserAvatar'
 import { Link } from 'react-router-dom'
 import LoginButton from '../account/login/LoginButton'
 import { Menu } from 'antd'
-import React from 'react'
-import firebase from 'src/firebase'
 import logo from 'src/assets/otl_logo_circle_lq.png'
-import css from '@emotion/css'
+import { css } from '@emotion/react'
+import { auth } from 'src/firebase'
 
 function Header(props: RouteComponentProps) {
-  const user = firebase.auth().currentUser
+  const user = auth.currentUser
 
   const current_page = props.location.pathname.split('/')[1]
   return (
@@ -31,7 +29,7 @@ function Header(props: RouteComponentProps) {
         </Menu.Item>
       </Menu>
 
-      {user ? <UserAvatar /> : <LoginButton>LOGIN</LoginButton>}
+      {user ? <UserAvatar /> : <LoginButton />}
     </div>
   )
 }
@@ -71,7 +69,7 @@ const styles = {
     @media (max-width: 550px) {
       padding: 0 1rem;
     }
-  `
+  `,
 }
 
 export default withRouter(Header)

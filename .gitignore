@@ -9,6 +9,7 @@ dist
 # misc
 .DS_Store
 .cache
+.parcel-cache
 
 yarn-debug.log*
 yarn-error.log*

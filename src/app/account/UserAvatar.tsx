@@ -1,23 +1,14 @@
-import { Avatar, Button, Popover } from 'antd'
-
+import { Button, Popover } from 'antd'
 import { Link } from 'react-router-dom'
-import React, { useState } from 'react'
-import firebase from 'src/firebase'
+import { useState } from 'react'
 import useCurrentProfile from 'src/utils/hooks/useCurrentProfile'
+import { auth } from 'src/firebase'
 
 export default () => {
   const [showPopover, setShowPopover] = useState(false)
 
   const handleSignOut = () => {
-    firebase
-      .auth()
-      .signOut()
-      .then(function() {
-        // Sign-out successful.
-      })
-      .catch(function(error) {
-        // An error happened.
-      })
+    auth.signOut()
   }
 
   const profile = useCurrentProfile()

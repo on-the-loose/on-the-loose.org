@@ -1,6 +1,5 @@
-import React from 'react'
 import background from 'src/assets/background.jpg'
-import css from '@emotion/css'
+import { css } from '@emotion/react'
 
 export default () => (
   <img

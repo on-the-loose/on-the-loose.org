@@ -1,6 +1,5 @@
-import React from 'react'
-import css from '@emotion/css'
-import Gallery from 'react-photo-gallery'
+import { css } from '@emotion/react'
+import PhotoAlbum from 'react-photo-album'
 import _ from 'lodash'
 
 export default () => {
@@ -34,7 +33,7 @@ export default () => {
           margin: auto;
         `}
       >
-        <Gallery photos={photos} />
+        <PhotoAlbum photos={photos} layout="rows" />
       </div>
       <div css={styles.clubDescription} style={{ fontSize: '0.95rem' }}>
         Designed and developed with ❤ by the OTL staff. We appreciate all feedback, suggestions or

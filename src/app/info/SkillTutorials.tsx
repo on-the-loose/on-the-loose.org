@@ -1,11 +1,10 @@
-import React from 'react'
 import YouTube from 'react-youtube'
-import css from '@emotion/css'
+import { css } from '@emotion/react'
 
 export default () => {
   const videoOpts = {
     height: Math.min(390, (window.innerWidth / 20) * 9),
-    width: Math.min(640, (window.innerWidth / 20) * 16)
+    width: Math.min(640, (window.innerWidth / 20) * 16),
   }
 
   return (

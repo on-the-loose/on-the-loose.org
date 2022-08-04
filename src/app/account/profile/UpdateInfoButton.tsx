@@ -1,6 +1,5 @@
 import { Button, Modal } from 'antd'
-
-import React, { useState } from 'react'
+import { useState } from 'react'
 import UpdateInfo from './UpdateInfo'
 
 export interface State {
@@ -22,10 +21,10 @@ export default () => {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
-            padding: '3rem'
+            padding: '3rem',
           }}
           style={{
-            textAlign: 'center'
+            textAlign: 'center',
           }}
           closable={false}
           centered

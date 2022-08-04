@@ -1,12 +1,11 @@
 import { Button, Modal } from 'antd'
-
 import LoginForm from './LoginForm'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import SignUp from '../SignUp'
 
 let email = ''
 
-export default () => {
+export default (_: {}) => {
   const [isSignUp, setIsSignUp] = useState(false)
   const [showModal, setShowModal] = useState(false)
 
@@ -25,10 +24,10 @@ export default () => {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
-            padding: '3rem'
+            padding: '3rem',
           }}
           style={{
-            textAlign: 'center'
+            textAlign: 'center',
           }}
           closable={false}
           centered
@@ -39,7 +38,7 @@ export default () => {
           {isSignUp ? (
             <SignUp email={email} />
           ) : (
-            <LoginForm setIsSignUp={setIsSignUp} setEmail={e => (email = e)} />
+            <LoginForm setIsSignUp={setIsSignUp} setEmail={(e) => (email = e)} />
           )}
         </Modal>
       )}

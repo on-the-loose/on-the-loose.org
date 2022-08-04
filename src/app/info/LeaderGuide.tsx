@@ -1,7 +1,6 @@
-import React from 'react'
 import { Collapse } from 'antd'
 import ReactMarkdown from 'react-markdown'
-import css from '@emotion/css'
+import { css } from '@emotion/react'
 
 export default () => {
   return (
@@ -31,22 +30,23 @@ export default () => {
           }
           key="leader"
         >
-          <ReactMarkdown source={becomingALeaderInfo} />
+          <ReactMarkdown>{becomingALeaderInfo}</ReactMarkdown>
         </Collapse.Panel>
         <Collapse.Panel header={<b>How to organize a trip</b>} key="pre-trip">
-          <ReactMarkdown source={preTripInfo} />
+          <ReactMarkdown>{preTripInfo}</ReactMarkdown>
         </Collapse.Panel>
         <Collapse.Panel header={<b>What to do during a trip</b>} key="on-trip">
-          <ReactMarkdown source={onTripInfo} />
+          <ReactMarkdown>{onTripInfo}</ReactMarkdown>
         </Collapse.Panel>
         <Collapse.Panel header={<b>What to do after a trip</b>} key="post-trip">
-          <ReactMarkdown source={postTripInfo} />
+          <ReactMarkdown>{postTripInfo}</ReactMarkdown>
         </Collapse.Panel>
       </Collapse>
     </div>
   )
 }
 
+// TODO: Save these as markdown files and load them in here
 const becomingALeaderInfo = `How to become a leader:
 
 Obtain a medical training and certification appropriate for the type of trips you want to lead:

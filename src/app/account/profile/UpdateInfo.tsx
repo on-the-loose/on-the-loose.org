@@ -1,10 +1,10 @@
 import { Button } from 'antd'
-
-import React, { useState } from 'react'
-import firebase from 'src/firebase'
+import { useState } from 'react'
 import ProfileForm from './ProfileForm'
 import useCurrentProfile from 'src/utils/hooks/useCurrentProfile'
 import _ from 'lodash'
+import { updateDoc, doc } from 'firebase/firestore'
+import { db } from 'src/firebase'
 
 // TODO: handle errors
 // TODO: add cancel button
@@ -15,33 +15,24 @@ export default () => {
 
   const profile = useCurrentProfile()
 
-  const handleSubmit = (e, form) => {
-    e.preventDefault()
-    form.validateFields((err, values) => {
-      if (err) return
+  const handleFormFinish = (values) => {
+    setIsLoading(true)
+    setIsDisabled(true)
 
-      setIsLoading(true)
-      setIsDisabled(true)
+    values.bday = new Date(values.bday)
 
-      values.bday = new Date(values.bday)
-
-      firebase
-        .firestore()
-        .doc(`users/${profile.email}`)
-        .update(_.omitBy(values, _.isUndefined))
-        .then(res => {
-          setIsLoading(false)
-          setIsDisabled(false)
-        })
-
-      window.localStorage.setItem('emailForSignIn', values.email)
+    updateDoc(doc(db, 'users', profile.email), _.omitBy(values, _.isUndefined)).then(() => {
+      setIsLoading(false)
+      setIsDisabled(false)
     })
+
+    window.localStorage.setItem('emailForSignIn', values.email)
   }
 
   return (
     <div>
       <ProfileForm
-        onSubmit={handleSubmit}
+        onFinish={handleFormFinish}
         isDisabled={isDisabled}
         initialValues={profile}
         submitButton={

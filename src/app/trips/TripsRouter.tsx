@@ -1,19 +1,19 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom'
 import useTrips from 'src/utils/hooks/useTrips'
 import Trip from './display/Trip'
 import TripEdit from './creation/TripEdit'
 import TripList from './display/TripList'
-import firebase from 'src/firebase'
 import useIsLeader from 'src/utils/hooks/useIsLeader'
+import { auth } from 'src/firebase'
 
 export default () => {
-  const user = firebase.auth().currentUser
+  const user = auth.currentUser
 
   const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
       {...rest}
-      render={props => (user != null ? <Component {...props} /> : <Redirect to="/trips" />)}
+      render={(props) => (user != null ? <Component {...props} /> : <Redirect to="/trips" />)}
     />
   )
 

@@ -1,5 +1,5 @@
-import React, { PropsWithChildren } from 'react'
-import css from '@emotion/css'
+import { PropsWithChildren } from 'react'
+import { css } from '@emotion/react'
 
 export interface Props {
   headerImage?: string
@@ -60,5 +60,5 @@ const styles = {
 
   content: css`
     padding: 0rem 2rem;
-  `
+  `,
 }

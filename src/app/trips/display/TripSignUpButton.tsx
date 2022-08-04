@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Popover, Button } from 'antd'
-import css from '@emotion/css'
+import { css } from '@emotion/react'
 import { Link } from 'react-router-dom'
-import firebase from 'src/firebase'
 import { Profile } from 'src/utils/hooks/useCurrentProfile'
+import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore'
+import { db } from 'src/firebase'
 
 export interface Props {
   isSignedUp: boolean
@@ -13,34 +14,35 @@ export interface Props {
 }
 
 export default (props: Props) => {
-  const db = firebase.firestore()
-
   const [isLoading, setIsLoading] = useState(false)
   const [isConfirmVisible, setisConfirmVisible] = useState(false)
 
   const toggleSignUp = () => {
     setisConfirmVisible(false)
 
-    const operation = props.isSignedUp
-      ? firebase.firestore.FieldValue.arrayRemove
-      : firebase.firestore.FieldValue.arrayUnion
+    const operation = props.isSignedUp ? arrayRemove : arrayUnion
 
-    db.doc(`trips/${props.tripId}`)
-      .update({
-        signUps: operation({
-          email: props.profile.email,
-          name: props.profile.name,
-          confirmed: false
-        })
-      })
-      .then(res => {
+    updateDoc(doc(db, `trips/${props.tripId}`), {
+      signUps: operation({
+        email: props.profile.email,
+        name: props.profile.name,
+        confirmed: false,
+      }),
+    })
+      .then((res) => {
         setIsLoading(false)
       })
       .catch(() => console.log('failed'))
   }
 
   return props.isSignedUp ? (
-    <Button onClick={toggleSignUp} loading={isLoading} type={'danger'} disabled={props.disabled}>
+    <Button
+      onClick={toggleSignUp}
+      loading={isLoading}
+      type={'primary'}
+      danger
+      disabled={props.disabled}
+    >
       Withdraw
     </Button>
   ) : (

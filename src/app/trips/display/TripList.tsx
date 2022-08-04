@@ -1,16 +1,15 @@
-import { Icon, Button, Switch, Divider, Spin } from 'antd'
-
-import React, { Dispatch, SetStateAction, useState, useEffect } from 'react'
+import { Button, Switch, Divider, Spin } from 'antd'
+import { Dispatch, SetStateAction } from 'react'
 import TripPreview from 'src/app/trips/display/TripPreview'
-import firebase from 'src/firebase'
 import { Link } from 'react-router-dom'
 import useCurrentProfile from 'src/utils/hooks/useCurrentProfile'
-import css from '@emotion/css'
-import useIsLeader from 'src/utils/hooks/useIsLeader'
+import { css } from '@emotion/react'
+import { QueryDocumentSnapshot } from 'firebase/firestore'
+import { auth } from 'src/firebase'
 
 export interface Props {
-  trips: firebase.firestore.QueryDocumentSnapshot[]
-  pastTrips: firebase.firestore.QueryDocumentSnapshot[]
+  trips: QueryDocumentSnapshot[]
+  pastTrips: QueryDocumentSnapshot[]
   hidePastTrips: boolean
   setHidePastTrips: Dispatch<SetStateAction<boolean>>
   isLeader: boolean
@@ -21,7 +20,7 @@ export interface Props {
 
 export default (props: Props) => {
   const { trips, pastTrips, hidePastTrips, setHidePastTrips } = props
-  const user = firebase.auth().currentUser
+  const user = auth.currentUser
 
   return (
     <div style={{ textAlign: 'center' }}>
@@ -70,9 +69,9 @@ const TripPreviewsList = ({ trip_docs }) => {
 
   if (trip_docs == null || profile == null) return <Spin size="large" delay={500} />
 
-  const trips = trip_docs.map(doc => [doc.id, doc.data()])
+  const trips = trip_docs.map((doc) => [doc.id, doc.data()])
   const isSignedUp = trips.map(
-    ([_, t]) => t.signUps && t.signUps.map(e => e.email).includes(profile.email)
+    ([_, t]) => t.signUps && t.signUps.map((e) => e.email).includes(profile.email)
   )
   const isLeader = trips.map(([_, t]) => t.leader.email == profile.email)
 
@@ -122,5 +121,5 @@ const styles = {
     margin: auto;
     max-width: 50rem;
     width: 90%;
-  `
+  `,
 }

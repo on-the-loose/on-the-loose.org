@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
-import css from '@emotion/css'
+import { css } from '@emotion/react'
 
 export default () => {
   const waiver = `_All trip participants, confirmed and not confirmed, have electronically signed the Release and Waiver of Liability:_
@@ -34,7 +34,6 @@ export default () => {
 `
   return (
     <ReactMarkdown
-      source={waiver}
       css={css`
         margin: 2rem auto;
         max-width: 40rem;
@@ -45,6 +44,8 @@ export default () => {
           margin-top: 2rem;
         }
       `}
-    />
+    >
+      {waiver}
+    </ReactMarkdown>
   )
 }
