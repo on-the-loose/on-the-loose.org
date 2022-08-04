@@ -13,6 +13,7 @@ dist
 
 yarn-debug.log*
 yarn-error.log*
+*.log*
 
 .vscode
 .firebase

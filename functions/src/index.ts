@@ -3,7 +3,6 @@ import * as admin from 'firebase-admin'
 import * as firebase from 'firebase/app'
 import * as nodemailer from 'nodemailer'
 import * as _ from 'lodash'
-import { orderBy } from 'natural-orderby'
 import 'firebase/auth'
 import 'firebase/firestore'
 import { getAuth, sendSignInLinkToEmail } from 'firebase/auth'
@@ -102,7 +101,7 @@ export const onTripCreation = functions.firestore
     )
   })
 
-async function sendTripDataEmail(id, toEmails, subject) {
+async function sendTripDataEmail(id: string, toEmails: string[], subject: string) {
   const mailOptions = toEmails.map((email) => ({
     from: `On The Loose <${gmailEmail}>`,
     to: email,
@@ -113,3 +112,7 @@ async function sendTripDataEmail(id, toEmails, subject) {
   await Promise.all(mailOptions.map((options) => mailTransport.sendMail(options)))
   console.log('Trip creation email notification sent')
 }
+
+export const test = functions.https.onRequest((req, res) => {
+  res.send('Hello from Firebase!')
+})
