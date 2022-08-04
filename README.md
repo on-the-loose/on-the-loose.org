@@ -1,6 +1,6 @@
 # OTL Website
 
-Hello! This is the codebase for the new main website of On The Loose, the Claremont Colleges outdoors club.
+Hello! This is the codebase for the website of On The Loose, the Claremont Colleges outdoors club.
 
 # Project Structure
 
