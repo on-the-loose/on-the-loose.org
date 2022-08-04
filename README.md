@@ -6,7 +6,7 @@ Hello! This is the codebase for the website of On The Loose, the Claremont Colle
 
 ```
 .
-├── functions           # Backend logic using Firebase functions
+├── firebase           # Backend logic using Firebase functions
 ├── website             # React Frontend (Single Page App)
 │   ├── public              # Html and favicon that will be provided as-is
 │   ├── src                 
