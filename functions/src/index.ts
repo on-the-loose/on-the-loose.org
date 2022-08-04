@@ -17,6 +17,7 @@ const EMAIL_LIST = [
   'oec@pomona.edu',
   'chris.Weyant@pomona.edu',
   'martin.crawford@pomona.edu',
+  'simonpfish@gmail.com',
 ]
 
 admin.initializeApp()
@@ -94,25 +95,14 @@ export const onTripCreation = functions.firestore
   .document('trips/{tripId}')
   .onCreate((snap, context) => {
     const data = snap.data()
-    return sendTripDataEmail(
-      context.params.tripId,
-      EMAIL_LIST,
-      `Trip created by ${data.leader.name}: ${data.title}`
-    )
+    admin
+      .firestore()
+      .collection('mail')
+      .add({
+        to: EMAIL_LIST,
+        message: {
+          subject: `Trip created by ${data.leader.name}: ${data.title}`,
+          text: `Access the trip here: https://on-the-loose.org/trips/${context.params.tripId}`,
+        },
+      })
   })
-
-async function sendTripDataEmail(id: string, toEmails: string[], subject: string) {
-  const mailOptions = toEmails.map((email) => ({
-    from: `On The Loose <${gmailEmail}>`,
-    to: email,
-    subject,
-    text: `Access the trip here: https://on-the-loose.org/trips/${id}`,
-  }))
-
-  await Promise.all(mailOptions.map((options) => mailTransport.sendMail(options)))
-  console.log('Trip creation email notification sent')
-}
-
-export const test = functions.https.onRequest((req, res) => {
-  res.send('Hello from Firebase!')
-})
