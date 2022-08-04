@@ -14,7 +14,7 @@
       "npm --prefix \"$RESOURCE_DIR\" run lint",
       "npm --prefix \"$RESOURCE_DIR\" run build"
     ],
-    "source": "functions"
+    "source": "firebase/functions"
   },
   "emulators": {
     "hosting": {
@@ -24,5 +24,9 @@
     "firestore": {
       "port": "8080"
     }
+  },
+  "firestore": {
+    "rules": "firebase/firestore.rules",
+    "indexes": "firebase/firestore.indexes.json"
   }
 }
