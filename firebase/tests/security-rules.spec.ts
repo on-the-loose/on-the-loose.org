@@ -1,51 +1,66 @@
 import "mocha";
-import { readFileSync } from "fs";
 import {
   initializeTestEnvironment,
   assertFails,
   assertSucceeds,
   RulesTestEnvironment,
 } from "@firebase/rules-unit-testing";
-import {
-  doc,
-  getDoc,
-  setDoc,
-  serverTimestamp,
-  setLogLevel,
-} from "firebase/firestore";
-import assert from "assert";
+import { doc, getDoc, setDoc, getDocs, collection } from "firebase/firestore";
 import chai from "chai";
+import firebase from "firebase/compat";
 
 let testEnv: RulesTestEnvironment;
+let unauthed: firebase.firestore.Firestore;
+let authed: firebase.firestore.Firestore;
+
 chai.should();
 
 before(async () => {
-  // Silence expected rules rejections from Firestore SDK. Unexpected rejections
-  // will still bubble up and will be thrown as an error (failing the tests).
-  setLogLevel("error");
-
   testEnv = await initializeTestEnvironment({
-    firestore: { rules: readFileSync("firestore.rules", "utf8") },
+    firestore: {
+      host: "localhost",
+      port: 8080,
+    },
+    projectId: "on-the-loose",
   });
+
+  unauthed = testEnv.unauthenticatedContext().firestore();
+  authed = testEnv.authenticatedContext("test-user").firestore();
 });
 
 after(async () => {
-  // Delete all the FirebaseApp instances created during testing.
-  // Note: this does not affect or clear any data.
   await testEnv.cleanup();
 });
 
-beforeEach(async () => {
-  await testEnv.clearFirestore();
-});
-
 describe("Data Access", () => {
-  const variable = true;
-  it("should not let unauthenticated users access data", async () => {
-    variable.should.equal(false);
+  const testDoc = "users/foobar";
+  const testDocContents = { foo: "bar" };
+
+  it("should create docs", async () => {
+    await testEnv.withSecurityRulesDisabled(async (context) => {
+      await assertSucceeds(
+        setDoc(doc(context.firestore(), testDoc), testDocContents)
+      );
+    });
   });
 
-  it("should let authenticated users access data", async () => {});
+  it("should not let unauthenticated users access data", async () => {
+    await assertFails(getDoc(doc(unauthed, testDoc)));
+  });
 
-  it("should not let anyone mutate the mail collection", async () => {});
+  it("should let authenticated users access data", async () => {
+    await assertSucceeds(setDoc(doc(authed, testDoc), testDocContents));
+    await assertSucceeds(getDoc(doc(authed, testDoc)));
+  });
+
+  it("should let admins access the mail collection", async () => {
+    await testEnv.withSecurityRulesDisabled(async (context) => {
+      await assertSucceeds(getDocs(collection(context.firestore(), "mail")));
+    });
+  });
+
+  it("should not let anyone else access the mail collection", async () => {
+    await assertFails(getDocs(collection(unauthed, "mail")));
+    await assertFails(getDocs(collection(authed, "mail")));
+  });
 });

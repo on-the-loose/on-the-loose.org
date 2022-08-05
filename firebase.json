@@ -1,7 +1,11 @@
 {
   "hosting": {
     "public": "website/dist",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
     "rewrites": [
       {
         "source": "**",
@@ -23,10 +27,22 @@
     },
     "firestore": {
       "port": "8080"
+    },
+    "auth": {
+      "port": 9099
+    },
+    "functions": {
+      "port": 5001
+    },
+    "ui": {
+      "enabled": true
     }
   },
   "firestore": {
     "rules": "firebase/firestore.rules",
     "indexes": "firebase/firestore.indexes.json"
+  },
+  "extensions": {
+    "firestore-send-email": "firebase/firestore-send-email@0.1.19"
   }
 }
