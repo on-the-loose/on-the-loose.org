@@ -1,11 +1,7 @@
 {
   "hosting": {
-    "public": "website/dist",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
+    "public": "../website/dist",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
         "source": "**",
@@ -18,7 +14,7 @@
       "npm --prefix \"$RESOURCE_DIR\" run lint",
       "npm --prefix \"$RESOURCE_DIR\" run build"
     ],
-    "source": "firebase/functions"
+    "source": "functions"
   },
   "emulators": {
     "hosting": {
@@ -39,8 +35,8 @@
     }
   },
   "firestore": {
-    "rules": "firebase/firestore.rules",
-    "indexes": "firebase/firestore.indexes.json"
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
   },
   "extensions": {
     "firestore-send-email": "firebase/firestore-send-email@0.1.19"
