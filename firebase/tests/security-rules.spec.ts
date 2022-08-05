@@ -36,14 +36,6 @@ describe("Data Access", () => {
   const testDoc = "users/foobar";
   const testDocContents = { foo: "bar" };
 
-  it("should create docs", async () => {
-    await testEnv.withSecurityRulesDisabled(async (context) => {
-      await assertSucceeds(
-        setDoc(doc(context.firestore(), testDoc), testDocContents)
-      );
-    });
-  });
-
   it("should not let unauthenticated users access data", async () => {
     await assertFails(getDoc(doc(unauthed, testDoc)));
   });
@@ -53,14 +45,10 @@ describe("Data Access", () => {
     await assertSucceeds(getDoc(doc(authed, testDoc)));
   });
 
-  it("should let admins access the mail collection", async () => {
-    await testEnv.withSecurityRulesDisabled(async (context) => {
-      await assertSucceeds(getDocs(collection(context.firestore(), "mail")));
-    });
-  });
-
-  it("should not let anyone else access the mail collection", async () => {
+  it("should not let anyone access the mail collection", async () => {
     await assertFails(getDocs(collection(unauthed, "mail")));
     await assertFails(getDocs(collection(authed, "mail")));
+    await assertFails(setDoc(doc(unauthed, "mail", "foo"), { foo: "bar" }));
+    await assertFails(setDoc(doc(authed, "mail", "foo"), { foo: "bar" }));
   });
 });
