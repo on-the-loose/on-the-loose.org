@@ -1,7 +1,6 @@
 import * as functions from 'firebase-functions'
 import * as admin from 'firebase-admin'
 import * as firebase from 'firebase/app'
-import * as nodemailer from 'nodemailer'
 import * as _ from 'lodash'
 import 'firebase/auth'
 import 'firebase/firestore'
@@ -12,13 +11,16 @@ export const EMAIL_REGEX =
   /.+(@pomona\.edu|@mymail.pomona\.edu|@cmc\.edu|@hmc\.edu|@g\.hmc\.edu|@scrippscollege\.edu|@pitzer\.edu|@students\.pitzer\.edu|@cgu\.edu|@kgi\.edu)/
 
 // Emails that get notifications when trips are created or modified
-const EMAIL_LIST = [
-  'otlstaff@gmail.com',
-  'oec@pomona.edu',
-  'chris.Weyant@pomona.edu',
-  'martin.crawford@pomona.edu',
-  'simonpfish@gmail.com',
-]
+
+const EMAIL_LIST =
+  !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
+    ? ['simonpfish@gmail.com']
+    : [
+        'otlstaff@gmail.com',
+        'oec@pomona.edu',
+        'chris.Weyant@pomona.edu',
+        'martin.crawford@pomona.edu',
+      ]
 
 admin.initializeApp()
 const db = admin.firestore()
@@ -30,16 +32,6 @@ const app = firebase.initializeApp({
   projectId: 'on-the-loose',
   storageBucket: 'on-the-loose.appspot.com',
   messagingSenderId: '816227148735',
-})
-
-const gmailEmail = functions.config().gmail.email
-const gmailPassword = functions.config().gmail.password
-const mailTransport = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: gmailEmail,
-    pass: gmailPassword,
-  },
 })
 
 export const checkAccountExists = functions.https.onCall((data, context) => {
@@ -106,3 +98,11 @@ export const onTripCreation = functions.firestore
         },
       })
   })
+
+export const getEmailList = functions.https.onCall(async (data, context) => {
+  if (context.auth?.uid == null) {
+    throw new Error('Not authorized')
+  }
+
+  return EMAIL_LIST
+})
