@@ -17,18 +17,18 @@
     "source": "functions"
   },
   "emulators": {
-    "hosting": {
-      "host": "localhost",
-      "port": "5050"
+    "functions": {
+      "port": 4001
     },
     "firestore": {
-      "port": "8080"
+      "port": 4002
     },
     "auth": {
-      "port": 9099
+      "port": 4003
     },
-    "functions": {
-      "port": 5001
+    "hosting": {
+      "host": "localhost",
+      "port": 4005
     },
     "ui": {
       "enabled": true

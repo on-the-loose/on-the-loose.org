@@ -7,6 +7,7 @@ import {
 } from "@firebase/rules-unit-testing";
 import { doc, getDoc, setDoc, getDocs, collection } from "firebase/firestore";
 import chai from "chai";
+import firebaseConfig from "../../firebase.json";
 import firebase from "firebase/compat";
 
 let testEnv: RulesTestEnvironment;
@@ -19,7 +20,7 @@ before(async () => {
   testEnv = await initializeTestEnvironment({
     firestore: {
       host: "localhost",
-      port: 8080,
+      port: firebaseConfig.emulators.firestore.port,
     },
     projectId: "on-the-loose",
   });
