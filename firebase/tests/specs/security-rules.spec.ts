@@ -5,7 +5,14 @@ import {
   assertSucceeds,
   RulesTestEnvironment,
 } from "@firebase/rules-unit-testing";
-import { doc, getDoc, setDoc, getDocs, collection } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  setDoc,
+  getDocs,
+  collection,
+  setLogLevel,
+} from "firebase/firestore";
 import firebaseConfig from "../../firebase.json";
 import firebase from "firebase/compat";
 
@@ -14,6 +21,8 @@ let unauthed: firebase.firestore.Firestore;
 let authed: firebase.firestore.Firestore;
 
 before(async () => {
+  setLogLevel("error");
+
   testEnv = await initializeTestEnvironment({
     firestore: {
       host: "localhost",
