@@ -6,15 +6,12 @@ import {
   RulesTestEnvironment,
 } from "@firebase/rules-unit-testing";
 import { doc, getDoc, setDoc, getDocs, collection } from "firebase/firestore";
-import chai from "chai";
 import firebaseConfig from "../../firebase.json";
 import firebase from "firebase/compat";
 
 let testEnv: RulesTestEnvironment;
 let unauthed: firebase.firestore.Firestore;
 let authed: firebase.firestore.Firestore;
-
-chai.should();
 
 before(async () => {
   testEnv = await initializeTestEnvironment({
