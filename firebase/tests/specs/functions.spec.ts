@@ -46,19 +46,23 @@ describe("Firebase Functions", () => {
     expect(result).to.equal(false);
   });
 
-  it("should send trip creation email", async () => {
-    const wrapped = test.wrap(functions.onTripCreation);
+  // Disabling test because it requires API secret
+  // TODO: Set up this end-to-end test with mailslurp
+  // For now, test manually using the emulator
 
-    // Make a fake document snapshot to pass to the function
-    const trip = test.firestore.makeDocumentSnapshot(
-      {
-        title: "TEST TRIP",
-        leader: { name: "TEST" },
-      },
-      "/trips/TEST_TRIP_ID"
-    );
+  // it("should send trip creation email", async () => {
+  //   const wrapped = test.wrap(functions.onTripCreation);
 
-    const result = await wrapped(trip);
-    expect(result.statusCode).to.equal(202);
-  });
+  //   // Make a fake document snapshot to pass to the function
+  //   const trip = test.firestore.makeDocumentSnapshot(
+  //     {
+  //       title: "TEST TRIP",
+  //       leader: { name: "TEST" },
+  //     },
+  //     "/trips/TEST_TRIP_ID"
+  //   );
+
+  //   const result = await wrapped(trip);
+  //   expect(result.statusCode).to.equal(202);
+  // });
 });

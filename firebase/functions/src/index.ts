@@ -84,20 +84,11 @@ export const createAccount = functions.https.onCall(async (data, context) => {
     })
 })
 
-export const onTripCreation = functions.firestore
-  .document('trips/{tripId}')
+export const onTripCreation = functions
+  .runWith({ secrets: ['SENDGRID_API_KEY'] })
+  .firestore.document('trips/{tripId}')
   .onCreate(async (snap, context) => {
     const data = snap.data()
-    // admin
-    //   .firestore()
-    //   .collection('mail')
-    //   .add({
-    //     to: EMAIL_LIST,
-    //     message: {
-    //       subject: `Trip created by ${data.leader.name}: ${data.title}`,
-    //       text: `Access the trip here: https://on-the-loose.org/trips/${context.params.tripId}`,
-    //     },
-    //   })
 
     sgMail.setApiKey(process.env.SENDGRID_API_KEY!)
 
