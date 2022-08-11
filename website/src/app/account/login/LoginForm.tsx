@@ -58,7 +58,7 @@ const LoginForm: React.FC<Props> = (props: Props) => {
       <Form onFinish={handleFinish} className="login-form" form={form}>
         <Form.Item
           style={{ height: '1.5rem', marginBottom: '3rem' }}
-          name="username"
+          name="email"
           rules={[
             { required: true, message: 'Please enter your email' },
             {
