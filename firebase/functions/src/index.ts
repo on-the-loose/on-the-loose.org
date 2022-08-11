@@ -5,6 +5,7 @@ import * as _ from 'lodash'
 import 'firebase/auth'
 import 'firebase/firestore'
 import { getAuth, sendSignInLinkToEmail } from 'firebase/auth'
+import sgMail from '@sendgrid/mail'
 
 // If you change this regex make sure to also change the one in the front-end (ProfileForm.tsx)
 export const EMAIL_REGEX =
@@ -85,18 +86,30 @@ export const createAccount = functions.https.onCall(async (data, context) => {
 
 export const onTripCreation = functions.firestore
   .document('trips/{tripId}')
-  .onCreate((snap, context) => {
+  .onCreate(async (snap, context) => {
     const data = snap.data()
-    admin
-      .firestore()
-      .collection('mail')
-      .add({
-        to: EMAIL_LIST,
-        message: {
-          subject: `Trip created by ${data.leader.name}: ${data.title}`,
-          text: `Access the trip here: https://on-the-loose.org/trips/${context.params.tripId}`,
-        },
-      })
+    // admin
+    //   .firestore()
+    //   .collection('mail')
+    //   .add({
+    //     to: EMAIL_LIST,
+    //     message: {
+    //       subject: `Trip created by ${data.leader.name}: ${data.title}`,
+    //       text: `Access the trip here: https://on-the-loose.org/trips/${context.params.tripId}`,
+    //     },
+    //   })
+
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY!)
+
+    const result = await sgMail.send({
+      to: 'simonpfish@gmail.com',
+      from: 'On The Loose Updates <updates@on-the-loose.org>',
+      subject: `Trip created by ${data.leader.name}: ${data.title}`,
+      html: `<p>Trip created by ${data.leader.name}: ${data.title}</p>
+        <a href=https://on-the-loose.org/trips/${context.params.tripId}>Access the trip here.</a>`,
+    })
+
+    return result[0]
   })
 
 export const getEmailList = functions.https.onCall(async (data, context) => {
