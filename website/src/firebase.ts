@@ -9,12 +9,12 @@ import { connectFunctionsEmulator, getFunctions } from 'firebase/functions'
 
 const firebaseConfig = {
   // It's okay for this key to be public (https://firebase.google.com/docs/projects/api-keys#api-keys-for-firebase-are-different)
-  apiKey: 'AIzaSyCbdmTfvPp334ZhII9t2vxDACLUDJ_pfm0',
-  authDomain: 'on-the-loose.firebaseapp.com',
-  databaseURL: 'https://on-the-loose.firebaseio.com',
-  projectId: 'on-the-loose',
-  storageBucket: 'on-the-loose.appspot.com',
-  messagingSenderId: '816227148735',
+  apiKey: process.env.API_KEY ?? 'AIzaSyCbdmTfvPp334ZhII9t2vxDACLUDJ_pfm0',
+  authDomain: process.env.AUTH_DOMAIN ?? 'on-the-loose.firebaseapp.com',
+  databaseURL: process.env.DB_URL ?? 'https://on-the-loose.firebaseio.com',
+  projectId: process.env.PROJECT_ID ?? 'on-the-loose',
+  storageBucket: process.env.STORAGE_BUCKET ?? 'on-the-loose.appspot.com',
+  messagingSenderId: process.env.MESSAGING_SENDER_ID ?? '816227148735',
 }
 
 export const app = initializeApp(firebaseConfig)

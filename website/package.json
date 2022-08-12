@@ -60,6 +60,6 @@
   "scripts": {
     "prebuild": "rm -rf ../firebase/hosting/public",
     "start": "parcel public/index.html",
-    "build": "parcel build public/index.html --no-source-maps"
+    "build": "parcel build public/index.html --no-source-maps --no-cache"
   }
 }

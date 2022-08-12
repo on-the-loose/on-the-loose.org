@@ -8,6 +8,9 @@
       "extensionInstances": {
         "firestore-send-email": "92523052061dad6290ea7e45a44aab56d0bdf78a7739a514f231ace53e39c9b7"
       }
+    },
+    "on-the-loose-test": {
+      "extensionInstances": {}
     }
   }
 }
