@@ -5,6 +5,7 @@ node_modules
 
 # production
 dist
+firebase/hosting
 
 # misc
 .DS_Store
@@ -17,3 +18,4 @@ yarn-error.log*
 
 .vscode
 .firebase
+

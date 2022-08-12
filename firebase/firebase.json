@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "../website/dist",
+    "public": "./hosting/public",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
@@ -35,7 +35,5 @@
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
   },
-  "extensions": {
-    "firestore-send-email": "firebase/firestore-send-email@0.1.19"
-  }
+  "extensions": {}
 }
