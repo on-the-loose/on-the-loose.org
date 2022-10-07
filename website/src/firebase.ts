@@ -23,7 +23,7 @@ export const db = getFirestore(app)
 export const functions = getFunctions(app)
 
 if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-  console.log('Connecting to Firebase Emulators')
-  connectFunctionsEmulator(functions, 'localhost', 4001)
-  connectAuthEmulator(auth, 'http://localhost:4003')
+  // console.log('Connecting to Firebase Emulators')
+  // connectFunctionsEmulator(functions, 'localhost', 4001)
+  // connectAuthEmulator(auth, 'http://localhost:4003')
 }

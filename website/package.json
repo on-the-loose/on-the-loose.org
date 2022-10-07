@@ -59,7 +59,7 @@
   },
   "scripts": {
     "prebuild": "rm -rf ../firebase/hosting/public",
-    "start": "parcel public/index.html",
-    "build": "parcel build public/index.html --no-source-maps --no-cache"
+    "start": "API_KEY='AIzaSyBluVaLFI89dVtZssQ23LJhm3AUrtyXyKM' AUTH_DOMAIN='on-the-loose-test.firebaseapp.com' DB_URL='https://on-the-loose-test.firebaseio.com' PROJECT_ID='on-the-loose-test' STORAGE_BUCKET='on-the-loose-test.appspot.com' MESSAGING_SENDER_ID='873642667332' parcel public/index.html",
+    "build": "parcel build public/index.html --no-cache --no-optimize"
   }
 }
